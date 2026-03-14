@@ -1,190 +1,141 @@
 'use client';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { useRef } from 'react';
 import Image from 'next/image';
-import { PageFlip } from 'page-flip';
-import { useEffect, useRef, useState } from 'react';
+import { useTheme } from '@/lib/ThemeContext';
+
+const STORY_ITEMS = [
+  {
+    image: "/Image1.png",
+    title: "The Vision",
+    year: "2024",
+    desc: "It started with a simple idea: make healthy, home-cooked meals accessible to everyone without compromising on taste."
+  },
+  {
+    image: "/Image2.png",
+    title: "The Kitchens",
+    year: "2025",
+    desc: "We partnered with the finest home chefs across India, bringing traditional family recipes to the digital age."
+  },
+  {
+    image: "/Image3.png",
+    title: "The Craft",
+    year: "2026",
+    desc: "Every meal is an art piece. Small batches, fresh ingredients, and zero preservatives. Pure love."
+  },
+  {
+    image: "/Image4.png",
+    title: "The Community",
+    year: "BEYOND",
+    desc: "Today, we are more than just a delivery service. We are a community of food lovers and creators."
+  }
+];
 
 export default function FlipBook() {
-    const bookRef = useRef(null);
-    const flipBook = useRef(null);
-    const containerRef = useRef(null);
-    const [isMobile, setIsMobile] = useState(false);
+  const containerRef = useRef(null);
+  const { theme } = useTheme();
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
 
-    useEffect(() => {
-        const checkScreenSize = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-        checkScreenSize();
-        window.addEventListener('resize', checkScreenSize);
-        return () => window.removeEventListener('resize', checkScreenSize);
-    }, []);
+  const smoothScroll = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
-    useEffect(() => {
-        if (bookRef.current) {
-            flipBook.current = new PageFlip(bookRef.current, {
-                width: isMobile ? 320 : 600,
-                height: isMobile ? 420 : 500,
-                size: 'fixed',
-                minWidth: isMobile ? 280 : 400,
-                maxWidth: 1000,
-                minHeight: isMobile ? 400 : 550,
-                maxHeight: 1536,
-                maxShadowOpacity: 0.5,
-                showCover: false,
-                mobileScrollSupport: true,
-                useMouseEvents: true,
-                startPage: 0,
-                drawShadow: true,
-                flippingTime: 700,
-                mode: isMobile ? 'swipe' : 'double',
-                clickEventForward: true,
-                disableFlipByClick: false,
-                swipeDistance: 30,
-                usePortrait: true,
-                flipCornerSize: 50,
-            });
+  // Calculate horizontal movement - Tighter range to prevent dead space at the end
+  const xOffset = useTransform(smoothScroll, [0, 0.95], ["0%", "-300%"]);
+  
+  // Fade out into the footer to remove the "black block" feeling
+  const opacity = useTransform(scrollYProgress, [0.9, 1], [1, 0]);
 
-            flipBook.current.loadFromHTML(document.querySelectorAll('.page'));
-
-            flipBook.current.on('flip', (e) => {
-                e.preventDefault && e.preventDefault();
-            });
-        }
-    }, [isMobile]);
-
-    const handlePrevPage = () => {
-        if (flipBook.current) flipBook.current.flipPrev();
-    };
-
-    const handleNextPage = () => {
-        if (flipBook.current) flipBook.current.flipNext();
-    };
-
-    return (
-        <div
-            ref={containerRef}
-            className="flex flex-col justify-center items-center bg-black px-4"
-            style={{ height: '100vh', width: '100%', overflow: 'hidden', position: 'relative' }}
+  return (
+    <div ref={containerRef} className="h-[250vh] md:h-[400vh] relative z-40 bg-black">
+      <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
+        
+        {/* CINEMATIC MURAL TITLE */}
+        <motion.div 
+          style={{ 
+            opacity: useTransform(scrollYProgress, [0, 0.05], [1, 0]),
+            scale: useTransform(scrollYProgress, [0, 0.05], [1, 0.8])
+          }}
+          className="absolute inset-0 z-50 flex flex-col items-center justify-center pointer-events-none"
         >
-            {/* Book + Buttons */}
-            <div className="flex flex-col items-center justify-center relative w-full flex-1" style={{ minHeight: isMobile ? '60vh' : '70vh' }}>
-                {/* Flipbook */}
-                <div
-                    ref={bookRef}
-                    className="flipbook shadow-2xl"
-                    style={{
-                        width: isMobile ? '100%' : 'auto',
-                        maxWidth: isMobile ? '100%' : 'auto'
-                    }}
-                ></div>
+          <div className="overflow-hidden">
+            <motion.h2 
+              initial={{ y: 200 }}
+              whileInView={{ y: 0 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[12vw] md:text-[10vw] font-black italic tracking-tighter leading-none text-white uppercase"
+            >
+              OUR <span className="text-gradient">STORY</span>
+            </motion.h2>
+          </div>
+          <p className="text-white/30 tracking-[1em] uppercase text-[10px] md:text-sm mt-4">The Kinetic Journey</p>
+        </motion.div>
 
-                {/* Navigation Arrows */}
-                <button
-                    onClick={handlePrevPage}
-                    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-black rounded-full p-2 shadow-md z-20"
-                    aria-label="Previous page"
-                >
-                    &#8592;
-                </button>
+        {/* KINETIC SCROLLING GALLERY */}
+        <motion.div 
+          style={{ x: xOffset, opacity }}
+          className="flex h-full items-center px-[5vw] md:px-[10vw] gap-[15vw] md:gap-[20vw]"
+        >
+          {STORY_ITEMS.map((item, i) => (
+            <div key={i} className="flex-shrink-0 w-[90vw] md:w-[60vw] h-[55vh] md:h-[60vh] relative group">
+              
+              {/* LARGE YEAR NUMBER BACKGROUND */}
+              <div className="absolute -top-10 md:-top-20 -left-5 md:-left-10 z-0">
+                <span className="text-[25vw] md:text-[20vw] font-black text-white/[0.03] italic leading-none pointer-events-none">
+                  {item.year}
+                </span>
+              </div>
 
-                <button
-                    onClick={handleNextPage}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-black rounded-full p-2 shadow-md z-20"
-                    aria-label="Next page"
-                >
-                    &#8594;
-                </button>
+              <div className="w-full h-full relative rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-[#0a0a0a]">
+                <Image 
+                  src={item.image} 
+                  alt={item.title} 
+                  fill 
+                  className="object-cover opacity-50 transition-transform duration-1000 group-hover:scale-110" 
+                  priority={i === 0}
+                />
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-6 md:p-20 flex flex-col justify-end">
+                  <div className="max-w-2xl space-y-4 md:space-y-6">
+                    <div className="w-16 md:w-20 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" />
+                    <h3 className="text-4xl md:text-8xl font-black italic tracking-tighter text-white uppercase leading-none">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-400 text-sm md:text-2xl font-light leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-                {/* Touch areas for page navigation on mobile */}
-                {isMobile && (
-                    <>
-                        <div
-                            className="absolute left-0 top-0 w-1/2 h-full z-10 cursor-pointer"
-                            onClick={handlePrevPage}
-                            aria-label="Previous page"
-                        />
-                        <div
-                            className="absolute right-0 top-0 w-1/2 h-full z-10 cursor-pointer"
-                            onClick={handleNextPage}
-                            aria-label="Next page"
-                        />
-                    </>
-                )}
+              {/* FLOATING DECOR */}
+              <motion.div 
+                animate={{ 
+                  y: [0, -20, 0],
+                  rotate: [0, 5, 0]
+                }}
+                transition={{ duration: 5, repeat: Infinity, delay: i * 0.5 }}
+                className="absolute -bottom-10 -right-10 w-24 md:w-40 h-24 md:h-40 bg-purple-600/10 md:bg-purple-600/20 blur-[40px] md:blur-[60px] rounded-full -z-10"
+              />
             </div>
+          ))}
+        </motion.div>
 
-            {/* Hidden pages */}
-            <div className="hidden">
-                {/* Page 1 */}
-                <div className="page p-0 m-0">
-                    <div className="relative w-full h-full">
-                        <Image src="/Image1.png" alt="Image 1" fill className="object-cover" />
-                    </div>
-                </div>
-
-                {/* Page 2 */}
-                <div className="page bg-[#FFE4C4] flex flex-col items-center justify-center h-full px-4 md:px-6">
-                    <div className="text-center max-w-xl flex flex-col items-center justify-center h-full">
-                        <h1 className="text-2xl md:text-4xl font-extrabold mb-3 md:mb-4">Pre-Book Your Delight</h1>
-                        <p className="text-base md:text-lg leading-relaxed">
-                            Secure your favorite meals ahead of time by choosing your preferred time slot.
-                            Order from nearby kitchens offering exclusive, limited-stock dishes tailored just for you!
-                        </p>
-                    </div>
-                </div>
-
-                {/* Page 3 */}
-                <div className="page p-0 m-0">
-                    <div className="relative w-full h-full">
-                        <Image src="/Image2.png" alt="Image 2" fill className="object-cover" />
-                    </div>
-                </div>
-
-                {/* Page 4 */}
-                <div className="page bg-[#FFE4C4] flex flex-col items-center justify-center h-full px-4 md:px-6">
-                    <div className="text-center max-w-xl flex flex-col items-center justify-center h-full">
-                        <h1 className="text-2xl md:text-4xl font-extrabold mb-3 md:mb-4">Authentic Flavors, Straight from the Heart</h1>
-                        <p className="text-base md:text-lg leading-relaxed">
-                            Indulge in meals prepared by passionate home chefs, infused with generations of tradition,
-                            love, and a deep dedication to crafting unforgettable culinary experiences.
-                        </p>
-                    </div>
-                </div>
-
-                {/* Page 5 */}
-                <div className="page p-0 m-0">
-                    <div className="relative w-full h-full">
-                        <Image src="/Image3.png" alt="Image 3" fill className="object-cover" />
-                    </div>
-                </div>
-
-                {/* Page 6 */}
-                <div className="page bg-[#FFE4C4] flex flex-col items-center justify-center h-full px-4 md:px-6">
-                    <div className="text-center max-w-xl flex flex-col items-center justify-center h-full">
-                        <h1 className="text-2xl md:text-4xl font-extrabold mb-3 md:mb-4">Made Just for You</h1>
-                        <p className="text-base md:text-lg leading-relaxed">
-                            Every meal is freshly prepared in small batches at home, ensuring exceptional quality,
-                            irresistible taste, and true value for your money.
-                        </p>
-                    </div>
-                </div>
-
-                {/* Page 7 */}
-                <div className="page p-0 m-0">
-                    <div className="relative w-full h-full">
-                        <Image src="/Image4.png" alt="Image 4" fill className="object-cover" />
-                    </div>
-                </div>
-
-                {/* Page 8 */}
-                <div className="page bg-[#FFE4C4] flex flex-col items-center justify-center h-full px-4 md:px-6">
-                    <div className="text-center max-w-xl flex flex-col items-center justify-center h-full">
-                        <h1 className="text-2xl md:text-4xl font-extrabold mb-3 md:mb-4">Group Feast Made Easy</h1>
-                        <p className="text-base md:text-lg leading-relaxed">
-                            Savor the joy of daYummeals with friends and family! Split the bill effortlessly
-                            and send friendly payment reminders—all while relishing authentic homemade meals together.
-                        </p>
-                    </div>
-                </div>
-            </div>
+        {/* HORIZONTAL PROGRESS BAR */}
+        <div className="absolute bottom-10 left-[10vw] right-[10vw] h-[1px] bg-white/10 overflow-hidden">
+          <motion.div 
+            style={{ scaleX: scrollYProgress, opacity }}
+            className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 origin-left"
+          />
         </div>
-    );
+
+      </div>
+    </div>
+  );
 }
