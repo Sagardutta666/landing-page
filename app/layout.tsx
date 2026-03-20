@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Archivo } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "@/components/ClientLayout";
@@ -7,12 +7,17 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo" });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.dayummeals.in"),
   title: "daYummeals - Authenticity starts here!",
   description: "Experience authentic home-cooked meals with daYummeals – your ultimate homefood destination delivering quality and taste directly from our kitchen to your door.",
   keywords: "homefood, home-cooked meals, authentic food, daYummeals, food delivery, quality food, traditional recipes, homemade, culinary, healthy eating",
   authors: [{ name: "daYummeals Team" }],
-  viewport: "width=device-width, initial-scale=1",
   robots: "index, follow",
   alternates: {
     canonical: "https://www.dayummeals.in",

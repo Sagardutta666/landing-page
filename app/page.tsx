@@ -5,11 +5,10 @@ import FreshStory from "@/components/FreshStory";
 import FlipComponent from "@/components/FlipComponent";
 import HeroSection from "@/components/Hero";
 import ShowcaseSection from "@/components/Showcase";
-import DynamicPromise from "@/components/DynamicPromise";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useTheme } from "@/lib/ThemeContext";
 import { useEffect } from "react";
-import { Instagram, Twitter, Linkedin, Github } from "lucide-react";
+import { Instagram, Twitter, Linkedin } from "lucide-react";
 
 function SectionWrapper({ 
   children, 

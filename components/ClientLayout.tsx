@@ -5,23 +5,14 @@ import Dialogbox from "@/components/Dialogbox";
 import Navbar from "@/components/Navbar";
 import GrainOverlay from "@/components/GrainOverlay";
 import FloatingPremiumAction from "@/components/FloatingPremiumAction";
-import { AnimatePresence, motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { ThemeProvider, useTheme } from "@/lib/ThemeContext";
 
 function ThemeWrapper({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();
   const [openDialog, setOpenDialog] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const { scrollY } = useScroll();
-  const [isScrolling, setIsScrolling] = useState(false);
-  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
-
-  useMotionValueEvent(scrollY, "change", () => {
-    setIsScrolling(true);
-    if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
-    scrollTimeout.current = setTimeout(() => setIsScrolling(false), 150);
-  });
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 800);
