@@ -4,6 +4,7 @@ import BrandLogo from "@/components/BrandLogo";
 import Dialogbox from "@/components/Dialogbox";
 import Navbar from "@/components/Navbar";
 import GrainOverlay from "@/components/GrainOverlay";
+import FloatingPremiumAction from "@/components/FloatingPremiumAction";
 import { AnimatePresence, motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import { ThemeProvider, useTheme } from "@/lib/ThemeContext";
@@ -12,32 +13,23 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();
   const [openDialog, setOpenDialog] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [showFloatingButton, setShowFloatingButton] = useState(false);
-  const lastScrollY = useRef(0);
-
   const { scrollY } = useScroll();
+  const [isScrolling, setIsScrolling] = useState(false);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    // Logic: Hide at top (first 30vh), show ONLY when scrolling down, hide when scrolling up.
-    if (latest > window.innerHeight * 0.3) {
-      if (latest > lastScrollY.current + 10) {
-        setShowFloatingButton(true); // scrolling down
-      } else if (latest < lastScrollY.current - 10) {
-        setShowFloatingButton(false); // scrolling up
-      }
-    } else {
-      setShowFloatingButton(false); // at the top
-    }
-    lastScrollY.current = latest;
+  useMotionValueEvent(scrollY, "change", () => {
+    setIsScrolling(true);
+    if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    scrollTimeout.current = setTimeout(() => setIsScrolling(false), 150);
   });
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2000);
+    const timer = setTimeout(() => setIsLoading(false), 800);
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className={`min-h-screen transition-colors duration-1000 ${theme === 'light' ? 'bg-white text-black' : 'bg-black text-white'}`}>
+    <div className={`min-h-screen transition-colors duration-500 ${theme === 'light' ? 'bg-[#F2F0EA] text-[#1A1A1A]' : 'bg-black text-white'}`}>
       <AnimatePresence mode="wait">
         {isLoading ? (
           <motion.div 
@@ -88,57 +80,11 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
               {children}
             </main>
 
-            {/* SMOOTH FLOATING ACTION BUTTON */}
-            <AnimatePresence>
-              {showFloatingButton && (
-                <motion.div 
-                  initial={{ y: 150, opacity: 0, x: "-50%", scale: 0.8 }}
-                  animate={{ y: 0, opacity: 1, x: "-50%", scale: 1 }}
-                  exit={{ y: 150, opacity: 0, x: "-50%", scale: 0.8 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                  className="fixed bottom-10 left-1/2 z-[100] w-max"
-                >
-                  <AnimatePresence mode="wait">
-                    {openDialog ? (
-                      <motion.button
-                        key="close"
-                        onClick={() => setOpenDialog(false)}
-                        className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-[0_20px_50px_rgba(0,0,0,0.5)] border transition-colors ${theme === 'light' ? 'bg-black text-white border-white/20' : 'bg-white text-black border-black/10'}`}
-                        whileHover={{ scale: 1.1, rotate: 90 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <span className="text-2xl font-light">&times;</span>
-                      </motion.button>
-                    ) : (
-                      <motion.button
-                        key="open"
-                        onClick={() => setOpenDialog(true)}
-                        className={`px-8 py-3 rounded-full shadow-[0_20px_40px_rgba(0,0,0,0.1)] font-black uppercase tracking-[0.2em] text-[8px] md:text-[10px] flex items-center gap-3 transition-all relative overflow-hidden group ${theme === 'light' ? 'bg-white text-black border border-orange-100' : 'bg-white text-black'}`}
-                        whileHover={{ y: -5, scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        {/* Shimmer Effect for Light Theme */}
-                        {theme === 'light' && (
-                          <motion.div 
-                            animate={{ x: ["-100%", "200%"] }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-100/30 to-transparent skew-x-12"
-                          />
-                        )}
-                        <span className="relative z-10">Kal ka kya plan hai?</span>
-                        <motion.span 
-                          animate={{ rotate: [0, 10, -10, 0] }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                          className="text-lg relative z-10"
-                        >
-                           🍱
-                        </motion.span>
-                      </motion.button>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {/* PREMIUM MORPHING INTERACTION (RIGHT SIDE) */}
+            <FloatingPremiumAction 
+              isOpen={openDialog} 
+              onClick={() => setOpenDialog(!openDialog)} 
+            />
 
             <AnimatePresence>
               {openDialog && (

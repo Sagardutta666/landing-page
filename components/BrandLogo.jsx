@@ -7,7 +7,7 @@ export default function BrandLogo({ className = "" }) {
   const { theme } = useTheme();
 
   return (
-    <div className={`inline-flex items-center justify-center gap-0 font-black italic tracking-tighter cursor-pointer group bg-white px-4 py-1.5 rounded-full shadow-md whitespace-nowrap flex-nowrap ${className}`}>
+    <div className={`inline-flex items-center justify-center gap-0 font-black italic tracking-tighter cursor-pointer group bg-[#F2F0EA] px-4 py-1.5 rounded-full shadow-sm whitespace-nowrap flex-nowrap ${className}`}>
       {/* "da" */}
       <span className="text-black text-[0.9em]">
         da

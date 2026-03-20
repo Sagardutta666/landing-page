@@ -40,11 +40,11 @@ export default function Under90Experience() {
 
   // Deep branching design: Not sections, but a "Fluid Flow"
   return (
-    <div className="relative bg-[#fffdfa]">
+    <div className="relative bg-[#F2F0EA]">
       {/* 1. SCROLL-DRIVEN EXPERIENCE PARENT */}
-      <div ref={containerRef} className="relative h-[400vh]">
+      <div ref={containerRef} className="relative h-[800vh]">
         {/* STICKY DYNAMIC CANVAS */}
-        <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+        <div className="sticky top-0 h-[100dvh] w-full overflow-hidden flex items-center justify-center pt-[2vh] md:pt-[4vh]">
           
           {/* Organic Background Elements (Warm Kitchen Hues) - Adjusted for Mobile Depth */}
           <motion.div 
@@ -53,7 +53,7 @@ export default function Under90Experience() {
           />
           <motion.div 
             style={{ x: useTransform(mouseX, v => -v * 0.5), y: useTransform(mouseY, v => -v * 0.5) }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] md:w-[60vw] h-[120vw] md:h-[60vw] bg-purple-100/30 rounded-full blur-[60px] md:blur-[120px] pointer-events-none -z-10"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] md:w-[60vw] h-[120vw] md:h-[60vw] bg-purple-200/20 rounded-full blur-[60px] md:blur-[120px] pointer-events-none -z-10"
           />
 
           {/* MESH TEXTURE OVERLAY */}
@@ -61,9 +61,7 @@ export default function Under90Experience() {
 
           {/* THE "STORY ENGINE" */}
           <div className="relative h-full w-full flex items-center justify-center px-4 md:px-6">
-            <AnimatePresence mode="wait">
-              <SceneSwitcher progress={smoothProgress} />
-            </AnimatePresence>
+            <SceneSwitcher progress={smoothProgress} />
           </div>
 
           {/* SIDE SCENE INDICATOR (Modern - Scaled for reach) */}
@@ -96,7 +94,7 @@ export default function Under90Experience() {
       </div>
 
       {/* 2. FOOTER SECTION (Outside Sticky Parent, in natural flow) */}
-      <footer className="relative z-[100] py-16 md:py-24 bg-white border-t border-orange-50 text-black">
+      <footer className="relative z-[100] py-16 md:py-24 bg-[#F2F0EA] border-t border-black/5 text-black">
           <div className="container mx-auto px-6">
             <div className="flex flex-col md:flex-row justify-between items-start gap-12 md:gap-16 mb-16 md:mb-24">
               <div className="space-y-6 md:space-y-10 max-w-sm text-center md:text-left mx-auto md:mx-0 w-full">
@@ -154,41 +152,29 @@ export default function Under90Experience() {
     </div>
   );
 }
-
 function SceneSwitcher({ progress }) {
-  const [scene, setScene] = useState(0);
-
-  useEffect(() => {
-    return progress.on("change", (v) => {
-      if (v < 0.25) setScene(0);
-      else if (v < 0.5) setScene(1);
-      else if (v < 0.75) setScene(2);
-      else setScene(3);
-    });
-  }, [progress]);
-
   return (
-    <div className="w-full h-full">
-      <AnimatePresence mode="wait">
-        {scene === 0 && <SceneHero key="hero" />}
-        {scene === 1 && <SceneKitchen key="kitchen" />}
-        {scene === 2 && <SceneTrack key="track" />}
-        {scene === 3 && <SceneCTA key="cta" />}
-      </AnimatePresence>
+    <div className="w-full h-full relative">
+      <SceneHero progress={progress} />
+      <SceneKitchen progress={progress} />
+      <SceneTrack progress={progress} />
+      <SceneCTA progress={progress} />
     </div>
   );
 }
 
-function SceneHero() {
+function SceneHero({ progress }) {
+  const opacity = useTransform(progress, [0, 0.15, 0.22, 0.25], [1, 1, 0, 0]);
+  const y = useTransform(progress, [0, 0.22, 0.25], [0, -100, -200]);
+  const scale = useTransform(progress, [0, 0.22, 0.25], [1, 0.9, 0.8]);
+
   return (
     <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0, y: -50, filter: "blur(20px)" }}
-      className="flex flex-col lg:flex-row items-center justify-between max-w-7xl mx-auto w-full px-6 gap-20"
+      style={{ opacity, y, scale }}
+      className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center max-w-7xl mx-auto w-full px-6 gap-10 md:gap-20"
     >
       {/* Left: Clean Typography */}
-      <div className="w-full lg:w-1/2 text-center lg:text-left space-y-6 md:space-y-8">
+      <div className="w-full lg:w-1/2 text-center lg:text-left space-y-4 md:space-y-8">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
@@ -197,27 +183,27 @@ function SceneHero() {
           <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-orange-500 animate-pulse" />
           <span className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">Freshly Simmering</span>
         </motion.div>
-
-        <h1 className="text-[12vw] md:text-8xl xl:text-9xl font-black tracking-tighter leading-[0.85] md:leading-[0.8] text-black">
-          MOM'S <br />
+ 
+        <h1 className="text-[12vw] md:text-7xl xl:text-8xl font-black tracking-tighter leading-[0.85] md:leading-[0.8] text-black">
+          MOM&apos;S <br />
           <span className="text-orange-500 italic">MAGIC</span> <br />
-          <span className="text-[5vw] md:text-5xl font-light tracking-normal text-gray-300">IN 90 MINS.</span>
+          <span className="text-[4.5vw] md:text-4xl font-light tracking-normal text-gray-300">IN 90 MINS.</span>
         </h1>
-
-        <p className="text-sm md:text-xl text-gray-400 font-light max-w-lg mx-auto lg:mx-0 leading-relaxed">
+ 
+        <p className="text-[10px] md:text-lg text-gray-400 font-light max-w-lg mx-auto lg:mx-0 leading-relaxed">
           The warmth of a home kitchen, delivered at express speed. No factory prep, just pure love and local ingredients.
         </p>
       </div>
-
+ 
       {/* Right: "Living Kitchen" Image Animation */}
-      <div className="w-full lg:w-1/2 relative mt-12 lg:mt-0">
+      <div className="w-full lg:w-1/2 relative mt-8 md:mt-12 lg:mt-0">
         <motion.div 
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1, type: "spring" }}
-          className="relative aspect-square w-full max-w-[300px] md:max-w-xl mx-auto"
+          className="relative aspect-square w-full max-w-[240px] md:max-w-xl mx-auto"
         >
-          {/* Animated Cooking Elements (Steam/Particles) */}
+          {/* Animated Cooking Elements */}
           <div className="absolute inset-0 z-20 pointer-events-none">
              {[...Array(5)].map((_, i) => (
                 <motion.div
@@ -238,32 +224,31 @@ function SceneHero() {
                 />
              ))}
           </div>
-
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-100 to-purple-50 rounded-[4rem] -rotate-6 scale-95" />
-          <div className="relative z-10 w-full h-full rounded-[4rem] overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.1)] border-8 border-white bg-white group">
+ 
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-100 to-purple-50 rounded-[3rem] md:rounded-[4rem] -rotate-6 scale-95" />
+          <div className="relative z-10 w-full h-full rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.1)] border-4 md:border-8 border-white bg-white group">
             <img 
               src="/under90_bowl.png" 
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[3s]" 
               alt="Mom's Cooking" 
             />
-            {/* Soft Overlay */}
             <div className="absolute inset-0 bg-gradient-to-tr from-orange-500/10 to-transparent pointer-events-none" />
           </div>
-
-          {/* Floating Ingredients (Animated) */}
+ 
+          {/* Floating Ingredients */}
           <motion.div 
-            animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}
+            animate={{ y: [0, -15, 0], rotate: [0, 8, 0] }}
             transition={{ duration: 4, repeat: Infinity }}
-            className="absolute -top-10 -right-4 w-24 h-24 bg-white rounded-3xl shadow-2xl flex items-center justify-center p-4 z-20"
+            className="absolute -top-6 -right-2 w-16 h-16 md:w-24 md:h-24 bg-white rounded-2xl md:rounded-3xl shadow-2xl flex items-center justify-center p-2 z-20"
           >
-             <span className="text-4xl">🌿</span>
+             <span className="text-2xl md:text-4xl">🌿</span>
           </motion.div>
           <motion.div 
-            animate={{ y: [0, 20, 0], rotate: [0, -10, 0] }}
+            animate={{ y: [0, 15, 0], rotate: [0, -8, 0] }}
             transition={{ duration: 5, repeat: Infinity, delay: 1 }}
-            className="absolute -bottom-6 -left-10 w-20 h-20 bg-white rounded-3xl shadow-2xl flex items-center justify-center p-4 z-20"
+            className="absolute -bottom-4 -left-6 w-14 h-14 md:w-20 md:h-20 bg-white rounded-2xl md:rounded-3xl shadow-2xl flex items-center justify-center p-2 z-20"
           >
-             <span className="text-4xl">🧂</span>
+             <span className="text-2xl md:text-4xl">🧂</span>
           </motion.div>
         </motion.div>
       </div>
@@ -271,7 +256,11 @@ function SceneHero() {
   );
 }
 
-function SceneKitchen() {
+function SceneKitchen({ progress }) {
+  const opacity = useTransform(progress, [0.18, 0.25, 0.45, 0.52], [0, 1, 1, 0]);
+  const y = useTransform(progress, [0.18, 0.25, 0.45, 0.52], [100, 0, 0, -100]);
+  const scale = useTransform(progress, [0.18, 0.25, 0.45, 0.52], [0.9, 1, 1, 0.9]);
+
   const screenshots = [
     { src: "/under90_splashscreen.png", label: "Pure Heart" },
     { src: "/under90_homescreen.png", label: "Mom's Desk" },
@@ -281,10 +270,8 @@ function SceneKitchen() {
 
   return (
     <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0, scale: 0.9, filter: "blur(20px)" }}
-      className="max-w-7xl mx-auto w-full px-6 flex flex-col lg:flex-row items-center gap-16"
+      style={{ opacity, y, scale }}
+      className="absolute inset-0 max-w-7xl mx-auto w-full px-6 flex flex-col lg:flex-row items-center justify-center gap-10 md:gap-16"
     >
       {/* Left Content: The "Under 90" / "Mom's Touch" Message */}
       <div className="w-full lg:w-5/12 space-y-8 md:space-y-10 text-center lg:text-left">
@@ -297,11 +284,11 @@ function SceneKitchen() {
             <div className="h-[1px] w-6 md:w-8 bg-orange-400" />
             <span className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] md:tracking-[0.4em] text-orange-600">Purely HomeMade</span>
           </motion.div>
-          <h2 className="text-4xl md:text-7xl font-black tracking-tighter leading-none mb-4 md:mb-6">
+          <h2 className="text-3xl md:text-6xl font-black tracking-tighter leading-none mb-4 md:mb-6">
             MADE BY <br />
-            <span className="italic">MOM'S HAND.</span>
+            <span className="italic">MOM&apos;S HAND.</span>
           </h2>
-          <p className="text-lg md:text-2xl text-gray-500 font-light leading-snug px-4 md:px-0">
+          <p className="text-base md:text-xl text-gray-500 font-light leading-snug px-4 md:px-0">
             Authentic meals crafted by neighborhood moms, arriving at your doorstep in <span className="text-orange-600 font-bold underline decoration-2 underline-offset-4 font-serif italic">under 90 minutes.</span>
           </p>
         </div>
@@ -338,11 +325,11 @@ function SceneKitchen() {
                 initial={{ opacity: 0, x: 100, rotate: 10 }}
                 animate={{ 
                   opacity: 1, 
-                  x: (i - 1.5) * (window.innerWidth < 768 ? 30 : 60), // Scaled horizontal stagger
-                  y: Math.sin(i * 1.5) * (window.innerWidth < 768 ? 15 : 30), // Scaled S-curve
+                  x: (i - 1.5) * (window.innerWidth < 768 ? 25 : 60), // Scaled horizontal stagger
+                  y: Math.sin(i * 1.5) * (window.innerWidth < 768 ? 10 : 30), // Scaled S-curve
                   rotate: (i - 1.5) * (window.innerWidth < 768 ? 4 : 8), // Scaled Fan-out
                   zIndex: 10 + i,
-                  scale: 0.9 + (i * 0.05)
+                  scale: (window.innerWidth < 768 ? 0.8 : 0.9) + (i * 0.05)
                 }}
                 whileHover={{ 
                   scale: 1.1, 
@@ -351,7 +338,7 @@ function SceneKitchen() {
                   zIndex: 50,
                   transition: { type: "spring", stiffness: 400, damping: 20 }
                 }}
-                className="absolute w-[120px] md:w-[240px] aspect-[9/19] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden border-4 md:border-8 border-white bg-white shadow-xl md:shadow-2xl transition-shadow hover:shadow-orange-200/50 group"
+                className="absolute w-[100px] md:w-[240px] aspect-[9/19] rounded-[1.2rem] md:rounded-[2rem] overflow-hidden border-2 md:border-8 border-white bg-white shadow-xl md:shadow-2xl transition-shadow hover:shadow-orange-200/50 group"
               >
                 <img src={item.src} className="w-full h-full object-cover" alt={item.label} />
                 <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end translate-y-full group-hover:translate-y-0 transition-transform duration-500">
@@ -376,16 +363,18 @@ function SceneKitchen() {
   );
 }
 
-function SceneTrack() {
+function SceneTrack({ progress }) {
+  const opacity = useTransform(progress, [0.45, 0.52, 0.73, 0.8], [0, 1, 1, 0]);
+  const y = useTransform(progress, [0.45, 0.52, 0.73, 0.8], [100, 0, 0, -100]);
+  const scale = useTransform(progress, [0.45, 0.52, 0.73, 0.8], [0.9, 1, 1, 0.9]);
+
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 100 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.9, filter: "blur(20px)" }}
-      className="flex flex-col lg:flex-row items-center justify-center gap-20 max-w-6xl mx-auto w-full px-6"
+      style={{ opacity, y, scale }}
+      className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center gap-10 md:gap-20 max-w-6xl mx-auto w-full px-6"
     >
        {/* SLEEK FRAMELESS APP UI */}
-       <div className="relative w-full max-w-[320px] aspect-[9/19] group">
+       <div className="relative w-full max-w-[220px] md:max-w-[320px] aspect-[9/19] group">
           {/* Ambient Glow */}
           <motion.div 
             animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
@@ -422,11 +411,11 @@ function SceneTrack() {
        </div>
 
        <div className="text-center lg:text-left space-y-8">
-          <h3 className="text-5xl md:text-8xl font-black italic tracking-tighter uppercase leading-[0.8] mb-8">
+          <h3 className="text-3xl md:text-7xl font-black italic tracking-tighter uppercase leading-[0.85] md:leading-[0.8] mb-6 md:mb-8">
             SPEED WITH <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-purple-600">SOUL.</span>
           </h3>
-          <p className="text-xl text-gray-500 max-w-xl font-light leading-relaxed">
+          <p className="text-sm md:text-lg text-gray-500 max-w-xl font-light leading-relaxed">
             Witness the journey from a warm pan to your plate. Our riders pick up directly from home kitchens—no detours, no cold storage.
           </p>
           <div className="flex justify-center lg:justify-start">
@@ -439,36 +428,39 @@ function SceneTrack() {
   );
 }
 
-function SceneCTA() {
+function SceneCTA({ progress }) {
+  const opacity = useTransform(progress, [0.73, 0.8, 0.95, 1], [0, 1, 1, 0.8]);
+  const y = useTransform(progress, [0.73, 0.8, 1], [100, 0, 0]);
+  const scale = useTransform(progress, [0.73, 0.8, 1], [0.8, 1, 1]);
+
   return (
     <motion.div 
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-      className="text-center space-y-12"
+      style={{ opacity, y, scale }}
+      className="absolute inset-0 flex flex-col items-center justify-center text-center space-y-8 md:space-y-12 px-6"
     >
        <motion.div 
          animate={{ rotate: 360 }}
          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-         className="w-40 h-40 border-2 border-dashed border-purple-200 rounded-full mx-auto flex items-center justify-center"
+         className="w-24 h-24 md:w-40 md:h-40 border-2 border-dashed border-purple-200 rounded-full mx-auto flex items-center justify-center"
        >
-         <ArrowRight size={40} className="text-purple-600" />
+         <ArrowRight className="text-purple-600 w-8 h-8 md:w-12 md:h-12" />
        </motion.div>
-
-       <div className="space-y-6">
-          <h4 className="text-[10px] font-black uppercase tracking-[0.5em] text-purple-600">The Final Step</h4>
-          <h2 className="text-6xl md:text-[8vw] font-black tracking-tighter leading-none italic uppercase">
+ 
+        <div className="space-y-3 md:space-y-6">
+          <h4 className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.5em] text-purple-600">The Final Step</h4>
+          <h2 className="text-3xl md:text-[7vw] font-black tracking-tighter leading-none italic uppercase">
             Order <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">Express.</span>
           </h2>
-          <p className="text-2xl text-gray-400 font-light max-w-lg mx-auto">
+          <p className="text-xs md:text-xl text-gray-400 font-light max-w-lg mx-auto">
             Your neighborhood is cooking. Join the table now.
           </p>
-       </div>
-
-       <div className="flex flex-wrap justify-center gap-6 pt-12">
-          <button className="px-12 py-6 bg-black text-white rounded-3xl font-black uppercase tracking-widest text-xs hover:bg-purple-600 transition-all shadow-[0_20px_50px_rgba(0,0,0,0.2)]">
+        </div>
+ 
+       <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-6 pt-6 md:pt-12 w-full max-w-xs md:max-w-none mx-auto">
+          <button className="w-full md:w-auto px-8 md:px-12 py-4 md:py-6 bg-black text-white rounded-2xl md:rounded-3xl font-black uppercase tracking-widest text-[10px] md:text-xs hover:bg-purple-600 transition-all shadow-xl">
             Explore Dishes
           </button>
-          <button className="px-12 py-6 bg-white text-black border border-black/5 rounded-3xl font-black uppercase tracking-widest text-xs hover:bg-gray-50 transition-all shadow-sm">
+          <button className="w-full md:w-auto px-8 md:px-12 py-4 md:py-6 bg-white text-black border border-black/5 rounded-2xl md:rounded-3xl font-black uppercase tracking-widest text-[10px] md:text-xs hover:bg-gray-50 transition-all shadow-sm">
             Become a Chef
           </button>
        </div>

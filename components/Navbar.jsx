@@ -18,13 +18,13 @@ export default function Navbar() {
           onClick={toggleTheme}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className={`relative flex items-center gap-2 px-1.5 py-1.5 rounded-full cursor-pointer transition-all duration-700 shadow-2xl ${theme === 'light' ? 'bg-white border border-black/5' : 'bg-[#111] border border-white/10'}`}
+          className={`relative flex items-center gap-2 px-1.5 py-1.5 rounded-full cursor-pointer transition-all duration-700 shadow-xl ${theme === 'light' ? 'bg-[#F2F0EA] border border-black/5' : 'bg-[#111] border border-white/10'}`}
         >
           <div className="flex items-center gap-1">
-             <div className={`px-4 py-2 rounded-full text-[9px] font-black tracking-widest transition-all duration-500 ${theme === 'light' ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/30' : 'text-white/30 hover:text-white'}`}>
+             <div className={`px-4 py-2 rounded-full text-[9px] font-black tracking-widest transition-all duration-500 ${theme === 'light' ? 'bg-[#814A20] text-[#F2F0EA] shadow-lg shadow-[#814A20]/20' : 'text-white/30 hover:text-white'}`}>
                 90MIN
              </div>
-             <div className={`px-4 py-2 rounded-full text-[9px] font-black tracking-widest transition-all duration-500 ${theme === 'dark' ? 'bg-white text-black shadow-lg shadow-white/20' : 'text-black/30 hover:text-black'}`}>
+             <div className={`px-4 py-2 rounded-full text-[9px] font-black tracking-widest transition-all duration-500 ${theme === 'dark' ? 'bg-[#F2F0EA] text-[#1A1A1A] shadow-lg shadow-white/5' : 'text-black/30 hover:text-black'}`}>
                 PRE
              </div>
           </div>
@@ -33,7 +33,7 @@ export default function Navbar() {
           <motion.div 
             layoutId="active-pill"
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            className={`absolute inset-0 z-[-1] rounded-full ${theme === 'light' ? 'bg-purple-50' : 'bg-white/5'}`}
+            className={`absolute inset-0 z-[-1] rounded-full ${theme === 'light' ? 'bg-[#1A1A1A]/5' : 'bg-white/5'}`}
           />
         </motion.div>
       </div>

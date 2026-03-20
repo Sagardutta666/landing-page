@@ -44,7 +44,7 @@ export default function Hero() {
   };
 
   return (
-    <div className={`relative w-full h-screen overflow-hidden flex items-center justify-center transition-colors duration-700 bg-black`}>
+    <div className={`relative w-full h-[100dvh] overflow-hidden flex items-center justify-center transition-colors duration-700 bg-black pt-[12vh] md:pt-[14vh]`}>
       {/* Background Video */}
       <video
         className={`absolute top-0 left-0 w-full h-full object-cover brightness-[0.4]`}
@@ -70,14 +70,14 @@ export default function Hero() {
 
         <motion.h1 
           variants={itemVariants}
-          className={`text-4xl md:text-8xl font-black mb-4 md:mb-6 tracking-tighter leading-[0.9] text-white`}
+          className={`text-3xl md:text-7xl font-black mb-4 md:mb-6 tracking-tighter leading-[0.9] text-white`}
         >
           Elevate Your <br /><span className="text-gradient">Dining Experience</span>
         </motion.h1>
 
         <motion.p 
           variants={itemVariants}
-          className={`text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light text-gray-300`}
+          className={`text-base md:text-lg max-w-2xl mx-auto mb-10 font-light text-gray-300`}
         >
           Discover curated meals that blend traditional flavors with modern nutrition.
         </motion.p>

@@ -8,6 +8,7 @@ import ShowcaseSection from "@/components/Showcase";
 import DynamicPromise from "@/components/DynamicPromise";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useTheme } from "@/lib/ThemeContext";
+import { useEffect } from "react";
 import { Instagram, Twitter, Linkedin, Github } from "lucide-react";
 
 function SectionWrapper({ 
@@ -48,6 +49,11 @@ export default function Home() {
     damping: 30,
     restDelta: 0.01
   });
+
+  // NAVIGATION FIX: Reset scroll to top on theme/mode change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [theme]);
 
   // BRANCH 1: THE FLUID UNDER 90 EXPERIENCE (LIGHT)
   if (theme === 'light') {
