@@ -21,7 +21,7 @@ export default function Hero() {
   if (theme === 'light') {
     return <Under90Hero />;
   }
-
+ 
   const containerVariants = {
     initial: { opacity: 0 },
     animate: {
@@ -32,7 +32,7 @@ export default function Hero() {
       }
     }
   };
-
+ 
   const itemVariants = {
     initial: { y: 30, opacity: 0, scale: 0.95 },
     animate: { 
@@ -42,7 +42,7 @@ export default function Hero() {
       transition: { type: "spring", stiffness: 100, damping: 20 }
     }
   };
-
+ 
   return (
     <div className={`relative w-full h-[100dvh] overflow-hidden flex items-center justify-center transition-colors duration-700 bg-black pt-[12vh] md:pt-[14vh]`}>
       {/* Background Video */}
@@ -54,34 +54,49 @@ export default function Hero() {
         muted
         playsInline
       />
-
+ 
       {/* Hero Content Overlay */}
-      <motion.div 
-        className="relative z-10 text-center px-4"
-        variants={containerVariants}
-        initial="initial"
-        animate="animate"
-      >
-        <motion.div variants={itemVariants} className="mb-4">
-          <span className={`px-6 py-2 rounded-full text-sm font-medium tracking-[0.2em] uppercase glass text-white`}>
-            Taste the Future
-          </span>
+      <div className="container mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12 md:gap-20">
+        
+        {/* Left: Typography */}
+        <motion.div 
+          className="w-full lg:w-10/12 text-center lg:text-left"
+          variants={containerVariants}
+          initial="initial"
+          animate="animate"
+        >
+          <motion.div variants={itemVariants} className="mb-6">
+            <span className="px-6 py-1 rounded-full text-[10px] font-black tracking-[0.3em] uppercase glass text-white border-purple-500/30">
+              Tastier • Faster • Thinner
+            </span>
+          </motion.div>
+
+          <motion.h1 
+            variants={itemVariants}
+            className="text-5xl md:text-8xl lg:text-8xl font-black mb-6 tracking-tighter leading-[0.85] text-white uppercase italic"
+          >
+            THE ART OF <br /><span className="text-gradient">EATING WELL.</span>
+          </motion.h1>
+
+          <motion.p 
+            variants={itemVariants}
+            className="text-lg md:text-2xl max-w-2xl mx-auto lg:mx-0 mb-12 font-light text-white/50 leading-tight"
+          >
+            Discover curated home-cooked meals that blend traditional heritage with modern wellness.
+          </motion.p>
+
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+             <a 
+               href="https://play.google.com/store/apps/details?id=com.dayummeals.androidapp"
+               target="_blank"
+               rel="noopener noreferrer"
+               className="inline-block px-12 py-5 bg-[#aa3fdd] text-white rounded-full font-black uppercase tracking-widest text-[10px] md:text-sm hover:scale-105 transition-all shadow-2xl shadow-[#aa3fdd]/40 border border-white/10"
+             >
+               Order Now
+             </a>
+          </motion.div>
         </motion.div>
-
-        <motion.h1 
-          variants={itemVariants}
-          className={`text-3xl md:text-7xl font-black mb-4 md:mb-6 tracking-tighter leading-[0.9] text-white`}
-        >
-          Elevate Your <br /><span className="text-gradient">Dining Experience</span>
-        </motion.h1>
-
-        <motion.p 
-          variants={itemVariants}
-          className={`text-base md:text-lg max-w-2xl mx-auto mb-10 font-light text-gray-300`}
-        >
-          Discover curated meals that blend traditional flavors with modern nutrition.
-        </motion.p>
-      </motion.div>
+      </div>
 
       {/* Elegant Scroll Indicator */}
       <motion.div 

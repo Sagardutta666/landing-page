@@ -21,7 +21,7 @@ export default function Navbar() {
           className={`relative flex items-center gap-2 px-1.5 py-1.5 rounded-full cursor-pointer transition-all duration-700 shadow-xl ${theme === 'light' ? 'bg-[#F2F0EA] border border-black/5' : 'bg-[#111] border border-white/10'}`}
         >
           <div className="flex items-center gap-1">
-             <div className={`px-4 py-2 rounded-full text-[9px] font-black tracking-widest transition-all duration-500 ${theme === 'light' ? 'bg-[#814A20] text-[#F2F0EA] shadow-lg shadow-[#814A20]/20' : 'text-white/30 hover:text-white'}`}>
+             <div className={`px-4 py-2 rounded-full text-[9px] font-black tracking-widest transition-all duration-500 ${theme === 'light' ? 'bg-[#aa3fdd] text-[#F2F0EA] shadow-lg shadow-[#aa3fdd]/30' : 'text-white/30 hover:text-white'}`}>
                 90MIN
              </div>
              <div className={`px-4 py-2 rounded-full text-[9px] font-black tracking-widest transition-all duration-500 ${theme === 'dark' ? 'bg-[#F2F0EA] text-[#1A1A1A] shadow-lg shadow-white/5' : 'text-black/30 hover:text-black'}`}>

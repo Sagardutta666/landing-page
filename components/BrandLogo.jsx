@@ -7,43 +7,28 @@ export default function BrandLogo({ className = "" }) {
   const { theme } = useTheme();
 
   return (
-    <div className={`inline-flex items-center justify-center gap-0 font-black italic tracking-tighter cursor-pointer group bg-[#F2F0EA] px-4 py-1.5 rounded-full shadow-sm whitespace-nowrap flex-nowrap ${className}`}>
+    <div className={`inline-flex flex-row items-baseline font-black italic tracking-tighter cursor-pointer group bg-white/90 backdrop-blur-md px-5 py-2 rounded-full shadow-sm hover:shadow-md transition-all whitespace-nowrap overflow-visible ${className}`}>
       {/* "da" */}
-      <span className="text-black text-[0.9em]">
+      <span className="text-black text-[1em] leading-none">
         da
       </span>
 
-      {/* "Yum" - Now Colored #aa3fdd without border */}
-      <div className="relative">
-        {/* Floating Shine Path - Internal only */}
+      {/* "Yumm" - 4 letters colored #aa3fdd */}
+      <span className="text-[#aa3fdd] text-[1.1em] leading-none relative">
+        Yumm
         <motion.div 
-          className="absolute inset-0 z-[1] overflow-hidden rounded-full pointer-events-none"
-        >
-          <motion.div
-            animate={{ 
-              x: ["-100%", "100%"]
-            }}
-            transition={{ 
-              duration: 3, 
-              repeat: Infinity, 
-              ease: "linear" 
-            }}
-            className="w-full h-full bg-gradient-to-r from-transparent via-[#aa3fdd]/10 to-transparent skew-x-12"
-          />
-        </motion.div>
+          animate={{ x: ["-100%", "200%"] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-x-0 bottom-0 h-[2px] bg-[#aa3fdd]/30 blur-[1px]"
+        />
+      </span>
 
-        {/* The Text "Yum" - Colored #aa3fdd */}
-        <span className="relative z-10 text-[0.95em]" style={{ color: "#aa3fdd" }}>
-          Yum
-        </span>
-      </div>
-
-      {/* "meals" */}
+      {/* "eals" */}
       <motion.span 
-        className="text-black text-[0.9em]"
+        className="text-black text-[1em] leading-none"
         whileHover={{ x: 2 }}
       >
-        meals
+        eals
       </motion.span>
     </div>
   );

@@ -131,7 +131,7 @@ export default function FlipBook() {
         <div className="absolute bottom-10 left-[10vw] right-[10vw] h-[1px] bg-white/10 overflow-hidden">
           <motion.div 
             style={{ scaleX: scrollYProgress, opacity }}
-            className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 origin-left"
+            className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-[#aa3fdd] origin-left"
           />
         </div>
 

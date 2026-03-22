@@ -83,7 +83,7 @@ export default function FloatingPremiumAction({ onClick, isOpen }) {
           <motion.div
             animate={{ x: ["-100%", "200%"] }}
             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-            className={`absolute inset-0 bg-gradient-to-r from-transparent via-${theme === 'light' ? 'orange' : 'white'}-100/20 to-transparent skew-x-12`}
+            className={`absolute inset-0 bg-gradient-to-r from-transparent via-${theme === 'light' ? 'purple' : 'white'}-100/20 to-transparent skew-x-12`}
           />
         </motion.div>
 
@@ -93,7 +93,7 @@ export default function FloatingPremiumAction({ onClick, isOpen }) {
             scale: isHovered ? 1.4 : 1.1,
             opacity: isHovered ? 0.4 : 0.2
           }}
-          className={`absolute inset-0 rounded-full blur-2xl -z-10 transition-colors ${theme === 'light' ? 'bg-orange-400' : 'bg-purple-600'}`}
+          className={`absolute inset-0 rounded-full blur-2xl -z-10 transition-colors ${theme === 'light' ? 'bg-[#aa3fdd]/30' : 'bg-purple-600'}`}
         />
       </motion.div>
     </div>

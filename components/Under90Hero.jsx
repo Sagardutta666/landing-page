@@ -114,63 +114,56 @@ export default function Under90Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="text-xl md:text-2xl text-gray-500 font-light max-w-xl mx-auto lg:mx-0 leading-tight mb-12"
+            className="text-xl md:text-2xl text-gray-500 font-light max-w-xl mx-auto lg:mx-0 leading-tight mb-8"
           >
             Experience the warmth of <span className="text-black font-bold italic">freshly made home food</span>. Crafted with love by local home chefs and delivered in under 90 minutes.
           </motion.p>
 
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+            className="flex justify-center lg:justify-start"
+          >
+            <button 
+              onClick={() => window.open('https://play.google.com/store/apps/details?id=com.dayummeals.androidapp', '_blank')}
+              className="px-10 py-5 bg-purple-600 text-white rounded-full font-black uppercase tracking-widest text-[10px] md:text-xs hover:scale-105 transition-all shadow-2xl shadow-purple-500/40 border border-white/10"
+            >
+              Order Now
+            </button>
+          </motion.div>
         </motion.div>
 
-        {/* 3D Bowl Showcase */}
+        {/* 3D Showcase (Replacing Bowl with Layered Stack) */}
         <motion.div 
-          style={{ rotateX, rotateY, x: bowlX, y: bowlY }}
           className="w-full lg:w-1/2 relative flex justify-center perspective-[2000px]"
         >
-          <motion.div
-            initial={{ scale: 0.5, opacity: 0, rotate: -20 }}
-            animate={{ scale: 1, opacity: 1, rotate: 0 }}
-            transition={{ type: "spring", stiffness: 50, damping: 15, delay: 0.5 }}
-            className="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px]"
-          >
-            {/* Background Halo */}
-            <motion.div 
-              animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 blur-[100px] rounded-full"
-            />
-            
-            {/* Main Bowl Image */}
-            <img 
-              src="/under90_bowl.png" 
-              alt="Gourmet Bowl" 
-              className="w-full h-full object-contain relative z-10 drop-shadow-[0_50px_80px_rgba(0,0,0,0.15)]"
-            />
+          <div className="relative w-full aspect-square max-w-[400px] flex items-center justify-center">
+             {[
+               { src: "/under90_splashscreen.png", rotate: -10, x: -30 },
+               { src: "/under90_homescreen.png", rotate: 0, x: 0 },
+               { src: "/homescreen_under90.png", rotate: 10, x: 30 }
+             ].map((img, i) => (
+               <motion.div
+                 key={i}
+                 initial={{ opacity: 0, x: 100, rotate: 20 }}
+                 animate={{ opacity: 1, x: img.x, rotate: img.rotate }}
+                 transition={{ delay: 1 + i * 0.2, type: "spring", stiffness: 60 }}
+                 className="absolute inset-10 rounded-[2rem] overflow-hidden border-4 border-white shadow-2xl bg-white"
+               >
+                 <img src={img.src} className="w-full h-full object-cover" alt="app" />
+               </motion.div>
+             ))}
 
-            {/* Floating Accents */}
-            <motion.div 
-              animate={{ y: [0, -20, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-10 -right-10 w-32 h-32 bg-white/80 backdrop-blur-xl rounded-2xl border border-black/5 shadow-2xl flex flex-col items-center justify-center p-4 z-20"
-            >
-              <span className="text-4xl">⏱️</span>
-              <span className="text-[10px] font-black text-black mt-2">AVG. 35 MIN</span>
-            </motion.div>
-
-            <motion.div 
-              animate={{ y: [0, 20, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute -bottom-10 -left-10 w-40 h-16 bg-white/80 backdrop-blur-xl rounded-2xl border border-black/5 shadow-2xl flex items-center justify-center gap-3 p-4 z-20"
-            >
-              <div className="flex -space-x-2">
-                 {[1,2,3].map(i => (
-                   <div key={i} className="w-6 h-6 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
-                     <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i + 10}`} alt="user" />
-                   </div>
-                 ))}
-              </div>
-              <span className="text-[8px] font-black text-black/60 uppercase tracking-widest">4.9/5 Rating</span>
-            </motion.div>
-          </motion.div>
+             {/* Floating Badge */}
+             <motion.div
+               animate={{ y: [0, -10, 0] }}
+               transition={{ duration: 3, repeat: Infinity }}
+               className="absolute -top-10 -right-10 w-24 h-24 bg-purple-600 rounded-full flex items-center justify-center text-white text-[10px] font-black uppercase tracking-widest text-center px-4"
+             >
+                Order Express
+             </motion.div>
+          </div>
         </motion.div>
       </div>
 

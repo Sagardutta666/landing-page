@@ -23,7 +23,7 @@ const DARK_SCREENSHOTS = [
     image: "/orderdetails_screen.png", 
     title: "REAL-TIME TRACKING", 
     desc: "Follow your meal's journey from the kitchen to your doorstep with precision.", 
-    accent: "from-orange-600 to-amber-600"
+    accent: "from-purple-600 to-[#aa3fdd]"
   },
   { 
     id: 4, 
@@ -49,7 +49,7 @@ const LIGHT_SCREENSHOTS = [
     image: "/under90_homescreen.png", 
     title: "KITCHEN PRIDE", 
     desc: "Discover the secret recipes of your neighborhood. Handcrafted with love.", 
-    accent: "from-orange-500 to-amber-500",
+    accent: "from-purple-500 to-[#aa3fdd]",
     label: "STEP 02",
     layout: "slant"
   },
@@ -121,7 +121,7 @@ export default function Showcase() {
            initial={{ opacity: 0 }}
            animate={{ 
              opacity: theme === 'light' ? 1 : 0.3,
-             backgroundColor: theme === 'light' ? (currentScreenshot.accent.includes('purple') ? '#f5f3ff' : currentScreenshot.accent.includes('orange') ? '#fff7ed' : '#f0f9ff') : 'transparent'
+             backgroundColor: theme === 'light' ? (currentScreenshot.accent.includes('purple') ? '#f5f3ff' : currentScreenshot.accent.includes('#aa3fdd') ? '#f5f3ff' : '#f0f9ff') : 'transparent'
            }}
            exit={{ opacity: 0 }}
            transition={{ duration: 1 }}
@@ -149,7 +149,7 @@ export default function Showcase() {
             {theme === 'dark' ? (
               /* DARK THEME: PRE-ORDERS PHONE STACK */
               <div 
-                 className="relative w-[140px] h-[300px] sm:w-[180px] sm:h-[380px] md:w-[220px] md:h-[460px] cursor-pointer"
+                 className="relative w-[120px] h-[260px] sm:w-[180px] sm:h-[380px] md:w-[220px] md:h-[460px] cursor-pointer"
                  onClick={handleNext}
               >
                 <AnimatePresence mode="popLayout" initial={false}>

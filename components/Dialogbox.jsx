@@ -13,16 +13,24 @@ export default function Dialogbox({ open, onClose }) {
   const confettiFiredRef = useRef(false);
 
   useEffect(() => {
-    if (open && !confettiFiredRef.current) {
-      confettiFiredRef.current = true;
-      confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 }, colors: ['#9333ea', '#db2777', '#ffffff'] });
-      setTimeout(
-        () => confetti({ particleCount: 100, spread: 80, origin: { y: 0.6 }, colors: ['#9333ea', '#db2777', '#ffffff'] }),
-        300
-      );
-    } else if (!open) {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+      if (!confettiFiredRef.current) {
+        confettiFiredRef.current = true;
+        confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 }, colors: ['#9333ea', '#db2777', '#ffffff'] });
+        setTimeout(
+          () => confetti({ particleCount: 100, spread: 80, origin: { y: 0.6 }, colors: ['#9333ea', '#db2777', '#ffffff'] }),
+          300
+        );
+      }
+    } else {
+      document.body.style.overflow = '';
       confettiFiredRef.current = false;
     }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [open]);
 
   if (!open) return null;
@@ -136,11 +144,11 @@ export default function Dialogbox({ open, onClose }) {
                   </motion.button>
 
                   <div className="flex flex-wrap justify-center gap-x-3 md:gap-x-4 gap-y-1 text-[7px] md:text-[8px] lg:text-[9px] uppercase tracking-widest text-gray-500 font-bold">
-                    <a href="https://dayummeals.in/terms-and-conditions" target="_blank" className="hover:text-orange-600 transition-colors">Terms & Conditions</a>
-                    <a href="https://dayummeals.in/privacy-policy" target="_blank" className="hover:text-orange-600 transition-colors">Privacy Policy</a>
-                    <a href="https://dayummeals.in/about-us" target="_blank" className="hover:text-orange-600 transition-colors">About Us</a>
-                    <a href="#" className="hover:text-orange-600 transition-colors">Contact Us</a>
-                    <a href="#" className="hover:text-orange-600 transition-colors">Partner with us</a>
+                    <a href="https://dayummeals.in/terms-and-conditions" target="_blank" className="hover:text-purple-600 transition-colors">Terms & Conditions</a>
+                    <a href="https://dayummeals.in/privacy-policy" target="_blank" className="hover:text-purple-600 transition-colors">Privacy Policy</a>
+                    <a href="https://dayummeals.in/about-us" target="_blank" className="hover:text-purple-600 transition-colors">About Us</a>
+                    <a href="#" className="hover:text-purple-600 transition-colors">Contact Us</a>
+                    <a href="#" className="hover:text-purple-600 transition-colors">Partner with us</a>
                   </div>
 
                   <div className={`flex items-center gap-6 ${theme === 'light' ? 'text-black' : 'text-white'}`}>
