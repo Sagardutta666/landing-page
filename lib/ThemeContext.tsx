@@ -57,12 +57,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const openPolicy = (type: PolicyType, work: SplashType = "90MIN") => {
     setPolicyType(type);
-    setSplashType(work);
-    setIsSplashLoading(true);
-    setTimeout(() => {
-      setIsSplashLoading(false);
-      setIsPolicyOpen(true);
-    }, 1200);
+    setIsPolicyOpen(true);
   };
 
   const closePolicy = () => {
