@@ -9,6 +9,7 @@ import Splash from "@/components/Splash";
 import PolicyDialog from "@/components/PolicyDialog";
 import PartnerDialog from "@/components/PartnerDialog";
 import ContactDialog from "@/components/ContactDialog";
+import ChefRegistrationDialog from "@/components/ChefRegistrationDialog";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { ThemeProvider, useTheme } from "@/lib/ThemeContext";
@@ -25,7 +26,9 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
     isPartnerOpen,
     closePartner,
     isContactOpen,
-    closeContact
+    closeContact,
+    isChefDialogOpen,
+    closeChef
   } = useTheme();
   const [openDialog, setOpenDialog] = useState(false);
 
@@ -67,6 +70,9 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
           )}
           {isContactOpen && (
             <ContactDialog isOpen={isContactOpen} onClose={closeContact} />
+          )}
+          {isChefDialogOpen && (
+            <ChefRegistrationDialog isOpen={isChefDialogOpen} onClose={closeChef} />
           )}
         </AnimatePresence>
       </motion.div>

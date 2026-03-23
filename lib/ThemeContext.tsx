@@ -22,13 +22,16 @@ interface ThemeContextType {
   isContactOpen: boolean;
   openContact: () => void;
   closeContact: () => void;
+  isChefDialogOpen: boolean;
+  openChef: () => void;
+  closeChef: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
-  const [isSplashLoading, setIsSplashLoading] = useState(true);
+  const [isSplashLoading, setIsSplashLoading] = useState(false);
   const [splashType, setSplashType] = useState<SplashType>("90MIN");
   
   const [isPolicyOpen, setIsPolicyOpen] = useState(false);
@@ -36,18 +39,17 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const [isPartnerOpen, setIsPartnerOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isChefDialogOpen, setIsChefDialogOpen] = useState(false);
 
   useEffect(() => {
-    // Check if splash has been shown in this session
+    // Initial load splash-only check
     const hasSeenSplash = sessionStorage.getItem('hasSeenSplash');
-    
-    if (hasSeenSplash) {
-      setIsSplashLoading(false);
-    } else {
+    if (!hasSeenSplash) {
+      setIsSplashLoading(true);
       const timer = setTimeout(() => {
         setIsSplashLoading(false);
         sessionStorage.setItem('hasSeenSplash', 'true');
-      }, 800);
+      }, 1000);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -89,6 +91,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setIsContactOpen(false);
   };
 
+  const openChef = () => {
+    setIsChefDialogOpen(true);
+  };
+
+  const closeChef = () => {
+    setIsChefDialogOpen(false);
+  };
+
   return (
     <ThemeContext.Provider value={{ 
       theme, 
@@ -105,7 +115,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       closePartner,
       isContactOpen,
       openContact,
-      closeContact
+      closeContact,
+      isChefDialogOpen,
+      openChef,
+      closeChef
     }}>
       <div className={theme === "light" ? "light" : "dark"}>
         {children}

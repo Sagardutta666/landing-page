@@ -3,7 +3,6 @@
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useState, useRef, useEffect, memo } from "react";
 import BrandLogo from "./BrandLogo";
-import ChefRegistrationDialog from "./ChefRegistrationDialog";
 import { ChefHat, Timer, Heart, Sparkles, Star, Instagram, Twitter, Linkedin, Facebook } from "lucide-react";
 import { useTheme } from "@/lib/ThemeContext";
 
@@ -30,9 +29,8 @@ function SectionWrapper({ children, className = "" }) {
 }
 
 export default function Under90Experience() {
-  const [isChefDialogOpen, setIsChefDialogOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const { openPolicy, openPartner, openContact } = useTheme();
+  const { openPolicy, openPartner, openContact, openChef } = useTheme();
 
   const mouseX = useSpring(0, { stiffness: 50, damping: 20 });
   const mouseY = useSpring(0, { stiffness: 50, damping: 20 });
@@ -81,7 +79,7 @@ export default function Under90Experience() {
 
         {/* 4. CTA SECTION */}
         <SectionWrapper className="min-h-[60vh]">
-          <SceneCTA onChefClick={() => setIsChefDialogOpen(true)} isMobile={isMobile} />
+          <SceneCTA onChefClick={openChef} isMobile={isMobile} />
         </SectionWrapper>
 
         {/* 5. FOOTER */}
@@ -126,7 +124,6 @@ export default function Under90Experience() {
         </footer>
       </div>
 
-      <ChefRegistrationDialog isOpen={isChefDialogOpen} onClose={() => setIsChefDialogOpen(false)} />
     </div>
   );
 }
