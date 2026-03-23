@@ -38,9 +38,18 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
-    // Initial load splash
-    const timer = setTimeout(() => setIsSplashLoading(false), 800);
-    return () => clearTimeout(timer);
+    // Check if splash has been shown in this session
+    const hasSeenSplash = sessionStorage.getItem('hasSeenSplash');
+    
+    if (hasSeenSplash) {
+      setIsSplashLoading(false);
+    } else {
+      const timer = setTimeout(() => {
+        setIsSplashLoading(false);
+        sessionStorage.setItem('hasSeenSplash', 'true');
+      }, 800);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   const toggleTheme = () => {
