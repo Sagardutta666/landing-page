@@ -80,7 +80,8 @@ export default function Under90Hero() {
         >
           <motion.div
             initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex flex-col items-center lg:items-start gap-4 mb-6"
           >
@@ -94,13 +95,15 @@ export default function Under90Hero() {
 
           <motion.h1 
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: false }}
             className="text-6xl md:text-8xl xl:text-9xl font-black text-black tracking-tighter leading-[0.85] mb-8 flex flex-col items-center lg:items-start"
           >
             <div className="overflow-hidden">
                <motion.span 
                  initial={{ y: "100%" }}
-                 animate={{ y: 0 }}
+                 whileInView={{ y: 0 }}
+                 viewport={{ once: false }}
                  transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.4 }}
                  className="block"
                >
@@ -110,7 +113,8 @@ export default function Under90Hero() {
             <div className="overflow-hidden">
                <motion.span 
                  initial={{ y: "100%" }}
-                 animate={{ y: 0 }}
+                 whileInView={{ y: 0 }}
+                 viewport={{ once: false }}
                  transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.5 }}
                  className="text-purple-600 block"
                >
@@ -121,7 +125,8 @@ export default function Under90Hero() {
                <span className="relative block">
                  <motion.span
                    initial={{ y: "100%" }}
-                   animate={{ y: 0 }}
+                   whileInView={{ y: 0 }}
+                   viewport={{ once: false }}
                    transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.6 }}
                    className="block"
                  >
