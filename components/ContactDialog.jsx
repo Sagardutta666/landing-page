@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { X, User, Phone, HelpCircle, MessageSquare, Send, CheckCircle2, Loader2 } from "lucide-react";
+import { X, User, Phone, HelpCircle, MessageSquare, Send, CheckCircle2, Loader2, ChevronDown } from "lucide-react";
 import { useTheme } from "@/lib/ThemeContext";
 
 export default function ContactDialog({ isOpen, onClose }) {
@@ -12,7 +12,7 @@ export default function ContactDialog({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    queryType: "Order Related",
+    queryType: "",
     description: ""
   });
 
@@ -57,7 +57,7 @@ export default function ContactDialog({ isOpen, onClose }) {
       setTimeout(() => {
         onClose();
         setSubmitted(false);
-        setFormData({ name: "", phone: "", queryType: "Order Related", description: "" });
+        setFormData({ name: "", phone: "", queryType: "", description: "" });
       }, 3000);
     } catch (error) {
       console.error("Submission error:", error);
@@ -150,20 +150,25 @@ export default function ContactDialog({ isOpen, onClose }) {
                   </div>
                 </div>
 
-                <div className="relative">
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[#aa3fdd]">
+                <div className="relative group">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[#aa3fdd] pointer-events-none z-10">
                     <HelpCircle size={18} />
                   </div>
                   <select
+                    required
                     disabled={isLoading}
-                    className={`w-full border-none rounded-xl md:rounded-2xl py-3 md:py-4 pl-12 pr-4 text-xs md:text-sm focus:ring-2 focus:ring-[#aa3fdd]/20 transition-all outline-none cursor-pointer appearance-none disabled:opacity-50 ${isLight ? 'bg-white text-black' : 'bg-white/5 text-white'}`}
+                    className={`w-full border-none rounded-xl md:rounded-2xl py-3.5 md:py-4.5 pl-12 pr-12 text-xs md:text-sm focus:ring-2 focus:ring-[#aa3fdd]/20 transition-all outline-none cursor-pointer appearance-none disabled:opacity-50 relative z-0 ${isLight ? 'bg-white text-black' : 'bg-white/5 text-white'}`}
                     value={formData.queryType}
                     onChange={(e) => setFormData({ ...formData, queryType: e.target.value })}
                   >
+                    <option value="" disabled hidden>Select Issue Type</option>
                     {queryTypes.map(type => (
-                      <option key={type} value={type} className="text-black">{type}</option>
+                      <option key={type} value={type} className="text-black bg-white">{type}</option>
                     ))}
                   </select>
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none z-10">
+                    <ChevronDown size={18} />
+                  </div>
                 </div>
 
                 <div className="relative">
