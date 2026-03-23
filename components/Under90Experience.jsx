@@ -375,8 +375,7 @@ const SceneTrack = memo(({ isMobile }) => {
   return (
     <div className="flex flex-col lg:flex-row items-center justify-center gap-12 md:gap-20 max-w-6xl mx-auto w-full px-6">
        <div className="relative w-full max-w-[240px] md:max-w-[300px] aspect-[9/19]">
-          <div className="absolute -inset-8 bg-purple-400/10 blur-[60px] rounded-full" />
-          <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-white">
+          <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden">
              <img src="/under90_orderscreen (1).png" className="w-full h-full object-cover" alt="Tracking Screen" />
              
              {/* Masking the address for privacy/design */}
