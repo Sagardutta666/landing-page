@@ -188,9 +188,15 @@ export default function Under90Hero() {
 
              {/* Floating Badge */}
              <motion.div
+               initial={{ scale: 0, rotate: -45 }}
+               whileInView={{ scale: 1, rotate: 0 }}
+               viewport={{ once: false }}
                animate={{ y: [0, -10, 0] }}
-               transition={{ duration: 3, repeat: Infinity }}
-               className="absolute -top-10 -right-10 w-24 h-24 bg-purple-600 rounded-full flex items-center justify-center text-white text-[10px] font-black uppercase tracking-widest text-center px-4"
+               transition={{ 
+                 initial: { type: "spring", stiffness: 200, damping: 15 },
+                 animate: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+               }}
+               className="absolute -top-10 -right-10 w-24 h-24 bg-purple-600 rounded-full flex items-center justify-center text-white text-[10px] font-black uppercase tracking-widest text-center px-4 shadow-2xl shadow-purple-500/30"
              >
                 Order Express
              </motion.div>

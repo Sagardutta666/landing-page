@@ -91,8 +91,8 @@ export default function Under90Experience() {
                  <a href="#" onClick={(e) => handlePolicyOpen(e, "TERMS")} className="hover:text-[#aa3fdd] transition-colors">Terms & Conditions</a>
                  <a href="#" onClick={(e) => handlePolicyOpen(e, "PRIVACY")} className="hover:text-[#aa3fdd] transition-colors">Privacy Policy</a>
                  <a href="#" onClick={(e) => handlePolicyOpen(e, "ABOUT")} className="hover:text-[#aa3fdd] transition-colors">About Us</a>
-                 <a href="#" onClick={(e) => openContact()} className="hover:text-[#aa3fdd] transition-colors">Contact Us</a>
-                 <a href="#" onClick={() => openPartner()} className="hover:text-[#aa3fdd] transition-colors">Partner with us</a>
+                 <a href="#" onClick={(e) => { e.preventDefault(); openContact(); }} className="hover:text-[#aa3fdd] transition-colors">Contact Us</a>
+                 <a href="#" onClick={(e) => { e.preventDefault(); openPartner(); }} className="hover:text-[#aa3fdd] transition-colors">Partner with us</a>
               </div>
 
               <div className="flex justify-center gap-6 mb-12">

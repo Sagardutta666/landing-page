@@ -2,16 +2,24 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/lib/ThemeContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function FloatingPremiumAction({ onClick, isOpen }) {
   const { theme } = useTheme();
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const text = "KAL KA KYA PLAN HAI? • KAL KA KYA PLAN HAI? • ";
 
   return (
-    <div className="fixed bottom-10 right-10 z-[1001]">
+    <div className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[99999]">
       <motion.div
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
@@ -25,12 +33,12 @@ export default function FloatingPremiumAction({ onClick, isOpen }) {
         {/* Main Expanding Container */}
         <motion.div
           animate={{
-            width: isHovered ? (typeof window !== 'undefined' && window.innerWidth < 768 ? 120 : 150) : (typeof window !== 'undefined' && window.innerWidth < 768 ? 48 : 60),
-            height: (typeof window !== 'undefined' && window.innerWidth < 768 ? 48 : 60),
-            borderRadius: isHovered ? "1.2rem" : "50%",
+            width: isHovered ? (isMobile ? 120 : 160) : (isMobile ? 52 : 64),
+            height: (isMobile ? 52 : 64),
+            borderRadius: isHovered ? "1.5rem" : "50%",
           }}
-          transition={{ type: "spring", stiffness: 300, damping: 25 }}
-          className={`relative overflow-hidden shadow-xl flex items-center justify-center border backdrop-blur-xl ${theme === 'light' ? 'bg-[#F2F0EA]/90 border-[#814A20]/10' : 'bg-[#1A1A1A]/90 border-white/10'}`}
+          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+          className={`relative overflow-hidden shadow-2xl flex items-center justify-center border border-white/20 bg-[#aa3fdd] text-white backdrop-blur-xl`}
         >
           {/* Rotating Ring (Only visible when NOT hovered) */}
           <AnimatePresence>
@@ -48,7 +56,7 @@ export default function FloatingPremiumAction({ onClick, isOpen }) {
               >
                 <svg viewBox="0 0 100 100" className="w-[110%] h-[110%] overflow-visible opacity-40">
                   <path id="badgePath" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none" />
-                  <text className={`text-[9px] font-black tracking-[0.25em] ${theme === 'light' ? 'fill-black' : 'fill-white'}`}>
+                  <text className="text-[10px] font-black tracking-[0.28em] fill-white/80">
                     <textPath href="#badgePath" startOffset="0%">{text}</textPath>
                   </text>
                 </svg>
@@ -71,7 +79,7 @@ export default function FloatingPremiumAction({ onClick, isOpen }) {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -10 }}
-                  className={`text-[9px] md:text-[11px] font-black uppercase tracking-[0.2em] whitespace-nowrap ${theme === 'light' ? 'text-black' : 'text-white'}`}
+                  className="text-[10px] md:text-[12px] font-black uppercase tracking-[0.2em] whitespace-nowrap text-white"
                 >
                   {isOpen ? 'Close' : 'Plan?'}
                 </motion.span>
