@@ -52,14 +52,14 @@ export default function Dialogbox({ open, onClose }) {
         initial={{ opacity: 0, scale: 0.9, y: "-45%", x: "-50%" }}
         animate={{ opacity: 1, scale: 1, y: "-50%", x: "-50%" }}
         exit={{ opacity: 0, scale: 0.9, y: "-45%", x: "-50%" }}
-        className="fixed z-[1001] left-1/2 top-1/2 w-11/12 md:w-full max-w-5xl max-h-[92vh] md:max-h-[82vh] overflow-y-auto md:overflow-hidden p-4 md:p-8"
+        className="fixed z-[1001] left-1/2 top-1/2 w-11/12 md:w-full max-w-5xl max-h-[80vh] md:max-h-[82vh] overflow-y-auto md:overflow-hidden p-2 md:p-8"
       >
         <Card className={`${theme === 'light' ? 'bg-[#F2F0EA]/90 border-[#814A20]/10' : 'glass-dark border-white/10'} rounded-[2.5rem] overflow-hidden shadow-2xl backdrop-blur-xl`}>
           <CardContent className="p-0">
             <div className={`flex flex-col md:flex-row ${theme === 'light' ? 'bg-[#F2F0EA]' : ''}`}>
               {/* Left Side: Image Preview */}
-              <div className={`w-full md:w-5/12 bg-gradient-to-br p-6 md:p-8 flex items-center justify-center relative overflow-hidden ${theme === 'light' ? 'from-[#EAE8E4] to-[#F2F0EA]' : 'from-purple-900/40 to-black'}`}>
-                <div className="relative w-full max-w-[160px] md:max-w-[190px] aspect-[9/19]">
+              <div className={`w-full md:w-5/12 bg-gradient-to-br p-4 md:p-8 flex items-center justify-center relative overflow-hidden ${theme === 'light' ? 'from-[#EAE8E4] to-[#F2F0EA]' : 'from-purple-900/40 to-black'}`}>
+                <div className="relative w-full max-w-[120px] md:max-w-[190px] aspect-[9/19]">
                   {/* Secondary Image (Behind, Left) */}
                   <motion.div
                     initial={{ opacity: 0, x: 0, y: 20, rotate: -5 }}
@@ -98,16 +98,16 @@ export default function Dialogbox({ open, onClose }) {
               </div>
 
               {/* Right Side: Content */}
-              <div className="w-full md:w-7/12 p-6 md:p-8 lg:p-10 flex flex-col items-center justify-center text-center">
+              <div className="w-full md:w-7/12 p-5 md:p-8 lg:p-10 flex flex-col items-center justify-center text-center">
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                 >
                   <h2 className={`text-xl md:text-3xl lg:text-4xl font-black mb-1 md:mb-2 tracking-tighter ${theme === 'light' ? 'text-black' : 'text-white'}`}>
                     Order <span className="text-gradient">Authentic Meal</span> Now!
                   </h2>
-                  <p className={`${theme === 'light' ? 'text-gray-500' : 'text-gray-400'} mb-3 md:mb-4 text-[10px] md:text-xs max-w-sm`}>
+                  <p className={`${theme === 'light' ? 'text-gray-500' : 'text-gray-400'} mb-2 md:mb-4 text-[9px] md:text-xs max-w-sm`}>
                     Scan the QR code below to download our app
                   </p>
                 </motion.div>
@@ -116,7 +116,7 @@ export default function Dialogbox({ open, onClose }) {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.4 }}
-                  className="bg-white p-2 md:p-3 rounded-2xl mb-4 md:mb-4 shadow-xl"
+                  className="bg-white p-2 md:p-3 rounded-xl mb-3 md:mb-4 shadow-xl"
                   onClick={() => openInNewTab("https://play.google.com/store/apps/details?id=com.dayummeals.androidapp")}
                 >
                   <Image
@@ -124,12 +124,12 @@ export default function Dialogbox({ open, onClose }) {
                     alt="QR Code"
                     width={100}
                     height={100}
-                    className="object-contain w-20 md:w-24 lg:w-28"
+                    className="object-contain w-16 md:w-24 lg:w-28"
                     priority
                   />
                 </motion.div>
 
-                <div className="flex flex-col items-center gap-4 md:gap-6 w-full">
+                <div className="flex flex-col items-center gap-3 md:gap-6 w-full">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}

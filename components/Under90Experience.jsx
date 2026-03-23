@@ -1,24 +1,38 @@
 'use client';
 
-import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
-import { useState, useRef, useEffect } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useState, useRef, useEffect, memo } from "react";
 import BrandLogo from "./BrandLogo";
 import ChefRegistrationDialog from "./ChefRegistrationDialog";
-import { ChefHat, Timer, ArrowRight, Heart, Sparkles, Star, Instagram, Twitter, Linkedin, Facebook } from "lucide-react";
+import { ChefHat, Timer, Heart, Sparkles, Star, Instagram, Twitter, Linkedin, Facebook } from "lucide-react";
 import { useTheme } from "@/lib/ThemeContext";
+
+// Simple Reveal Wrapper matching the "PRE" experience
+function SectionWrapper({ children, className = "" }) {
+  const { scrollYProgress } = useScroll({
+    offset: ["start end", "end start"]
+  });
+
+  const yRaw = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [100, 0, 0, -100]);
+  const opacityRaw = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
+
+  const y = useSpring(yRaw, { stiffness: 60, damping: 20 });
+  const opacity = useSpring(opacityRaw, { stiffness: 60, damping: 20 });
+
+  return (
+    <motion.section 
+      style={{ y, opacity }}
+      className={`relative min-h-[70vh] flex items-center justify-center py-10 md:py-20 ${className}`}
+    >
+      {children}
+    </motion.section>
+  );
+}
 
 export default function Under90Experience() {
   const [isChefDialogOpen, setIsChefDialogOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const containerRef = useRef(null);
-  const { theme, openPolicy, openPartner, openContact } = useTheme();
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const { openPolicy, openPartner, openContact } = useTheme();
 
   const mouseX = useSpring(0, { stiffness: 50, damping: 20 });
   const mouseY = useSpring(0, { stiffness: 50, damping: 20 });
@@ -27,14 +41,15 @@ export default function Under90Experience() {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     handleResize();
     window.addEventListener("resize", handleResize);
-    
+
     const handleMouseMove = (e) => {
       const { clientX, clientY } = e;
       const { innerWidth, innerHeight } = window;
-      mouseX.set(clientX - innerWidth / 2);
-      mouseY.set(clientY - innerHeight / 2);
+      mouseX.set((clientX - innerWidth / 2) / 25);
+      mouseY.set((clientY - innerHeight / 2) / 25);
     };
     window.addEventListener("mousemove", handleMouseMove);
+
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
@@ -46,267 +61,219 @@ export default function Under90Experience() {
     openPolicy(type, "90MIN");
   };
 
-  const handlePartnerOpen = (e) => {
-    e.preventDefault();
-    openPartner();
-  };
-
-  const handleContactOpen = (e) => {
-    e.preventDefault();
-    openContact();
-  };
-
   return (
-    <div className="relative bg-[#F2F0EA]">
-      {/* 1. SCROLL-DRIVEN EXPERIENCE PARENT */}
-      <div ref={containerRef} className="relative h-[500vh]">
-        {/* STICKY DYNAMIC CANVAS */}
-        <div className="sticky top-0 h-[100dvh] w-full overflow-hidden flex items-center justify-center">
-          
-          {/* Organic Background Elements */}
-          <motion.div 
-            style={{ x: isMobile ? 0 : mouseX, y: isMobile ? 0 : mouseY }}
-            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none -z-10
-              ${isMobile ? 'w-[100vw] h-[100vw] bg-purple-100/30 blur-[60px]' : 'w-[140vw] h-[140vw] bg-purple-100/40 blur-[150px]'}`}
-          />
+    <div className="relative bg-[#F2F0EA] overflow-x-hidden">
+      {/* 1. HERO SECTION (Simple & Pinned/Sticky) */}
+      <section className="h-screen sticky top-0 z-0 bg-[#F2F0EA]">
+        <SceneHero isMobile={isMobile} mouseX={mouseX} mouseY={mouseY} />
+      </section>
 
-          {/* THE "STORY ENGINE" */}
-          <div className="relative h-full w-full flex items-center justify-center">
-            <SceneSwitcher 
-              progress={smoothProgress} 
-              mouseX={mouseX} 
-              mouseY={mouseY} 
-              onChefClick={() => setIsChefDialogOpen(true)}
-              isMobile={isMobile}
-            />
-          </div>
-        </div>
-      </div>
+      {/* 2. KITCHEN SECTION */}
+      <div className="relative z-10 bg-[#F2F0EA]">
+        <SectionWrapper className="shadow-[-20px_0_50px_rgba(0,0,0,0.02)]">
+          <SceneKitchen isMobile={isMobile} />
+        </SectionWrapper>
 
-      {/* 2. PREMIUM FOOTER */}
-      <footer className="w-full bg-white py-20 border-t border-purple-100 relative z-[100]">
-          <div className="container mx-auto px-6 text-center">
-            <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-12 text-[10px] md:text-sm font-black uppercase tracking-[0.2em] text-gray-400 italic">
-               <a 
-                 href="#" 
-                 onClick={(e) => handlePolicyOpen(e, "TERMS")}
-                 className="hover:text-[#aa3fdd] transition-colors"
-               >
-                 Terms & Conditions
-               </a>
-               <a 
-                 href="#" 
-                 onClick={(e) => handlePolicyOpen(e, "PRIVACY")}
-                 className="hover:text-[#aa3fdd] transition-colors"
-               >
-                 Privacy Policy
-               </a>
-               <a 
-                 href="#" 
-                 onClick={(e) => handlePolicyOpen(e, "ABOUT")}
-                 className="hover:text-[#aa3fdd] transition-colors"
-               >
-                 About Us
-               </a>
-               <a 
-                 href="#" 
-                 onClick={handleContactOpen}
-                 className="hover:text-[#aa3fdd] transition-colors"
-               >
-                 Contact Us
-               </a>
-               <a 
-                 href="#" 
-                 onClick={handlePartnerOpen}
-                 className="hover:text-[#aa3fdd] transition-colors"
-               >
-                 Partner with us
-               </a>
-            </div>
+        {/* 3. TRACKING SECTION */}
+        <SectionWrapper>
+          <SceneTrack isMobile={isMobile} />
+        </SectionWrapper>
 
-            <div className="flex justify-center gap-6 mb-12">
-               {[
-                 { Icon: Instagram, href: "https://www.instagram.com/dayummeals/" },
-                 { Icon: Twitter, href: "https://x.com/dayummeals" },
-                 { Icon: Facebook, href: "https://m.facebook.com/61567845624373/" },
-                 { Icon: Linkedin, href: "https://www.linkedin.com/in/dayummeals-authentic-homemade-meals-618ba53b8/" }
-               ].map((social, idx) => (
-                 <motion.a 
-                   href={social.href} 
-                   key={idx} 
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   whileHover={{ y: -5, scale: 1.1 }} 
-                   className={`w-10 h-10 md:w-12 md:h-12 rounded-2xl border flex items-center justify-center transition-all border-gray-100 bg-white shadow-sm hover:shadow-md text-gray-400 hover:text-[#aa3fdd] hover:border-purple-200`}
-                 >
-                   <social.Icon size={20} strokeWidth={2.5} />
-                 </motion.a>
-               ))}
-            </div>
-            
-            <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-black uppercase tracking-[0.3em] opacity-40 text-black">
-              <p>© 2026 Drowsy Owls LLP</p>
-              <div className="flex items-center gap-2">
-                <span>Made in India</span>
-                <span className="text-base">🇮🇳</span>
+        {/* 4. CTA SECTION */}
+        <SectionWrapper className="min-h-[60vh]">
+          <SceneCTA onChefClick={() => setIsChefDialogOpen(true)} isMobile={isMobile} />
+        </SectionWrapper>
+
+        {/* 5. FOOTER */}
+        <footer className="w-full bg-white py-20 border-t border-purple-100 relative z-[100]">
+            <div className="container mx-auto px-6 text-center">
+              <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-12 text-[10px] md:text-sm font-black uppercase tracking-[0.2em] text-gray-400 italic">
+                 <a href="#" onClick={(e) => handlePolicyOpen(e, "TERMS")} className="hover:text-[#aa3fdd] transition-colors">Terms & Conditions</a>
+                 <a href="#" onClick={(e) => handlePolicyOpen(e, "PRIVACY")} className="hover:text-[#aa3fdd] transition-colors">Privacy Policy</a>
+                 <a href="#" onClick={(e) => handlePolicyOpen(e, "ABOUT")} className="hover:text-[#aa3fdd] transition-colors">About Us</a>
+                 <a href="#" onClick={(e) => openContact()} className="hover:text-[#aa3fdd] transition-colors">Contact Us</a>
+                 <a href="#" onClick={() => openPartner()} className="hover:text-[#aa3fdd] transition-colors">Partner with us</a>
+              </div>
+
+              <div className="flex justify-center gap-6 mb-12">
+                 {[
+                   { Icon: Instagram, href: "https://www.instagram.com/dayummeals/" },
+                   { Icon: Twitter, href: "https://x.com/dayummeals" },
+                   { Icon: Facebook, href: "https://m.facebook.com/61567845624373/" },
+                   { Icon: Linkedin, href: "https://www.linkedin.com/in/dayummeals-authentic-homemade-meals-618ba53b8/" }
+                 ].map((social, idx) => (
+                   <motion.a 
+                     href={social.href} 
+                     key={idx} 
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     whileHover={{ y: -5, scale: 1.1 }} 
+                     className="w-10 h-10 md:w-12 md:h-12 rounded-2xl border flex items-center justify-center transition-all border-gray-100 bg-white shadow-sm hover:shadow-md text-gray-400 hover:text-[#aa3fdd] hover:border-purple-200"
+                   >
+                     <social.Icon size={20} strokeWidth={2.5} />
+                   </motion.a>
+                 ))}
+              </div>
+              
+              <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-black uppercase tracking-[0.3em] opacity-40 text-black">
+                <p>© 2026 Drowsy Owls LLP</p>
+                <div className="flex items-center gap-2">
+                  <span>Made in India</span>
+                  <span className="text-base">🇮🇳</span>
+                </div>
               </div>
             </div>
-          </div>
-      </footer>
+        </footer>
+      </div>
 
       <ChefRegistrationDialog isOpen={isChefDialogOpen} onClose={() => setIsChefDialogOpen(false)} />
     </div>
   );
 }
 
-function SceneSwitcher({ progress, mouseX, mouseY, onChefClick, isMobile }) {
+const SceneHero = memo(({ mouseX, mouseY }) => {
+  const rotateX = useTransform(mouseY, (v) => -v * 0.3);
+  const rotateY = useTransform(mouseX, (v) => v * 0.3);
+
   return (
-    <div className="w-full h-full relative">
-      <SceneHero progress={progress} mouseX={mouseX} mouseY={mouseY} isMobile={isMobile} />
-      <SceneKitchen progress={progress} isMobile={isMobile} />
-      <SceneTrack progress={progress} isMobile={isMobile} />
-      <SceneCTA progress={progress} onChefClick={onChefClick} isMobile={isMobile} />
+    <div className="relative w-full min-h-screen flex items-center justify-center px-4 md:px-10 py-10 md:py-0 overflow-x-hidden">
+      <div className="max-w-6xl w-full grid grid-cols-2 md:grid-cols-12 gap-3 md:gap-5 h-auto md:h-[75vh]">
+        
+        {/* 1. Main Title Card - Prominent (Left) */}
+        <motion.div 
+          className="col-span-2 md:col-span-6 md:row-span-2 bg-[#FDFCF8] rounded-[2.5rem] p-6 md:p-12 flex flex-col justify-center gap-4 relative overflow-hidden shadow-[0_30px_70px_-15px_rgba(0,0,0,0.06)] border border-white/60 group"
+        >
+          <div className="absolute top-0 right-0 w-64 h-64 bg-purple-50/50 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+          
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-50/80 backdrop-blur-md border border-purple-100 w-fit relative z-10">
+            <span className="w-2 h-2 rounded-full bg-[#aa3fdd] animate-pulse" />
+            <span className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] text-[#aa3fdd]">Freshly Simmering</span>
+          </div>
+
+          <h1 className="text-[12vw] md:text-[5.5rem] font-black tracking-tighter leading-[0.85] text-black relative z-10 flex flex-col items-start">
+            <div className="overflow-hidden">
+              <motion.span 
+                initial={{ y: "100%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+                className="block"
+              >
+                MOM&apos;S
+              </motion.span>
+            </div>
+            <div className="overflow-hidden">
+              <motion.span 
+                initial={{ y: "100%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.1, ease: [0.33, 1, 0.68, 1] }}
+                className="text-[#aa3fdd] italic selection:bg-purple-200 block"
+              >
+                MAGIC
+              </motion.span>
+            </div>
+            <motion.span 
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="text-[4vw] md:text-[1.8rem] font-light tracking-normal text-gray-400 uppercase mt-2 md:mt-4 block"
+            >
+              IN 90 MINS.
+            </motion.span>
+          </h1>
+
+          <p className="text-xs md:text-lg text-gray-400 font-light max-w-sm leading-relaxed relative z-10">
+            Authentic home kitchens, delivered at express speed. No factory prep, just pure love.
+          </p>
+
+          <div className="pt-2 md:pt-4 relative z-10">
+              <a 
+                href="https://play.google.com/store/apps/details?id=com.dayummeals.androidapp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-10 py-5 md:px-12 md:py-5.5 bg-[#aa3fdd] text-white rounded-full font-black uppercase tracking-widest text-[10px] md:text-xs hover:scale-105 transition-all shadow-2xl shadow-purple-200 active:scale-95"
+              >
+                Order Now
+              </a>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          style={{ 
+            rotateX: rotateX, 
+            rotateY: rotateY
+          }}
+          className="col-span-2 md:col-span-6 md:row-span-1 bg-[#F2F0EA] rounded-[2.5rem] relative overflow-hidden flex items-center justify-center group border border-purple-100/30 shadow-md aspect-video md:aspect-auto h-auto md:h-full lg:max-h-[35vh]"
+        >
+           <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent z-10" />
+           <img 
+             src="/moms_love.png" 
+             className="w-full h-full object-contain bg-white transition-transform duration-1000 ease-out grayscale-[0.05] group-hover:grayscale-0" 
+             alt="Moms Love" 
+           />
+           <div className="absolute bottom-4 left-4 z-20 text-black flex flex-col gap-1">
+              <span className="text-[9px] font-black uppercase tracking-[0.2em] opacity-60">Heart of the house</span>
+              <p className="text-base font-bold">Packed with affection.</p>
+           </div>
+           
+           <motion.div 
+             animate={{ scale: [1, 1.1, 1] }} 
+             transition={{ duration: 4, repeat: Infinity }}
+             className="absolute top-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-2xl shadow-xl text-[#aa3fdd] z-20"
+           >
+             <Heart size={20} fill="currentColor" />
+           </motion.div>
+        </motion.div>
+
+        {/* 3. Small Mini card - Status */}
+        <motion.div 
+          className="col-span-1 md:col-span-3 bg-[#FDFCF8] rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-8 flex flex-col justify-between border border-white/60 shadow-sm relative overflow-hidden aspect-square md:aspect-auto h-auto md:h-full"
+        >
+          <div className="absolute top-0 left-0 w-20 h-20 bg-green-50 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+          <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-green-50 flex items-center justify-center text-green-500 relative z-10 shadow-inner">
+             <ChefHat size={18} />
+          </div>
+          <div className="relative z-10">
+             <p className="text-[8px] md:text-[10px] font-black uppercase text-gray-400 tracking-widest mb-1 md:mb-1.5">Live Status</p>
+             <p className="text-sm md:text-xl font-bold leading-tight">Cooking <br/>Now</p>
+          </div>
+        </motion.div>
+
+        {/* 4. Small Mini card - Speed */}
+        <motion.div 
+          className="col-span-1 md:col-span-3 bg-[#aa3fdd] rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-8 flex flex-col justify-between text-white shadow-lg md:shadow-2xl shadow-purple-200/50 relative overflow-hidden aspect-square md:aspect-auto h-auto md:h-full"
+        >
+          <div className="absolute top-0 left-0 w-20 h-20 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+          <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-white/20 flex items-center justify-center text-white relative z-10 backdrop-blur-sm">
+             <Timer size={18} />
+          </div>
+          <div className="relative z-10">
+             <p className="text-[8px] md:text-[10px] font-black uppercase text-white/50 tracking-widest mb-1 md:mb-1.5">Speed</p>
+             <p className="text-sm md:text-xl font-bold leading-tight italic">90 Min <br/>Guarantee</p>
+          </div>
+        </motion.div>
+
+      </div>
     </div>
   );
-}
+});
 
-function SceneHero({ progress, mouseX, mouseY, isMobile }) {
-  const opacity = useTransform(progress, [0, 0.15, 0.25, 0.3], [1, 1, 0, 0]);
-  const y = useTransform(progress, [0, 0.25, 0.3], [0, -50, -100]);
-  const scale = useTransform(progress, [0, 0.25, 0.3], [1, 0.95, 0.9]);
-  const pointerEvents = useTransform(progress, p => p < 0.25 ? "auto" : "none");
-  const transformedX = useTransform(mouseX, [-500, 500], [-30, 30]);
-  const transformedY = useTransform(mouseY, [-500, 500], [-30, 30]);
+const KITCHEN_SCREENSHOTS = [
+  { src: "/under90_orderscreen (1).png", label: "Order Joy" },
+  { src: "/under90_homescreen.png", label: "Mom's Desk" },
+  { src: "/under90_splashscreen.png", label: "Pure Entry" },
+  { src: "/homescreen_under90.png", label: "Local Flavor" },
+];
 
+const SceneKitchen = memo(({ isMobile }) => {
   return (
-    <motion.div 
-      style={{ opacity, y, scale, pointerEvents }}
-      className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center max-w-7xl mx-auto w-full px-6 gap-10 md:gap-20 will-change-[transform,opacity] z-10"
-    >
-      <div className="w-full lg:w-1/2 text-center lg:text-left space-y-4 md:space-y-8">
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50 border border-purple-100"
-        >
-          <span className="w-2 h-2 rounded-full bg-[#aa3fdd] animate-pulse" />
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#aa3fdd]">Freshly Simmering</span>
-        </motion.div>
- 
-        <motion.h1 
-          className="text-[12vw] md:text-8xl font-black tracking-tighter leading-[0.8] text-black"
-        >
-          MOM&apos;S <br />
-          <span className="text-[#aa3fdd] italic relative">MAGIC</span> <br />
-          <span className="text-[4vw] md:text-4xl font-light tracking-normal text-gray-600/40">IN 90 MINS.</span>
-        </motion.h1>
- 
-        <p className="text-xs md:text-lg text-gray-600 font-light max-w-lg mx-auto lg:mx-0 leading-relaxed md:leading-tight">
-          The warmth of a home kitchen, delivered at express speed. No factory prep, just pure love and local ingredients.
-        </p>
- 
-        <div className="flex justify-center lg:justify-start pt-6">
-             <a 
-               href="https://play.google.com/store/apps/details?id=com.dayummeals.androidapp"
-               target="_blank"
-               rel="noopener noreferrer"
-               className="inline-block px-10 py-4 md:px-12 md:py-5 bg-[#aa3fdd] text-white rounded-full font-black uppercase tracking-widest text-[10px] md:text-xs hover:scale-105 transition-all shadow-xl hover:shadow-2xl hover:shadow-[#aa3fdd]/40 border border-white/10 relative z-[60]"
-             >
-               Order Now
-             </a>
-        </div>
-      </div>
-  
-      <div className="w-full lg:w-1/2 relative flex items-center justify-center h-[350px] md:h-[500px]">
-        <motion.div 
-          className="relative w-full h-full flex items-center justify-center"
-        >
-          <motion.div 
-            animate={{ rotate: 360 }}
-            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-x-10 inset-y-10 border border-purple-200/50 rounded-full border-dashed"
-          />
- 
-          <motion.div 
-            style={{ 
-              x: isMobile ? 0 : transformedX,
-              y: isMobile ? 0 : transformedY
-            }}
-            className="relative z-20 w-56 h-56 md:w-80 md:h-80 will-change-transform"
-          >
-            <div className="absolute inset-0 bg-[#aa3fdd]/5 blur-[40px] md:blur-[60px] rounded-full" />
-            <img 
-              src="/under90_bowl.png" 
-              className="w-full h-full object-contain drop-shadow-[0_20px_40px_rgba(170,63,221,0.2)] md:drop-shadow-[0_40px_60px_rgba(170,63,221,0.2)]" 
-              alt="Gourmet Bowl" 
-            />
-            
-            <motion.div 
-              animate={{ scale: [1, 1.2, 1] }} 
-              transition={{ duration: 2, repeat: Infinity }}
-              className="absolute -top-2 -right-2 md:-top-4 md:-right-4 bg-white p-2 md:p-3 rounded-xl md:rounded-2xl shadow-xl text-[#aa3fdd]"
-            >
-              <Heart size={isMobile ? 16 : 20} fill="currentColor" />
-            </motion.div>
-          </motion.div>
-
-          {[
-            { Icon: Sparkles, label: "Magic", angle: 0 },
-            { Icon: Star, label: "Top Rated", angle: 90 },
-            { Icon: Timer, label: "Express", angle: 180 },
-            { Icon: ChefHat, label: "Authentic", angle: 270 }
-          ].map((item, i) => {
-            const radius = isMobile ? 140 : 220;
-            return (
-              <motion.div
-                key={i}
-                style={{
-                  translateX: Math.cos((item.angle * Math.PI) / 180) * radius,
-                  translateY: Math.sin((item.angle * Math.PI) / 180) * radius,
-                }}
-                className="absolute z-30 group cursor-pointer hidden md:flex"
-              >
-                <motion.div 
-                  whileHover={{ scale: 1.2, rotate: 10 }}
-                  className="bg-white/95 backdrop-blur-md p-3 md:p-4 rounded-2xl md:rounded-3xl shadow-lg border border-purple-50 flex flex-col items-center gap-1 w-24 md:w-28 transition-all hover:bg-[#aa3fdd] hover:text-white"
-                >
-                  <item.Icon className="w-8 h-8 md:w-10 md:h-10 text-[#aa3fdd] group-hover:text-white" />
-                  <span className="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-gray-400 group-hover:text-white">{item.label}</span>
-                </motion.div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-      </div>
-    </motion.div>
-  );
-}
-
-function SceneKitchen({ progress, isMobile }) {
-  const opacity = useTransform(progress, [0.25, 0.35, 0.5, 0.55], [0, 1, 1, 0]);
-  const y = useTransform(progress, [0.25, 0.35, 0.5, 0.55], [100, 0, 0, -100]);
-  const scale = useTransform(progress, [0.25, 0.35, 0.5, 0.55], [0.9, 1, 1, 0.9]);
-  const pointerEvents = useTransform(progress, p => (p >= 0.25 && p < 0.55) ? "auto" : "none");
-
-  const screenshots = [
-    { src: "/under90_splashscreen.png", label: "Pure Heart" },
-    { src: "/under90_homescreen.png", label: "Mom's Desk" },
-    { src: "/homescreen_under90.png", label: "Local Flavor" },
-    { src: "/under90_orderscreen (1).png", label: "Express Joy" }
-  ];
-
-  return (
-    <motion.div 
-      style={{ opacity, y, scale, pointerEvents }}
-      className="absolute inset-0 max-w-7xl mx-auto w-full px-6 flex flex-col lg:flex-row items-center justify-center gap-8 md:gap-16 z-0 will-change-[transform,opacity]"
-    >
-      <div className="w-full lg:w-5/12 space-y-6 md:space-y-10 text-center lg:text-left">
+    <div className="max-w-7xl mx-auto w-full px-6 flex flex-col lg:flex-row items-center justify-center gap-0 md:gap-16">
+      <div className="w-full lg:w-5/12 space-y-6 text-center lg:text-left">
         <div>
           <div className="flex items-center gap-2 mb-4 justify-center lg:justify-start">
             <div className="h-[1px] w-8 bg-purple-400" />
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-purple-600">Purely HomeMade</span>
           </div>
-          <h2 className="text-3xl md:text-6xl font-black tracking-tighter leading-none mb-4 md:mb-6 uppercase italic">
+          <h2 className="text-3xl md:text-6xl font-black tracking-tighter leading-none mb-4 uppercase italic">
             MADE BY <br />
             <span className="text-[#aa3fdd]">MOM&apos;S HAND.</span>
           </h2>
@@ -315,115 +282,143 @@ function SceneKitchen({ progress, isMobile }) {
           </p>
         </div>
 
-        <div className="flex flex-col gap-4 md:gap-6 items-center lg:items-start">
-           <div className="flex items-center gap-3 md:gap-4 bg-white p-3 md:p-4 rounded-2xl md:rounded-3xl shadow-sm border border-purple-50 w-full md:w-fit">
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-purple-100 flex items-center justify-center text-purple-600">
-                 <Timer size={isMobile ? 20 : 24} />
-              </div>
-              <div className="text-left">
-                 <p className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-gray-400">The Promise</p>
-                 <p className="text-xs md:text-sm font-bold">Express: Under 90 Min</p>
-              </div>
-           </div>
+        <div className="flex items-center gap-4 bg-white p-4 rounded-3xl shadow-sm border border-purple-50 w-fit mx-auto lg:mx-0">
+          <div className="w-12 h-12 rounded-2xl bg-purple-100 flex items-center justify-center text-purple-600">
+             <Timer size={24} />
+          </div>
+          <div className="text-left">
+             <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">The Promise</p>
+             <p className="text-sm font-bold">Express: Under 90 Min</p>
+          </div>
         </div>
       </div>
 
-      <div className="w-full lg:w-7/12 relative h-[350px] md:h-[650px] flex items-center justify-center mt-8 lg:mt-0">
-         <div className="relative w-full h-full flex items-center justify-center perspective-[2000px]">
-            {screenshots.map((item, i) => (
+      <div className="w-full lg:w-7/12 relative h-[350px] md:h-[700px] flex items-center justify-center mt-[-40px] md:mt-0">
+         <div className="relative w-full h-full flex items-center justify-center perspective-[3000px]">
+            {KITCHEN_SCREENSHOTS.map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: 100, rotate: 10 }}
-                animate={{ 
+                initial={{ opacity: 0, x: 0, y: 100, rotateX: 20 }}
+                whileInView={{ 
                   opacity: 1, 
-                  x: (i - 1.5) * (isMobile ? 35 : 60),
-                  y: Math.sin(i * 1.5) * (isMobile ? 15 : 30),
-                  rotate: (i - 1.5) * (isMobile ? 5 : 8),
-                  zIndex: 10 + i,
-                  scale: (isMobile ? 0.8 : 0.9) + (i * 0.05)
+                  x: (i - 1.5) * (isMobile ? 40 : 130),
+                  y: Math.abs(i - 1.5) * (isMobile ? 15 : 40),
+                  rotateY: (i - 1.5) * (isMobile ? -8 : -15),
+                  z: Math.abs(i - 1.5) * -150,
+                  rotateX: 0
                 }}
-                whileHover={{ scale: 1.1, rotate: 0, y: -30, zIndex: 50 }}
-                className="absolute w-[120px] md:w-[240px] aspect-[9/19] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden border-4 md:border-8 border-white bg-white shadow-2xl transition-shadow hover:shadow-purple-200/50 group"
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 100, 
+                  damping: 20, 
+                  delay: i * 0.1 
+                }}
+                whileHover={{ 
+                  y: -20,
+                  scale: 1.1,
+                  rotateY: 0,
+                  z: 100
+                }}
+                viewport={{ once: false, margin: "-100px" }}
+                className="absolute w-[160px] md:w-[280px] aspect-[9/19] rounded-[2.5rem] md:rounded-[3.2rem] overflow-hidden preserve-3d"
               >
-                <img src={item.src} className="w-full h-full object-cover" alt={item.label} />
+                <img 
+                  src={item.src} 
+                  className="w-full h-full object-cover" 
+                  alt={item.label} 
+                />
               </motion.div>
             ))}
          </div>
       </div>
-    </motion.div>
+    </div>
   );
-}
+});
 
-function SceneTrack({ progress, isMobile }) {
-  const opacity = useTransform(progress, [0.5, 0.6, 0.75, 0.8], [0, 1, 1, 0]);
-  const y = useTransform(progress, [0.5, 0.6, 0.75, 0.8], [50, 0, 0, -50]);
-  const pointerEvents = useTransform(progress, p => (p >= 0.5 && p < 0.8) ? "auto" : "none");
-
+const SceneTrack = memo(({ isMobile }) => {
   return (
-    <motion.div 
-      style={{ opacity, y, pointerEvents }}
-      className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center gap-12 md:gap-20 max-w-6xl mx-auto w-full px-6 z-0 will-change-[transform,opacity]"
-    >
-       <div className="relative w-full max-w-[240px] md:max-w-[320px] aspect-[9/19] group">
-          <div className="absolute -inset-8 bg-purple-400/20 blur-[60px] md:blur-[80px] rounded-full z-0" />
-          <div className="relative z-10 w-full h-full rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl border-4 md:border-8 border-white bg-white">
+    <div className="flex flex-col lg:flex-row items-center justify-center gap-12 md:gap-20 max-w-6xl mx-auto w-full px-6">
+       <div className="relative w-full max-w-[240px] md:max-w-[300px] aspect-[9/19]">
+          <div className="absolute -inset-8 bg-purple-400/10 blur-[60px] rounded-full" />
+          <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-white">
              <img src="/under90_orderscreen (1).png" className="w-full h-full object-cover" alt="Tracking Screen" />
+             
+             {/* Masking the address for privacy/design */}
+             <div className="absolute top-[32%] bottom-0 left-0 right-0 bg-white z-10 p-5 flex flex-col items-center">
+                <div className="w-full max-w-[210px] bg-purple-50 rounded-[2rem] p-5 flex flex-col items-center gap-3 border border-purple-100 shadow-sm">
+                   <div className="flex items-center gap-2 text-purple-600">
+                      <div className="w-2 h-2 rounded-full bg-purple-600 animate-pulse" />
+                      <span className="text-[10px] font-black uppercase tracking-widest">Live Status</span>
+                   </div>
+                   <p className="text-sm font-bold text-gray-800">MOM IS PACKING...</p>
+                   <div className="w-full h-1.5 bg-gray-200/50 rounded-full overflow-hidden">
+                      <motion.div 
+                        initial={{ width: "10%" }}
+                        animate={{ width: "95%" }}
+                        transition={{ duration: 15, repeat: Infinity }}
+                        className="h-full bg-gradient-to-r from-purple-500 to-[#aa3fdd]"
+                      />
+                   </div>
+                   <p className="text-[9px] text-gray-500 italic">Simmering with love since 15 mins</p>
+                </div>
+                
+                <div className="mt-8 space-y-4 w-full px-6">
+                   {[1, 2].map(i => (
+                     <div key={i} className="h-4 bg-gray-50 rounded-full w-full flex items-center px-4">
+                        <div className="h-1.5 w-1/2 bg-gray-100/50 rounded-full" />
+                     </div>
+                   ))}
+                </div>
+             </div>
           </div>
 
           <motion.div 
-            initial={{ x: -30, opacity: 0 }}
+            initial={{ x: -20, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
-            className="absolute top-1/4 -left-12 md:-left-24 bg-white/95 backdrop-blur-md p-3 md:p-5 rounded-[1.5rem] md:rounded-[2rem] shadow-2xl border border-purple-50 z-20 w-40 md:w-56 flex items-center gap-3 md:gap-4 hidden sm:flex"
+            className="absolute top-1/2 -left-20 lg:-left-24 bg-white/95 backdrop-blur-md p-5 rounded-[2rem] shadow-2xl border border-purple-50 z-20 w-56 flex items-center gap-4 hidden sm:flex"
           >
-            <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#aa3fdd] text-white flex items-center justify-center font-black text-xs">!</div>
+            <div className="w-10 h-10 rounded-full bg-[#aa3fdd] text-white flex items-center justify-center shadow-lg shadow-purple-200">
+               <Timer size={20} />
+            </div>
             <div>
-               <p className="text-[6px] md:text-[8px] font-black uppercase text-[#aa3fdd] tracking-widest">Live Now</p>
-               <p className="text-[10px] md:text-xs font-bold">Mom is packing...</p>
+               <p className="text-[10px] font-black uppercase text-[#aa3fdd] tracking-widest">Live Now</p>
+               <p className="text-xs font-bold text-gray-800">Mom is packing...</p>
             </div>
           </motion.div>
        </div>
 
-       <div className="text-center lg:text-left space-y-6 md:space-y-8">
-          <h3 className="text-3xl md:text-7xl font-black italic tracking-tighter uppercase leading-[0.8] mb-4 md:mb-8">
+       <div className="text-center lg:text-left space-y-6">
+          <h3 className="text-3xl md:text-7xl font-black italic tracking-tighter uppercase leading-[0.8]">
             SPEED WITH <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-[#aa3fdd]">SOUL.</span>
           </h3>
           <p className="text-sm md:text-lg text-gray-600 font-light max-w-xl leading-relaxed">
-            Witness the journey from a warm pan to your plate. Our riders pick up directly from home kitchens—no detours, no cold storage.
+            Witness the journey from a warm pan to your plate. Our riders pick up directly from home kitchens—no detours.
           </p>
        </div>
-    </motion.div>
+    </div>
   );
-}
+});
 
-function SceneCTA({ progress, onChefClick, isMobile }) {
-  const opacity = useTransform(progress, [0.75, 0.85, 0.95, 1], [0, 1, 1, 1]);
-  const y = useTransform(progress, [0.75, 0.85, 1], [100, 0, 0]);
-  const pointerEvents = useTransform(progress, p => p >= 0.75 ? "auto" : "none");
-
+const SceneCTA = memo(({ onChefClick }) => {
   return (
-    <motion.div 
-      style={{ opacity, y, pointerEvents }}
-      className="absolute inset-0 flex flex-col items-center justify-center text-center space-y-8 md:space-y-12 px-6 z-0 will-change-[transform,opacity]"
-    >
-        <div className="space-y-4 md:space-y-6">
-          <h4 className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.5em] text-purple-600">The Final Step</h4>
+    <div className="text-center space-y-8 px-6">
+        <div className="space-y-4">
+          <h4 className="text-[10px] font-black uppercase tracking-[0.5em] text-purple-600">The Final Step</h4>
           <h2 className="text-5xl md:text-[8vw] font-black tracking-tighter leading-none italic uppercase">
             Order <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">Express.</span>
           </h2>
-          <p className="text-xs md:text-xl text-gray-600 font-light max-w-lg mx-auto">
+          <p className="text-sm md:text-xl text-gray-600 font-light max-w-lg mx-auto">
             Your neighborhood is cooking. Join the table now.
           </p>
         </div>
  
-        <div className="flex justify-center pt-8 md:pt-12 w-full max-w-xs md:max-w-none mx-auto">
-          <button 
-            onClick={onChefClick}
-            className="w-full md:w-auto px-10 py-5 md:px-12 md:py-6 bg-white text-black border border-black/5 rounded-[1.5rem] md:rounded-3xl font-black uppercase tracking-widest text-[10px] md:text-xs hover:bg-[#aa3fdd] hover:text-white transition-all shadow-sm hover:shadow-2xl hover:shadow-[#aa3fdd]/40 relative z-50"
-          >
-            Become a Chef
-          </button>
-        </div>
-    </motion.div>
+        <button 
+          onClick={onChefClick}
+          className="px-10 py-5 md:px-12 md:py-6 bg-white text-black border border-black/5 rounded-[1.5rem] md:rounded-3xl font-black uppercase tracking-widest text-[10px] md:text-xs hover:bg-[#aa3fdd] hover:text-white transition-all shadow-sm hover:shadow-2xl hover:shadow-[#aa3fdd]/40"
+        >
+          Become a Chef
+        </button>
+    </div>
   );
-}
+});

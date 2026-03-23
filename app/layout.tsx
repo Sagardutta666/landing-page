@@ -60,7 +60,11 @@ export const metadata: Metadata = {
     "dc.publisher": "daYummeals",
     "geo.region": "IN-KA",
     "geo.placename": "Bengaluru",
-  }
+  },
+  icons: {
+    icon: "/app_logo.jpg",
+    apple: "/app_logo.jpg",
+  },
 };
 
 export default function RootLayout({

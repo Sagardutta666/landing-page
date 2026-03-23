@@ -5,7 +5,7 @@ export default function GrainOverlay() {
   return (
     <div className="fixed inset-0 z-[9999] pointer-events-none opacity-[0.05] overflow-hidden">
       <div 
-        className="absolute inset-x-[-100%] inset-y-[-100%] w-[300%] h-[300%] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-50"
+        className="absolute inset-x-[-100%] inset-y-[-100%] w-[300%] h-[300%] bg-[url('https://res.cloudinary.com/dqr68965p/image/upload/v1689650000/noise_okf8vq.png')] opacity-50"
         style={{ animation: 'grain 8s steps(10) infinite' }}
       />
       <style jsx global>{`

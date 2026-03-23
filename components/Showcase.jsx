@@ -117,25 +117,27 @@ export default function Showcase() {
       {/* Background Glow / Dynamic Color Shift */}
       <AnimatePresence mode="wait">
         <motion.div
-           key={`bg-${currentIndex}`}
+           key={`container-${currentIndex}`}
            initial={{ opacity: 0 }}
-           animate={{ 
-             opacity: theme === 'light' ? 1 : 0.3,
-             backgroundColor: theme === 'light' ? (currentScreenshot.accent.includes('purple') ? '#f5f3ff' : currentScreenshot.accent.includes('#aa3fdd') ? '#f5f3ff' : '#f0f9ff') : 'transparent'
-           }}
+           animate={{ opacity: 1 }}
            exit={{ opacity: 0 }}
-           transition={{ duration: 1 }}
-           className={`absolute inset-0 pointer-events-none z-0`}
-        />
-        {theme === 'dark' && (
+           className="absolute inset-0 pointer-events-none z-0"
+        >
           <motion.div
-            key={`glow-${currentIndex}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.3 }}
-            exit={{ opacity: 0 }}
-            className={`absolute inset-0 bg-gradient-to-br ${currentScreenshot.accent} opacity-20 pointer-events-none z-0`}
+             animate={{ 
+               opacity: theme === 'light' ? 1 : 0.3,
+               backgroundColor: theme === 'light' ? (currentScreenshot.accent.includes('purple') ? '#f5f3ff' : currentScreenshot.accent.includes('#aa3fdd') ? '#f5f3ff' : '#f0f9ff') : 'transparent'
+             }}
+             transition={{ duration: 1 }}
+             className="absolute inset-0"
           />
-        )}
+          {theme === 'dark' && (
+            <motion.div
+              animate={{ opacity: 0.3 }}
+              className={`absolute inset-0 bg-gradient-to-br ${currentScreenshot.accent} opacity-20`}
+            />
+          )}
+        </motion.div>
       </AnimatePresence>
 
       <div className="container mx-auto px-6 relative z-10">

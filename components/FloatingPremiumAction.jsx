@@ -44,12 +44,12 @@ export default function FloatingPremiumAction({ onClick, isOpen }) {
                   rotate: { duration: 15, repeat: Infinity, ease: "linear" },
                   opacity: { duration: 0.3 }
                 }}
-                className="absolute inset-0 flex items-center justify-center p-1"
+                className="absolute inset-0 flex items-center justify-center"
               >
-                <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible opacity-40">
-                  <path id="badgePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
-                  <text className={`text-[10px] font-black tracking-[0.2em] ${theme === 'light' ? 'fill-black' : 'fill-white'}`}>
-                    <textPath href="#badgePath">{text}</textPath>
+                <svg viewBox="0 0 100 100" className="w-[110%] h-[110%] overflow-visible opacity-40">
+                  <path id="badgePath" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none" />
+                  <text className={`text-[9px] font-black tracking-[0.25em] ${theme === 'light' ? 'fill-black' : 'fill-white'}`}>
+                    <textPath href="#badgePath" startOffset="0%">{text}</textPath>
                   </text>
                 </svg>
               </motion.div>
@@ -57,12 +57,12 @@ export default function FloatingPremiumAction({ onClick, isOpen }) {
           </AnimatePresence>
 
           {/* Icon / Content State */}
-          <div className="flex items-center gap-3 px-4 relative z-10">
+          <div className={`flex items-center justify-center gap-2 relative z-10 w-full h-full ${isHovered ? 'px-4' : ''}`}>
             <motion.div
               animate={{ rotate: isOpen ? 45 : 0 }}
-              className="text-2xl md:text-3xl"
+              className="text-2xl md:text-3xl flex items-center justify-center h-full"
             >
-              {isOpen ? '✕' : (isHovered ? '🍱' : '🍱')}
+              {isOpen ? '✕' : '🍱'}
             </motion.div>
             
             <AnimatePresence>
@@ -73,7 +73,7 @@ export default function FloatingPremiumAction({ onClick, isOpen }) {
                   exit={{ opacity: 0, x: -10 }}
                   className={`text-[9px] md:text-[11px] font-black uppercase tracking-[0.2em] whitespace-nowrap ${theme === 'light' ? 'text-black' : 'text-white'}`}
                 >
-                  {isOpen ? 'Close' : 'Click Me'}
+                  {isOpen ? 'Close' : 'Plan?'}
                 </motion.span>
               )}
             </AnimatePresence>

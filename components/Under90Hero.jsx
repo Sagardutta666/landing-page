@@ -93,21 +93,47 @@ export default function Under90Hero() {
           </motion.div>
 
           <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="text-6xl md:text-8xl xl:text-9xl font-black text-black tracking-tighter leading-[0.85] mb-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-6xl md:text-8xl xl:text-9xl font-black text-black tracking-tighter leading-[0.85] mb-8 flex flex-col items-center lg:items-start"
           >
-            MADE IN <br />
-            <span className="text-purple-600">HOME</span> <br /> 
-            <span className="relative">
-              KITCHENS
-              <motion.div 
-                animate={{ width: ["0%", "100%", "0%"], left: ["0%", "0%", "100%"] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -bottom-2 h-2 bg-purple-600/30 rounded-full"
-              />
-            </span>
+            <div className="overflow-hidden">
+               <motion.span 
+                 initial={{ y: "100%" }}
+                 animate={{ y: 0 }}
+                 transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.4 }}
+                 className="block"
+               >
+                 MADE IN
+               </motion.span>
+            </div>
+            <div className="overflow-hidden">
+               <motion.span 
+                 initial={{ y: "100%" }}
+                 animate={{ y: 0 }}
+                 transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.5 }}
+                 className="text-purple-600 block"
+               >
+                 HOME
+               </motion.span>
+            </div>
+            <div className="overflow-hidden">
+               <span className="relative block">
+                 <motion.span
+                   initial={{ y: "100%" }}
+                   animate={{ y: 0 }}
+                   transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.6 }}
+                   className="block"
+                 >
+                   KITCHENS
+                 </motion.span>
+                 <motion.div 
+                   animate={{ width: ["0%", "100%", "0%"], left: ["0%", "0%", "100%"] }}
+                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                   className="absolute -bottom-2 h-2 bg-purple-600/30 rounded-full"
+                 />
+               </span>
+            </div>
           </motion.h1>
 
           <motion.p 
