@@ -7,11 +7,19 @@ export default function BrandLogo({ className = "" }) {
   const { theme } = useTheme();
 
   return (
-    <div className={`inline-flex flex-row items-baseline font-black italic tracking-tighter cursor-pointer group bg-white/90 backdrop-blur-md px-5 py-2 rounded-full shadow-sm hover:shadow-md transition-all whitespace-nowrap overflow-visible ${className}`}>
+    <div className={`inline-flex flex-row items-center font-black italic tracking-tighter cursor-pointer group bg-white/90 backdrop-blur-md px-5 py-2 rounded-full shadow-sm hover:shadow-md transition-all whitespace-nowrap overflow-visible ${className}`}>
+      {/* Logo Image */}
+      <img 
+        src="/app_logo.jpg" 
+        alt="daYummeals Logo" 
+        className="w-[1.2em] h-[1.2em] mr-2 rounded-lg"
+      />
+
       {/* "da" */}
       <span className="text-black text-[1em] leading-none">
         da
       </span>
+
 
       {/* "Yumm" - 4 letters colored #aa3fdd */}
       <span className="text-[#aa3fdd] text-[1.1em] leading-none relative">

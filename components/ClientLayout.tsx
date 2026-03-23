@@ -55,12 +55,12 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
           {children}
         </main>
 
-        <FloatingPremiumAction 
-          isOpen={isOrderNowOpen} 
-          onClick={isOrderNowOpen ? closeOrderNow : openOrderNow} 
-        />
-
       </motion.div>
+      <FloatingPremiumAction 
+        isOpen={isOrderNowOpen} 
+        onClick={isOrderNowOpen ? closeOrderNow : openOrderNow} 
+      />
+
       <AnimatePresence>
         {isOrderNowOpen && (
           <Dialogbox open={isOrderNowOpen} onClose={closeOrderNow} />
