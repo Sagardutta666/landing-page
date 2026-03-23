@@ -30,7 +30,7 @@ function SectionWrapper({ children, className = "" }) {
 
 export default function Under90Experience() {
   const [isMobile, setIsMobile] = useState(false);
-  const { openPolicy, openPartner, openContact, openChef } = useTheme();
+  const { openPolicy, openPartner, openContact, openChef, openOrderNow } = useTheme();
 
   const mouseX = useSpring(0, { stiffness: 50, damping: 20 });
   const mouseY = useSpring(0, { stiffness: 50, damping: 20 });
@@ -63,7 +63,7 @@ export default function Under90Experience() {
     <div className="relative bg-[#F2F0EA] overflow-x-hidden">
       {/* 1. HERO SECTION */}
       <section className="min-h-screen relative z-0 bg-[#F2F0EA]">
-        <SceneHero isMobile={isMobile} mouseX={mouseX} mouseY={mouseY} />
+        <SceneHero isMobile={isMobile} mouseX={mouseX} mouseY={mouseY} openOrderNow={openOrderNow} />
       </section>
 
       {/* 2. KITCHEN SECTION */}
@@ -128,7 +128,7 @@ export default function Under90Experience() {
   );
 }
 
-const SceneHero = memo(({ mouseX, mouseY }) => {
+const SceneHero = memo(({ isMobile, mouseX, mouseY, openOrderNow }) => {
   const rotateX = useTransform(mouseY, (v) => -v * 0.3);
   const rotateY = useTransform(mouseX, (v) => v * 0.3);
 
@@ -192,14 +192,12 @@ const SceneHero = memo(({ mouseX, mouseY }) => {
           </p>
 
           <div className="pt-2 md:pt-4 relative z-10">
-              <a 
-                href="https://play.google.com/store/apps/details?id=com.dayummeals.androidapp"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button 
+                onClick={openOrderNow}
                 className="inline-block px-10 py-5 md:px-12 md:py-5.5 bg-[#aa3fdd] text-white rounded-full font-black uppercase tracking-widest text-[10px] md:text-xs hover:scale-105 transition-all shadow-2xl shadow-purple-200 active:scale-95"
               >
                 Order Now
-              </a>
+              </button>
           </div>
         </motion.div>
 

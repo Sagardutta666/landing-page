@@ -1,8 +1,10 @@
 'use client'
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { useTheme } from "@/lib/ThemeContext";
 
 export default function Under90Hero() {
+  const { openOrderNow } = useTheme();
   const containerRef = useRef(null);
   const { scrollY } = useScroll();
   
@@ -157,7 +159,7 @@ export default function Under90Hero() {
             className="flex justify-center lg:justify-start"
           >
             <button 
-              onClick={() => window.open('https://play.google.com/store/apps/details?id=com.dayummeals.androidapp', '_blank')}
+              onClick={openOrderNow}
               className="px-10 py-5 bg-purple-600 text-white rounded-full font-black uppercase tracking-widest text-[10px] md:text-xs hover:scale-105 transition-all shadow-2xl shadow-purple-500/40 border border-white/10"
             >
               Order Now

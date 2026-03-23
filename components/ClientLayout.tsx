@@ -28,9 +28,11 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
     isContactOpen,
     closeContact,
     isChefDialogOpen,
-    closeChef
+    closeChef,
+    isOrderNowOpen,
+    openOrderNow,
+    closeOrderNow
   } = useTheme();
-  const [openDialog, setOpenDialog] = useState(false);
 
   return (
     <div className={`min-h-screen transition-colors duration-500 ${theme === 'light' ? 'bg-[#F2F0EA] text-[#1A1A1A]' : 'bg-black text-white'}`}>
@@ -54,28 +56,28 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
         </main>
 
         <FloatingPremiumAction 
-          isOpen={openDialog} 
-          onClick={() => setOpenDialog(!openDialog)} 
+          isOpen={isOrderNowOpen} 
+          onClick={isOrderNowOpen ? closeOrderNow : openOrderNow} 
         />
 
-        <AnimatePresence>
-          {openDialog && (
-            <Dialogbox open={openDialog} onClose={() => setOpenDialog(false)} />
-          )}
-          {isPolicyOpen && (
-            <PolicyDialog isOpen={isPolicyOpen} type={policyType} onClose={closePolicy} />
-          )}
-          {isPartnerOpen && (
-            <PartnerDialog isOpen={isPartnerOpen} onClose={closePartner} />
-          )}
-          {isContactOpen && (
-            <ContactDialog isOpen={isContactOpen} onClose={closeContact} />
-          )}
-          {isChefDialogOpen && (
-            <ChefRegistrationDialog isOpen={isChefDialogOpen} onClose={closeChef} />
-          )}
-        </AnimatePresence>
       </motion.div>
+      <AnimatePresence>
+        {isOrderNowOpen && (
+          <Dialogbox open={isOrderNowOpen} onClose={closeOrderNow} />
+        )}
+        {isPolicyOpen && (
+          <PolicyDialog isOpen={isPolicyOpen} type={policyType} onClose={closePolicy} />
+        )}
+        {isPartnerOpen && (
+          <PartnerDialog isOpen={isPartnerOpen} onClose={closePartner} />
+        )}
+        {isContactOpen && (
+          <ContactDialog isOpen={isContactOpen} onClose={closeContact} />
+        )}
+        {isChefDialogOpen && (
+          <ChefRegistrationDialog isOpen={isChefDialogOpen} onClose={closeChef} />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -25,6 +25,9 @@ interface ThemeContextType {
   isChefDialogOpen: boolean;
   openChef: () => void;
   closeChef: () => void;
+  isOrderNowOpen: boolean;
+  openOrderNow: () => void;
+  closeOrderNow: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -40,6 +43,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [isPartnerOpen, setIsPartnerOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isChefDialogOpen, setIsChefDialogOpen] = useState(false);
+  const [isOrderNowOpen, setIsOrderNowOpen] = useState(false);
 
   useEffect(() => {
     // Initial load splash-only check
@@ -99,6 +103,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setIsChefDialogOpen(false);
   };
 
+  const openOrderNow = () => {
+    setIsOrderNowOpen(true);
+  };
+
+  const closeOrderNow = () => {
+    setIsOrderNowOpen(false);
+  };
+
   return (
     <ThemeContext.Provider value={{ 
       theme, 
@@ -118,7 +130,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       closeContact,
       isChefDialogOpen,
       openChef,
-      closeChef
+      closeChef,
+      isOrderNowOpen,
+      openOrderNow,
+      closeOrderNow
     }}>
       <div className={theme === "light" ? "light" : "dark"}>
         {children}
