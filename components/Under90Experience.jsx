@@ -141,6 +141,10 @@ const SceneHero = memo(({ mouseX, mouseY }) => {
         
         {/* 1. Main Title Card - Prominent (Left) */}
         <motion.div 
+          initial={{ x: -100, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
           className="col-span-2 md:col-span-6 md:row-span-2 bg-[#FDFCF8] rounded-[2.5rem] p-6 md:p-12 flex flex-col justify-center gap-4 relative overflow-hidden shadow-[0_30px_70px_-15px_rgba(0,0,0,0.06)] border border-white/60 group"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-purple-50/50 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
@@ -198,6 +202,10 @@ const SceneHero = memo(({ mouseX, mouseY }) => {
         </motion.div>
 
         <motion.div 
+          initial={{ x: 100, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
           style={{ 
             rotateX: rotateX, 
             rotateY: rotateY
@@ -226,6 +234,10 @@ const SceneHero = memo(({ mouseX, mouseY }) => {
 
         {/* 3. Small Mini card - Status */}
         <motion.div 
+          initial={{ x: -50, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.2 }}
           className="col-span-1 md:col-span-3 bg-[#FDFCF8] rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-8 flex flex-col justify-between border border-white/60 shadow-sm relative overflow-hidden aspect-square md:aspect-auto h-auto md:h-full"
         >
           <div className="absolute top-0 left-0 w-20 h-20 bg-green-50 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
@@ -240,6 +252,10 @@ const SceneHero = memo(({ mouseX, mouseY }) => {
 
         {/* 4. Small Mini card - Speed */}
         <motion.div 
+          initial={{ x: 50, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.3 }}
           className="col-span-1 md:col-span-3 bg-[#aa3fdd] rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-8 flex flex-col justify-between text-white shadow-lg md:shadow-2xl shadow-purple-200/50 relative overflow-hidden aspect-square md:aspect-auto h-auto md:h-full"
         >
           <div className="absolute top-0 left-0 w-20 h-20 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
