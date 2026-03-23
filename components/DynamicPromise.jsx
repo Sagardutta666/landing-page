@@ -15,6 +15,7 @@ export default function DynamicPromise() {
   const textRight = useTransform(scrollYProgress, [0.5, 1], ["100%", "0%"]);
   const scale = useTransform(scrollYProgress, [0.3, 0.7], [0.8, 1.2]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  const minuteCount = useTransform(scrollYProgress, [0, 1], [0, 90]);
 
   return (
     <section ref={containerRef} className="h-[200vh] relative bg-white overflow-hidden">
@@ -47,7 +48,7 @@ export default function DynamicPromise() {
                 <motion.span 
                   className="text-7xl md:text-9xl font-black text-black block"
                 >
-                  <motion.span>{useTransform(scrollYProgress, [0, 1], [0, 90])}</motion.span>
+                  <motion.span>{minuteCount}</motion.span>
                   <span className="text-3xl md:text-5xl">MIN</span>
                 </motion.span>
                 <div className="w-20 h-2 bg-purple-600 mx-auto rounded-full my-6" />

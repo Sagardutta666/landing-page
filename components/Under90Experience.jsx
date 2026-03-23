@@ -175,6 +175,8 @@ function SceneHero({ progress, mouseX, mouseY, isMobile }) {
   const y = useTransform(progress, [0, 0.25, 0.3], [0, -50, -100]);
   const scale = useTransform(progress, [0, 0.25, 0.3], [1, 0.95, 0.9]);
   const pointerEvents = useTransform(progress, p => p < 0.25 ? "auto" : "none");
+  const transformedX = useTransform(mouseX, [-500, 500], [-30, 30]);
+  const transformedY = useTransform(mouseY, [-500, 500], [-30, 30]);
 
   return (
     <motion.div 
@@ -202,7 +204,7 @@ function SceneHero({ progress, mouseX, mouseY, isMobile }) {
         <p className="text-xs md:text-lg text-gray-600 font-light max-w-lg mx-auto lg:mx-0 leading-relaxed md:leading-tight">
           The warmth of a home kitchen, delivered at express speed. No factory prep, just pure love and local ingredients.
         </p>
-
+ 
         <div className="flex justify-center lg:justify-start pt-6">
              <a 
                href="https://play.google.com/store/apps/details?id=com.dayummeals.androidapp"
@@ -224,11 +226,11 @@ function SceneHero({ progress, mouseX, mouseY, isMobile }) {
             transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
             className="absolute inset-x-10 inset-y-10 border border-purple-200/50 rounded-full border-dashed"
           />
-
+ 
           <motion.div 
             style={{ 
-              x: isMobile ? 0 : useTransform(mouseX, [-500, 500], [-30, 30]),
-              y: isMobile ? 0 : useTransform(mouseY, [-500, 500], [-30, 30])
+              x: isMobile ? 0 : transformedX,
+              y: isMobile ? 0 : transformedY
             }}
             className="relative z-20 w-56 h-56 md:w-80 md:h-80 will-change-transform"
           >
