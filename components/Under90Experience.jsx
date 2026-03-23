@@ -16,8 +16,8 @@ function SectionWrapper({ children, className = "" }) {
   const yRaw = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [100, 0, 0, -100]);
   const opacityRaw = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
 
-  const y = useSpring(yRaw, { stiffness: 60, damping: 20 });
-  const opacity = useSpring(opacityRaw, { stiffness: 60, damping: 20 });
+  const y = useSpring(yRaw, { stiffness: 40, damping: 18 });
+  const opacity = useSpring(opacityRaw, { stiffness: 40, damping: 18 });
 
   return (
     <motion.section 
@@ -146,7 +146,7 @@ const SceneHero = memo(({ mouseX, mouseY }) => {
           viewport={{ once: false, margin: "-50px" }}
           transition={{ 
             type: "spring", 
-            stiffness: 80, 
+            stiffness: 40, 
             damping: 18,
             delay: 0.4
           }}
@@ -212,7 +212,7 @@ const SceneHero = memo(({ mouseX, mouseY }) => {
           viewport={{ once: false, margin: "-50px" }}
           transition={{ 
             type: "spring", 
-            stiffness: 80, 
+            stiffness: 40, 
             damping: 18,
             delay: 0.5
           }}
@@ -249,7 +249,7 @@ const SceneHero = memo(({ mouseX, mouseY }) => {
           viewport={{ once: false, margin: "-50px" }}
           transition={{ 
             type: "spring", 
-            stiffness: 80, 
+            stiffness: 40, 
             damping: 18,
             delay: 0.6
           }}
@@ -272,7 +272,7 @@ const SceneHero = memo(({ mouseX, mouseY }) => {
           viewport={{ once: false, margin: "-50px" }}
           transition={{ 
             type: "spring", 
-            stiffness: 80, 
+            stiffness: 40, 
             damping: 18,
             delay: 0.7
           }}

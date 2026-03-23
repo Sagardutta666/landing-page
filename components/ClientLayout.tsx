@@ -39,7 +39,7 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
 
       <motion.div 
         key="main-layout"
-        className="flex flex-col min-h-screen relative"
+        className="flex flex-col min-h-screen relative will-change-transform"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
@@ -77,7 +77,7 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider>
-      <ReactLenis root>
+      <ReactLenis root options={{ lerp: 0.05, duration: 1.2, smoothWheel: true }}>
         <ThemeWrapper>{children}</ThemeWrapper>
       </ReactLenis>
     </ThemeProvider>
