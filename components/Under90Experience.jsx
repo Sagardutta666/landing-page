@@ -137,11 +137,11 @@ const SceneHero = memo(({ mouseX, mouseY }) => {
 
   return (
     <div className="relative w-full min-h-screen flex items-center justify-center px-4 md:px-10 py-16 md:py-0 overflow-x-hidden">
-      <div className="max-w-6xl w-full grid grid-cols-2 md:grid-cols-12 gap-3 md:gap-5 h-auto md:h-[80vh] perspective-[2000px]">
+      <div className={`max-w-6xl w-full grid grid-cols-2 md:grid-cols-12 gap-3 md:gap-5 h-auto md:h-[80vh] ${isMobile ? '' : 'perspective-[2000px]'}`}>
         
         {/* 1. Main Title Card - Prominent (Left) */}
         <motion.div 
-          initial={{ opacity: 0, y: 100, rotateX: 15 }}
+          initial={{ opacity: 0, y: isMobile ? 40 : 100, rotateX: isMobile ? 0 : 15 }}
           whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
           viewport={{ once: false, margin: "-50px" }}
           transition={{ 
@@ -150,7 +150,7 @@ const SceneHero = memo(({ mouseX, mouseY }) => {
             damping: 18,
             delay: 0.4
           }}
-          className="col-span-2 md:col-span-6 md:row-span-2 bg-[#FDFCF8] rounded-[2.5rem] p-6 md:p-12 flex flex-col justify-center gap-4 relative overflow-hidden shadow-[0_30px_70px_-15px_rgba(0,0,0,0.06)] border border-white/60 group px-8 md:px-12"
+          className="col-span-2 md:col-span-6 md:row-span-2 bg-[#FDFCF8] rounded-[2.5rem] p-6 md:p-12 flex flex-col justify-center gap-4 relative overflow-hidden shadow-[0_30px_70px_-15px_rgba(0,0,0,0.06)] border border-white/60 group px-8 md:px-12 will-change-transform"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-purple-50/50 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
           
@@ -207,7 +207,7 @@ const SceneHero = memo(({ mouseX, mouseY }) => {
         </motion.div>
 
         <motion.div 
-          initial={{ opacity: 0, y: 100, rotateX: 15 }}
+          initial={{ opacity: 0, y: isMobile ? 40 : 100, rotateX: isMobile ? 0 : 15 }}
           whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
           viewport={{ once: false, margin: "-50px" }}
           transition={{ 
@@ -220,7 +220,7 @@ const SceneHero = memo(({ mouseX, mouseY }) => {
             rotateX: rotateX, 
             rotateY: rotateY
           }}
-          className="col-span-2 md:col-span-6 md:row-span-1 bg-[#F2F0EA] rounded-[2.5rem] relative overflow-hidden flex items-center justify-center group border border-purple-100/30 shadow-md aspect-video md:aspect-auto h-auto md:h-full lg:max-h-[38vh]"
+          className="col-span-2 md:col-span-6 md:row-span-1 bg-[#F2F0EA] rounded-[2.5rem] relative overflow-hidden flex items-center justify-center group border border-purple-100/30 shadow-md aspect-video md:aspect-auto h-auto md:h-full lg:max-h-[38vh] will-change-transform"
         >
            <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent z-10" />
            <img 
@@ -244,7 +244,7 @@ const SceneHero = memo(({ mouseX, mouseY }) => {
 
         {/* 3. Small Mini card - Status */}
         <motion.div 
-          initial={{ opacity: 0, y: 80, rotateX: 10 }}
+          initial={{ opacity: 0, y: isMobile ? 30 : 80, rotateX: isMobile ? 0 : 10 }}
           whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
           viewport={{ once: false, margin: "-50px" }}
           transition={{ 
@@ -253,7 +253,7 @@ const SceneHero = memo(({ mouseX, mouseY }) => {
             damping: 18,
             delay: 0.6
           }}
-          className="col-span-1 md:col-span-3 bg-[#FDFCF8] rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-6 flex flex-col justify-between border border-white/60 shadow-sm relative overflow-hidden aspect-square md:aspect-auto h-[160px] md:h-full"
+          className="col-span-1 md:col-span-3 bg-[#FDFCF8] rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-6 flex flex-col justify-between border border-white/60 shadow-sm relative overflow-hidden aspect-square md:aspect-auto h-[160px] md:h-full will-change-transform"
         >
           <div className="absolute top-0 left-0 w-20 h-20 bg-green-50 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
           <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-green-50 flex items-center justify-center text-green-500 relative z-10 shadow-inner">
@@ -267,7 +267,7 @@ const SceneHero = memo(({ mouseX, mouseY }) => {
 
         {/* 4. Small Mini card - Speed */}
         <motion.div 
-          initial={{ opacity: 0, y: 80, rotateX: 10 }}
+          initial={{ opacity: 0, y: isMobile ? 30 : 80, rotateX: isMobile ? 0 : 10 }}
           whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
           viewport={{ once: false, margin: "-50px" }}
           transition={{ 
@@ -276,7 +276,7 @@ const SceneHero = memo(({ mouseX, mouseY }) => {
             damping: 18,
             delay: 0.7
           }}
-          className="col-span-1 md:col-span-3 bg-[#aa3fdd] rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-6 flex flex-col justify-between text-white shadow-lg md:shadow-2xl shadow-purple-200/50 relative overflow-hidden aspect-square md:aspect-auto h-[160px] md:h-full"
+          className="col-span-1 md:col-span-3 bg-[#aa3fdd] rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-6 flex flex-col justify-between text-white shadow-lg md:shadow-2xl shadow-purple-200/50 relative overflow-hidden aspect-square md:aspect-auto h-[160px] md:h-full will-change-transform"
         >
           <div className="absolute top-0 left-0 w-20 h-20 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
           <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-white/20 flex items-center justify-center text-white relative z-10 backdrop-blur-sm">
