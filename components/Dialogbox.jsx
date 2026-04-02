@@ -9,7 +9,13 @@ import { useTheme } from "@/lib/ThemeContext";
 import { Instagram, Twitter, Facebook } from "lucide-react";
 
 export default function Dialogbox({ open, onClose }) {
-  const { theme } = useTheme();
+  const { 
+    theme, 
+    openPolicy, 
+    openPartner, 
+    openContact, 
+    openChef 
+  } = useTheme();
   const confettiFiredRef = useRef(false);
 
   useEffect(() => {
@@ -143,18 +149,25 @@ export default function Dialogbox({ open, onClose }) {
                     />
                   </motion.button>
 
-                  <div className="flex flex-wrap justify-center gap-x-3 md:gap-x-4 gap-y-1 text-[7px] md:text-[8px] lg:text-[9px] uppercase tracking-widest text-gray-500 font-bold">
-                    <a href="https://dayummeals.in/terms-and-conditions" target="_blank" className="hover:text-purple-600 transition-colors">Terms & Conditions</a>
-                    <a href="https://dayummeals.in/privacy-policy" target="_blank" className="hover:text-purple-600 transition-colors">Privacy Policy</a>
-                    <a href="https://dayummeals.in/about-us" target="_blank" className="hover:text-purple-600 transition-colors">About Us</a>
-                    <a href="#" className="hover:text-purple-600 transition-colors">Contact Us</a>
-                    <a href="#" className="hover:text-purple-600 transition-colors">Partner with us</a>
+                  <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 text-[8px] md:text-[10px] uppercase font-black tracking-[0.2em] text-gray-400 mt-2 px-2 md:px-8 border-t border-gray-100 pt-6 md:pt-8 w-full italic">
+                    <button onClick={() => openPolicy('TERMS')} className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">Terms & Conditions</button>
+                    <button onClick={() => openPolicy('PRIVACY')} className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">Privacy Policy</button>
+                    <button onClick={() => openPolicy('ABOUT')} className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">About Us</button>
+                    <button onClick={openContact} className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">Contact Us</button>
+                    <button onClick={openPartner} className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">Partner with us</button>
+                    <button onClick={openChef} className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap font-black">Become a Chef</button>
                   </div>
 
-                  <div className={`flex items-center gap-6 ${theme === 'light' ? 'text-black' : 'text-white'}`}>
-                    <a href="#" className="hover:scale-120 transition-transform"><Twitter size={14} /></a>
-                    <a href="#" className="hover:scale-120 transition-transform"><Instagram size={14} /></a>
-                    <a href="#" className="hover:scale-120 transition-transform"><Facebook size={14} /></a>
+                  <div className={`flex items-center gap-6 mt-2 ${theme === 'light' ? 'text-black/40' : 'text-white/40'}`}>
+                    {[
+                      { icon: Instagram, url: "https://www.instagram.com/dayummeals/" },
+                      { icon: Twitter, url: "https://x.com/dayummeals" },
+                      { icon: Facebook, url: "https://m.facebook.com/61567845624373/" }
+                    ].map((s, i) => (
+                      <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="hover:scale-120 hover:text-[#aa3fdd] transition-all">
+                        <s.icon size={16} />
+                      </a>
+                    ))}
                   </div>
                 </div>
               </div>

@@ -42,14 +42,14 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
         )}
       </AnimatePresence>
 
+      <GrainOverlay />
+      <Navbar />
       <motion.div 
         key="main-layout"
         className="flex flex-col min-h-screen relative will-change-transform"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
-        <Navbar />
-        <GrainOverlay />
         
         <main className="flex-1">
           {children}
@@ -63,19 +63,19 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
 
       <AnimatePresence>
         {isOrderNowOpen && (
-          <Dialogbox open={isOrderNowOpen} onClose={closeOrderNow} />
+          <Dialogbox key="order-dialog" open={isOrderNowOpen} onClose={closeOrderNow} />
         )}
         {isPolicyOpen && (
-          <PolicyDialog isOpen={isPolicyOpen} type={policyType} onClose={closePolicy} />
+          <PolicyDialog key="policy-dialog" isOpen={isPolicyOpen} type={policyType} onClose={closePolicy} />
         )}
         {isPartnerOpen && (
-          <PartnerDialog isOpen={isPartnerOpen} onClose={closePartner} />
+          <PartnerDialog key="partner-dialog" isOpen={isPartnerOpen} onClose={closePartner} />
         )}
         {isContactOpen && (
-          <ContactDialog isOpen={isContactOpen} onClose={closeContact} />
+          <ContactDialog key="contact-dialog" isOpen={isContactOpen} onClose={closeContact} />
         )}
         {isChefDialogOpen && (
-          <ChefRegistrationDialog isOpen={isChefDialogOpen} onClose={closeChef} />
+          <ChefRegistrationDialog key="chef-dialog" isOpen={isChefDialogOpen} onClose={closeChef} />
         )}
       </AnimatePresence>
     </div>

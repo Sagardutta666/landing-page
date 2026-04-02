@@ -25,51 +25,34 @@ export default function Splash({ theme, type = "90MIN" }) {
         <motion.div
           initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
           animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 1, ease: "easeOut" }}
           className="relative z-10 flex flex-col items-center"
         >
           {/* Logo Section */}
-          <div className="text-4xl md:text-6xl mb-12">
-            <BrandLogo />
+          <div className="flex flex-col items-center gap-12 mb-16">
+            <BrandLogo 
+              showIcon={false} 
+              showUnderline={false} 
+              className="scale-[1.6] md:scale-[2.4] origin-center bg-white px-6 py-2 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.1)]" 
+            />
+            <motion.span 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 1.2, ease: "easeOut" }}
+              className={`text-[8px] md:text-[11px] font-black uppercase tracking-[0.4em] md:tracking-[0.8em] whitespace-nowrap will-change-transform transform-gpu ${isLight ? 'text-gray-400/80' : 'text-white/40'}`}
+            >
+              Authenticity Starts Here!
+            </motion.span>
           </div>
 
-          {/* Type-Specific Loading Work */}
-          <div className="flex flex-col items-center gap-6">
-            <div className="flex items-center gap-3">
-              {type === "90MIN" ? (
-                <motion.div 
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                  className={`p-3 rounded-2xl border ${isLight ? 'bg-white border-purple-100 text-[#aa3fdd]' : 'bg-white/5 border-white/10 text-white'}`}
-                >
-                  <Timer size={24} />
-                </motion.div>
-              ) : (
-                <motion.div 
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className={`p-3 rounded-2xl border ${isLight ? 'bg-white border-purple-100 text-[#aa3fdd]' : 'bg-pink-500/20 border-pink-500/30 text-pink-500'}`}
-                >
-                  <Zap size={24} />
-                </motion.div>
-              )}
-              
-              <div className="h-6 w-[1px] bg-gray-300/30 mx-2" />
-              
-              <span className={`text-[12px] font-black uppercase tracking-[0.5em] ${isLight ? 'text-gray-400' : 'text-white/40'}`}>
-                {type === "90MIN" ? "Mom's Magic" : "Authentic Art"}
-              </span>
-            </div>
-
-            {/* Progress Reveal Line */}
-            <div className={`w-40 h-[2px] rounded-full relative overflow-hidden ${isLight ? 'bg-gray-200' : 'bg-white/10'}`}>
-              <motion.div 
-                initial={{ x: "-100%" }}
-                animate={{ x: "100%" }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                className={`absolute inset-0 bg-gradient-to-r from-transparent via-[#aa3fdd] to-transparent`}
-              />
-            </div>
+          {/* Progress Reveal Line */}
+          <div className={`w-40 md:w-48 h-[1px] md:h-[2px] rounded-full relative overflow-hidden ${isLight ? 'bg-gray-200' : 'bg-white/10'}`}>
+            <motion.div 
+              initial={{ x: "-100%" }}
+              animate={{ x: "100%" }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              className={`absolute inset-0 bg-gradient-to-r from-transparent via-[#aa3fdd] to-transparent will-change-transform transform-gpu`}
+            />
           </div>
         </motion.div>
       </div>
@@ -81,7 +64,7 @@ export default function Splash({ theme, type = "90MIN" }) {
         transition={{ delay: 1, duration: 2, repeat: Infinity }}
         className={`fixed bottom-12 text-[9px] font-black uppercase tracking-[1em] ${isLight ? 'text-gray-400' : 'text-white/20'}`}
       >
-        Authenticity starts here
+        LOADING MOM'S MAGIC
       </motion.p>
     </motion.div>
   );

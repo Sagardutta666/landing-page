@@ -47,22 +47,19 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Initial load splash-only check
-    const hasSeenSplash = sessionStorage.getItem('hasSeenSplash');
-    if (!hasSeenSplash) {
-      setIsSplashLoading(true);
-      const timer = setTimeout(() => {
-        setIsSplashLoading(false);
-        sessionStorage.setItem('hasSeenSplash', 'true');
-      }, 1000);
-      return () => clearTimeout(timer);
-    }
+    // Show splash screen on every initial mount
+    setIsSplashLoading(true);
+    const timer = setTimeout(() => {
+      setIsSplashLoading(false);
+    }, 2500);
+    return () => clearTimeout(timer);
   }, []);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
-  const triggerSplash = (work: SplashType = "90MIN", duration: number = 2000) => {
+  const triggerSplash = (work: SplashType = "90MIN", duration: number = 2500) => {
     setSplashType(work);
     setIsSplashLoading(true);
     setTimeout(() => {

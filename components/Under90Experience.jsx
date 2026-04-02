@@ -7,6 +7,8 @@ import { ChefHat, Timer, Heart, Sparkles, Star, Instagram, Twitter, Linkedin, Fa
 import { useTheme } from "@/lib/ThemeContext";
 
 // Simple Reveal Wrapper matching the "PRE" experience
+const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=com.dayummeals.androidapp";
+
 function SectionWrapper({ children, className = "" }) {
   const { scrollYProgress } = useScroll({
     offset: ["start end", "end start"]
@@ -79,7 +81,7 @@ export default function Under90Experience() {
 
         {/* 4. CTA SECTION */}
         <SectionWrapper className="min-h-[60vh]">
-          <SceneCTA onChefClick={openChef} isMobile={isMobile} />
+          <SceneCTA isMobile={isMobile} />
         </SectionWrapper>
 
         {/* 5. FOOTER */}
@@ -91,6 +93,7 @@ export default function Under90Experience() {
                  <a href="#" onClick={(e) => handlePolicyOpen(e, "ABOUT")} className="hover:text-[#aa3fdd] transition-colors">About Us</a>
                  <a href="#" onClick={(e) => { e.preventDefault(); openContact(); }} className="hover:text-[#aa3fdd] transition-colors">Contact Us</a>
                  <a href="#" onClick={(e) => { e.preventDefault(); openPartner(); }} className="hover:text-[#aa3fdd] transition-colors">Partner with us</a>
+                 <a href="#" onClick={(e) => { e.preventDefault(); openChef(); }} className="hover:text-[#aa3fdd] transition-colors">Become a Chef</a>
               </div>
 
               <div className="flex justify-center gap-6 mb-12">
@@ -147,9 +150,16 @@ const SceneHero = memo(({ isMobile, mouseX, mouseY, openOrderNow }) => {
             damping: 18,
             delay: 0.4
           }}
-          className="col-span-2 md:col-span-6 md:row-span-2 bg-[#FDFCF8] rounded-[2.5rem] p-6 md:p-12 flex flex-col justify-center gap-4 relative overflow-hidden shadow-[0_30px_70px_-15px_rgba(0,0,0,0.06)] border border-white/60 group px-8 md:px-12 will-change-transform"
+          className="col-span-2 md:col-span-6 md:row-span-2 bg-white rounded-[3.5rem] p-6 md:p-12 flex flex-col justify-center gap-4 relative overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.08)] border border-white/60 group px-8 md:px-12 will-change-transform transform-gpu isolate"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-purple-50/50 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+          
+          <div className="flex flex-col items-start gap-4 mb-6 md:mb-10 relative z-10 w-fit">
+            <div className="flex flex-col items-start gap-2">
+              <BrandLogo showIcon={false} showUnderline={false} className="scale-[1.3] origin-left" />
+              <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] text-gray-400 ml-1">Authenticity Starts Here!</span>
+            </div>
+          </div>
           
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-50/80 backdrop-blur-md border border-purple-100 w-fit relative z-10">
             <span className="w-2 h-2 rounded-full bg-[#aa3fdd] animate-pulse" />
@@ -183,21 +193,23 @@ const SceneHero = memo(({ isMobile, mouseX, mouseY, openOrderNow }) => {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="text-[4vw] md:text-[1.8rem] font-light tracking-normal text-gray-400 uppercase mt-2 md:mt-4 block"
             >
-              IN 90 MINS.
+              IN UNDER 90 MINS.
             </motion.span>
           </h1>
 
           <p className="text-xs md:text-lg text-gray-400 font-light max-w-sm leading-relaxed relative z-10">
-            Authentic home kitchens, delivered at express speed. No factory prep, just pure love.
+           Authentic home kitchens, delivering at express speed. No Factory prep, just pure love, taste and health.
           </p>
 
           <div className="pt-2 md:pt-4 relative z-10">
-              <button 
-                onClick={openOrderNow}
+              <a 
+                href={PLAY_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-block px-10 py-5 md:px-12 md:py-5.5 bg-[#aa3fdd] text-white rounded-full font-black uppercase tracking-widest text-[10px] md:text-xs hover:scale-105 transition-all shadow-2xl shadow-purple-200 active:scale-95"
               >
                 Order Now
-              </button>
+              </a>
           </div>
         </motion.div>
 
@@ -215,17 +227,17 @@ const SceneHero = memo(({ isMobile, mouseX, mouseY, openOrderNow }) => {
             rotateX: rotateX, 
             rotateY: rotateY
           }}
-          className="col-span-2 md:col-span-6 md:row-span-1 bg-[#F2F0EA] rounded-[2.5rem] relative overflow-hidden flex items-center justify-center group border border-purple-100/30 shadow-md aspect-video md:aspect-auto h-auto md:h-full lg:max-h-[38vh] will-change-transform"
+          className="col-span-2 md:col-span-6 md:row-span-1 bg-white rounded-[3.5rem] relative overflow-hidden flex items-center justify-center group border border-purple-100/30 shadow-xl shadow-black/5 aspect-video md:aspect-auto h-auto md:h-full lg:max-h-[48vh] will-change-transform isolate transform-gpu"
         >
-           <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent z-10" />
+           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90" />
            <img 
-             src="/moms_love.png" 
-             className="w-full h-full object-contain bg-white transition-transform duration-1000 ease-out grayscale-[0.05] group-hover:grayscale-0" 
+             src="/moms_love_new.png" 
+             className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:brightness-110 transform-gpu" 
              alt="Moms Love" 
            />
-           <div className="absolute bottom-4 left-4 z-20 text-black flex flex-col gap-1">
-              <span className="text-[9px] font-black uppercase tracking-[0.2em] opacity-60">Heart of the house</span>
-              <p className="text-base font-bold">Packed with affection.</p>
+           <div className="absolute bottom-6 left-6 z-20 text-white flex flex-col gap-1">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/80">Heart of the house</span>
+              <p className="text-xl font-bold tracking-tight">Packed with affection.</p>
            </div>
            
            <motion.div 
@@ -248,7 +260,7 @@ const SceneHero = memo(({ isMobile, mouseX, mouseY, openOrderNow }) => {
             damping: 18,
             delay: 0.6
           }}
-          className="col-span-1 md:col-span-3 bg-[#FDFCF8] rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-6 flex flex-col justify-between border border-white/60 shadow-sm relative overflow-hidden aspect-square md:aspect-auto h-[160px] md:h-full will-change-transform"
+          className="col-span-1 md:col-span-3 bg-white rounded-[2.5rem] p-4 md:p-6 flex flex-col justify-between border border-white/60 shadow-xl shadow-black/[0.03] relative overflow-hidden aspect-square md:aspect-auto h-[160px] md:h-full will-change-transform transform-gpu isolate"
         >
           <div className="absolute top-0 left-0 w-20 h-20 bg-green-50 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
           <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-green-50 flex items-center justify-center text-green-500 relative z-10 shadow-inner">
@@ -271,7 +283,7 @@ const SceneHero = memo(({ isMobile, mouseX, mouseY, openOrderNow }) => {
             damping: 18,
             delay: 0.7
           }}
-          className="col-span-1 md:col-span-3 bg-[#aa3fdd] rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-6 flex flex-col justify-between text-white shadow-lg md:shadow-2xl shadow-purple-200/50 relative overflow-hidden aspect-square md:aspect-auto h-[160px] md:h-full will-change-transform"
+          className="col-span-1 md:col-span-3 bg-[#aa3fdd] rounded-[2.5rem] p-4 md:p-6 flex flex-col justify-between text-white shadow-lg md:shadow-2xl shadow-purple-200/50 relative overflow-hidden aspect-square md:aspect-auto h-[160px] md:h-full will-change-transform transform-gpu isolate"
         >
           <div className="absolute top-0 left-0 w-20 h-20 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
           <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-white/20 flex items-center justify-center text-white relative z-10 backdrop-blur-sm">
@@ -430,7 +442,7 @@ const SceneTrack = memo(({ isMobile }) => {
   );
 });
 
-const SceneCTA = memo(({ onChefClick }) => {
+const SceneCTA = memo(() => {
   return (
     <div className="text-center space-y-8 px-6">
         <div className="space-y-4">
@@ -443,12 +455,14 @@ const SceneCTA = memo(({ onChefClick }) => {
           </p>
         </div>
  
-        <button 
-          onClick={onChefClick}
-          className="px-10 py-5 md:px-12 md:py-6 bg-white text-black border border-black/5 rounded-[1.5rem] md:rounded-3xl font-black uppercase tracking-widest text-[10px] md:text-xs hover:bg-[#aa3fdd] hover:text-white transition-all shadow-sm hover:shadow-2xl hover:shadow-[#aa3fdd]/40"
+        <a 
+          href={PLAY_STORE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block px-10 py-5 md:px-12 md:py-6 bg-[#aa3fdd] text-white rounded-full font-black uppercase tracking-widest text-[10px] md:text-xs hover:scale-105 transition-all shadow-2xl shadow-purple-200 active:scale-95 px-12"
         >
-          Become a Chef
-        </button>
+          Order Now
+        </a>
     </div>
   );
 });

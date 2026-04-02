@@ -103,7 +103,10 @@ export default function Home() {
         <footer className={`relative z-50 py-24 transition-colors duration-1000 bg-black text-white border-t border-white/5`}>
           <div className="container mx-auto px-6">
             <div className="flex flex-col items-center gap-12 text-center mb-16">
-              <BrandLogo className="text-3xl md:text-5xl" />
+              <div className="flex flex-col items-center gap-2">
+                <BrandLogo showIcon={false} showUnderline={false} className="scale-[1.5] origin-center bg-white px-5 py-2 mb-4" />
+                <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] text-white/30 italic">Authenticity Starts Here!</span>
+              </div>
               
               <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-white/40 italic">
                   <a 
@@ -140,6 +143,13 @@ export default function Home() {
                     className="hover:text-[#aa3fdd] transition-colors"
                   >
                     Partner with us
+                  </a>
+                  <a 
+                    href="#" 
+                    onClick={(e) => { e.preventDefault(); useTheme().openChef(); }}
+                    className="hover:text-[#aa3fdd] transition-colors"
+                  >
+                    Become a Chef
                   </a>
               </div>
 

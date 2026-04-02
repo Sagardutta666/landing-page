@@ -1,9 +1,10 @@
 'use client'
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "@/lib/ThemeContext";
 
 import Under90Hero from "./Under90Hero";
+import BrandLogo from "./BrandLogo";
 
 export default function Hero() {
   const [isMobile, setIsMobile] = useState(false);
@@ -43,6 +44,16 @@ export default function Hero() {
     }
   };
  
+  const words = ["WELL", "RIGHT", "AUTHENTIC", "HOMECOOKED"];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % words.length);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+ 
   return (
     <div className={`relative w-full h-[100dvh] overflow-hidden flex items-center justify-center transition-colors duration-700 bg-black pt-[12vh] md:pt-[14vh]`}>
       {/* Background Video */}
@@ -65,17 +76,44 @@ export default function Hero() {
           initial="initial"
           animate="animate"
         >
+          <motion.div 
+            variants={itemVariants}
+            className="flex flex-col items-center lg:items-start gap-4 mb-10"
+          >
+            <div className="flex flex-col items-center lg:items-start gap-2">
+              <BrandLogo showIcon={false} showUnderline={false} className="scale-[1.4] origin-center lg:origin-left bg-white px-5 py-2" />
+              <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] text-white/50 ml-1">Authenticity Starts Here!</span>
+            </div>
+          </motion.div>
+
           <motion.div variants={itemVariants} className="mb-6">
-            <span className="px-6 py-1 rounded-full text-[10px] font-black tracking-[0.3em] uppercase glass text-white border-purple-500/30">
-              Tastier • Faster • Thinner
+            <span className="px-6 py-1 rounded-full text-[10px] font-black tracking-[0.2em] uppercase glass text-white border-[#aa3fdd]/30">
+              Tastier • Healthy • Homely
             </span>
           </motion.div>
 
           <motion.h1 
             variants={itemVariants}
-            className="text-5xl md:text-8xl lg:text-8xl font-black mb-6 tracking-tighter leading-[0.85] text-white uppercase italic"
+            className="text-4vw lg:text-6xl xl:text-7xl font-black mb-6 tracking-tighter leading-[0.9] text-white uppercase italic flex flex-wrap items-baseline justify-center lg:justify-start gap-x-4 md:gap-x-6"
           >
-            THE ART OF <br /><span className="text-gradient">EATING WELL.</span>
+            <span>THE ART OF</span>
+            <span className="flex items-baseline gap-x-4 md:gap-x-6">
+              <span>EATING</span>
+              <div className="relative inline-flex items-baseline h-[1em] overflow-hidden min-w-[280px] md:min-w-[450px] lg:min-w-[600px]">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={words[index]}
+                    initial={{ y: "100%", opacity: 0 }}
+                    animate={{ y: "0%", opacity: 1 }}
+                    exit={{ y: "-100%", opacity: 0 }}
+                    transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+                    className="text-gradient block"
+                  >
+                    {words[index]}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
+            </span>
           </motion.h1>
 
           <motion.p 
