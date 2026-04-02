@@ -44,18 +44,19 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
 
       <GrainOverlay />
       {!isSplashLoading && <Navbar />}
+      
       <motion.div 
         key="main-layout"
-        className="flex flex-col min-h-screen relative will-change-transform"
+        className="flex flex-col min-h-screen relative transform-gpu will-change-transform"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: isSplashLoading ? 0 : 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        
         <main className="flex-1">
           {children}
         </main>
-
       </motion.div>
+
       {!isSplashLoading && (
         <FloatingPremiumAction 
           isOpen={isOrderNowOpen} 

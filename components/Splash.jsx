@@ -14,18 +14,19 @@ export default function Splash({ theme, type = "90MIN" }) {
       exit={{ 
         y: "-100%", 
         opacity: 0,
-        transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } 
+        pointerEvents: "none",
+        transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } 
       }}
       className={`fixed inset-0 z-[10000] flex flex-col items-center justify-center overflow-hidden ${isLight ? 'bg-[#F2F0EA]' : 'bg-black'}`}
     >
       <div className="relative">
         {/* Background Radial Glow */}
-        <div className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] rounded-full blur-[100px] pointer-events-none opacity-20 ${isLight ? 'bg-purple-200' : 'bg-purple-900/40'}`} />
+        <div className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] rounded-full blur-[60px] pointer-events-none opacity-20 ${isLight ? 'bg-purple-200' : 'bg-purple-900/40'}`} />
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
-          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
           className="relative z-10 flex flex-col items-center"
         >
           {/* Logo Section */}
@@ -38,7 +39,7 @@ export default function Splash({ theme, type = "90MIN" }) {
             <motion.span 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 1.2, ease: "easeOut" }}
+              transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
               className={`text-[8px] md:text-[11px] font-black uppercase tracking-[0.4em] md:tracking-[0.8em] whitespace-nowrap will-change-transform transform-gpu ${isLight ? 'text-gray-400/80' : 'text-white/40'}`}
             >
               Authenticity Starts Here!
@@ -50,7 +51,7 @@ export default function Splash({ theme, type = "90MIN" }) {
             <motion.div 
               initial={{ x: "-100%" }}
               animate={{ x: "100%" }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
               className={`absolute inset-0 bg-gradient-to-r from-transparent via-[#aa3fdd] to-transparent will-change-transform transform-gpu`}
             />
           </div>
@@ -61,7 +62,7 @@ export default function Splash({ theme, type = "90MIN" }) {
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 1, 0.5] }}
-        transition={{ delay: 1, duration: 2, repeat: Infinity }}
+        transition={{ delay: 0.5, duration: 1.5, repeat: Infinity }}
         className={`fixed bottom-12 text-[9px] font-black uppercase tracking-[1em] ${isLight ? 'text-gray-400' : 'text-white/20'}`}
       >
         LOADING MOM'S MAGIC

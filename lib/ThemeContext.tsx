@@ -34,7 +34,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
-  const [isSplashLoading, setIsSplashLoading] = useState(false);
+  const [isSplashLoading, setIsSplashLoading] = useState(true);
   const [splashType, setSplashType] = useState<SplashType>("90MIN");
   
   const [isPolicyOpen, setIsPolicyOpen] = useState(false);
@@ -51,7 +51,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setIsSplashLoading(true);
     const timer = setTimeout(() => {
       setIsSplashLoading(false);
-    }, 2500);
+    }, 900);
     return () => clearTimeout(timer);
   }, []);
 
@@ -59,7 +59,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
-  const triggerSplash = (work: SplashType = "90MIN", duration: number = 2500) => {
+  const triggerSplash = (work: SplashType = "90MIN", duration: number = 900) => {
     setSplashType(work);
     setIsSplashLoading(true);
     setTimeout(() => {
