@@ -23,11 +23,15 @@ export default function Dialogbox({ open, onClose }) {
       document.body.style.overflow = 'hidden';
       if (!confettiFiredRef.current) {
         confettiFiredRef.current = true;
-        confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 }, colors: ['#9333ea', '#db2777', '#ffffff'] });
-        setTimeout(
-          () => confetti({ particleCount: 100, spread: 80, origin: { y: 0.6 }, colors: ['#9333ea', '#db2777', '#ffffff'] }),
-          300
-        );
+        const confettiConfig = { 
+          particleCount: 200, 
+          spread: 120, 
+          origin: { y: 0.6 }, 
+          colors: ['#aa3fdd', '#db2777', '#ffffff'],
+          zIndex: 10000 
+        };
+        confetti(confettiConfig);
+        setTimeout(() => confetti({ ...confettiConfig, particleCount: 150 }), 300);
       }
     } else {
       document.body.style.overflow = '';

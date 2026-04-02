@@ -78,47 +78,51 @@ export default function Hero() {
         >
           <motion.div 
             variants={itemVariants}
-            className="flex flex-col items-center lg:items-start gap-4 mb-10"
+            className="flex flex-col items-center lg:items-start gap-4 mb-4 md:mb-10"
           >
             <div className="flex flex-col items-center lg:items-start gap-2">
-              <BrandLogo showIcon={false} showUnderline={false} className="scale-[1.4] origin-center lg:origin-left bg-white px-5 py-2" />
-              <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] text-white/50 ml-1">Authenticity Starts Here!</span>
+              <BrandLogo showIcon={false} showUnderline={false} className="scale-[1.1] md:scale-[1.4] origin-center lg:origin-left bg-white px-5 py-2 mb-2" />
+              <span className="text-[9px] md:text-[11px] font-black uppercase tracking-[0.2em] text-white/50">Authenticity Starts Here!</span>
             </div>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="mb-6">
-            <span className="px-6 py-1 rounded-full text-[10px] font-black tracking-[0.2em] uppercase glass text-white border-[#aa3fdd]/30">
+          <motion.div variants={itemVariants} className="mb-6 md:mb-8">
+            <span className="px-5 py-2 rounded-full text-[9px] md:text-[10px] font-black tracking-[0.15em] uppercase glass text-white border-white/10">
               Tastier • Healthy • Homely
             </span>
           </motion.div>
 
           <motion.h1 
             variants={itemVariants}
-            className="text-4vw lg:text-6xl xl:text-7xl font-black mb-6 tracking-tighter leading-[0.9] text-white uppercase italic flex flex-wrap items-baseline justify-center lg:justify-start gap-x-4 md:gap-x-6"
+            className="flex flex-col items-center lg:items-start gap-3 md:gap-2 mb-8 md:mb-12"
           >
-            <span>THE ART OF</span>
-            <span className="flex items-baseline gap-x-4 md:gap-x-6">
-              <span>EATING</span>
-              <div className="relative inline-flex items-baseline h-[1em] overflow-hidden min-w-[280px] md:min-w-[450px] lg:min-w-[600px]">
+            <span className="text-4xl sm:text-5xl md:text-7xl lg:text-7xl font-black tracking-tighter leading-none text-white italic">
+              THE ART OF
+            </span>
+            <div className="flex flex-col sm:flex-row items-center sm:items-baseline gap-4 sm:gap-6">
+              <span className="text-5xl sm:text-6xl md:text-8xl lg:text-8xl font-black tracking-tighter leading-none text-white italic">
+                EATING
+              </span>
+              <div className="relative min-w-[280px] sm:min-w-[300px] md:min-w-[600px] flex items-center justify-center sm:justify-start">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={words[index]}
-                    initial={{ y: "100%", opacity: 0 }}
-                    animate={{ y: "0%", opacity: 1 }}
-                    exit={{ y: "-100%", opacity: 0 }}
-                    transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-                    className="text-gradient block"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -20, opacity: 0 }}
+                    transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1] }}
+                    className="text-gradient block text-4xl sm:text-6xl md:text-8xl lg:text-8xl font-black italic tracking-tighter text-center sm:text-left leading-none"
                   >
                     {words[index]}
                   </motion.span>
                 </AnimatePresence>
               </div>
-            </span>
+            </div>
           </motion.h1>
 
           <motion.p 
             variants={itemVariants}
-            className="text-lg md:text-2xl max-w-2xl mx-auto lg:mx-0 mb-12 font-light text-white/50 leading-tight"
+            className="text-lg md:text-2xl max-w-2xl mx-auto lg:mx-0 mb-12 font-light text-white/50 leading-tight px-4 md:px-0"
           >
             Discover curated home-cooked meals that blend traditional heritage with modern wellness.
           </motion.p>
@@ -128,7 +132,7 @@ export default function Hero() {
                href="https://play.google.com/store/apps/details?id=com.dayummeals.androidapp"
                target="_blank"
                rel="noopener noreferrer"
-               className="inline-block px-12 py-5 bg-[#aa3fdd] text-white rounded-full font-black uppercase tracking-widest text-[10px] md:text-sm hover:scale-105 transition-all shadow-2xl shadow-[#aa3fdd]/40 border border-white/10"
+               className="inline-block px-8 md:px-12 py-5 bg-[#aa3fdd] text-white rounded-full font-black uppercase tracking-widest text-[10px] md:text-sm hover:scale-105 transition-all shadow-2xl shadow-[#aa3fdd]/40 border border-white/10"
              >
                Order Now
              </a>

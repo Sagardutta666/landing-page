@@ -43,7 +43,7 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
       </AnimatePresence>
 
       <GrainOverlay />
-      <Navbar />
+      {!isSplashLoading && <Navbar />}
       <motion.div 
         key="main-layout"
         className="flex flex-col min-h-screen relative will-change-transform"
@@ -56,10 +56,12 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
         </main>
 
       </motion.div>
-      <FloatingPremiumAction 
-        isOpen={isOrderNowOpen} 
-        onClick={isOrderNowOpen ? closeOrderNow : openOrderNow} 
-      />
+      {!isSplashLoading && (
+        <FloatingPremiumAction 
+          isOpen={isOrderNowOpen} 
+          onClick={isOrderNowOpen ? closeOrderNow : openOrderNow} 
+        />
+      )}
 
       <AnimatePresence>
         {isOrderNowOpen && (
