@@ -141,14 +141,13 @@ const SceneHero = memo(({ isMobile, mouseX, mouseY, openOrderNow }) => {
         
         {/* 1. Main Title Card - Prominent (Left) */}
         <motion.div 
-          initial={{ opacity: 0, y: isMobile ? 40 : 100, rotateX: isMobile ? 0 : 15 }}
-          whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-          viewport={{ once: false, margin: "-50px" }}
+          initial={{ opacity: 0, y: isMobile ? 20 : 100, rotateX: isMobile ? 0 : 15 }}
+          animate={{ opacity: 1, y: 0, rotateX: 0 }}
           transition={{ 
             type: "spring", 
             stiffness: 40, 
             damping: 18,
-            delay: 0.4
+            delay: isMobile ? 0.1 : 0.4
           }}
           className="col-span-2 md:col-span-6 md:row-span-2 bg-white rounded-[3.5rem] p-6 md:p-12 flex flex-col justify-center gap-4 relative overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.08)] border border-white/60 group px-8 md:px-12 will-change-transform transform-gpu isolate"
         >
@@ -214,14 +213,13 @@ const SceneHero = memo(({ isMobile, mouseX, mouseY, openOrderNow }) => {
         </motion.div>
 
         <motion.div 
-          initial={{ opacity: 0, y: isMobile ? 40 : 100, rotateX: isMobile ? 0 : 15 }}
-          whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-          viewport={{ once: false, margin: "-50px" }}
+          initial={{ opacity: 0, y: isMobile ? 20 : 100, rotateX: isMobile ? 0 : 15 }}
+          animate={{ opacity: 1, y: 0, rotateX: 0 }}
           transition={{ 
             type: "spring", 
             stiffness: 40, 
             damping: 18,
-            delay: 0.5
+            delay: isMobile ? 0.15 : 0.5
           }}
           style={{ 
             rotateX: rotateX, 
@@ -251,14 +249,13 @@ const SceneHero = memo(({ isMobile, mouseX, mouseY, openOrderNow }) => {
 
         {/* 3. Small Mini card - Status */}
         <motion.div 
-          initial={{ opacity: 0, y: isMobile ? 30 : 80, rotateX: isMobile ? 0 : 10 }}
-          whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-          viewport={{ once: false, margin: "-50px" }}
+          initial={{ opacity: 0, y: isMobile ? 20 : 80, rotateX: isMobile ? 0 : 10 }}
+          animate={{ opacity: 1, y: 0, rotateX: 0 }}
           transition={{ 
             type: "spring", 
             stiffness: 40, 
             damping: 18,
-            delay: 0.6
+            delay: isMobile ? 0.2 : 0.6
           }}
           className="col-span-1 md:col-span-3 bg-white rounded-[2.5rem] p-4 md:p-6 flex flex-col justify-between border border-white/60 shadow-xl shadow-black/[0.03] relative overflow-hidden aspect-square md:aspect-auto h-[160px] md:h-full will-change-transform transform-gpu isolate"
         >
@@ -274,14 +271,13 @@ const SceneHero = memo(({ isMobile, mouseX, mouseY, openOrderNow }) => {
 
         {/* 4. Small Mini card - Speed */}
         <motion.div 
-          initial={{ opacity: 0, y: isMobile ? 30 : 80, rotateX: isMobile ? 0 : 10 }}
-          whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-          viewport={{ once: false, margin: "-50px" }}
+          initial={{ opacity: 0, y: isMobile ? 20 : 80, rotateX: isMobile ? 0 : 10 }}
+          animate={{ opacity: 1, y: 0, rotateX: 0 }}
           transition={{ 
             type: "spring", 
             stiffness: 40, 
             damping: 18,
-            delay: 0.7
+            delay: isMobile ? 0.25 : 0.7
           }}
           className="col-span-1 md:col-span-3 bg-[#aa3fdd] rounded-[2.5rem] p-4 md:p-6 flex flex-col justify-between text-white shadow-lg md:shadow-2xl shadow-purple-200/50 relative overflow-hidden aspect-square md:aspect-auto h-[160px] md:h-full will-change-transform transform-gpu isolate"
         >
