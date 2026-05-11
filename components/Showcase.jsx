@@ -6,7 +6,7 @@ import { useTheme } from "@/lib/ThemeContext";
 const DARK_SCREENSHOTS = [
   { 
     id: 1, 
-    image: "/homescreen.png", 
+    image: "/dashboard_updated.png", 
     title: "AUTHENTIC FLAVORS", 
     desc: "Experience the real taste of home-cooked meals, crafted with love by local chefs.", 
     accent: "from-purple-600 to-indigo-600"
@@ -64,7 +64,7 @@ const LIGHT_SCREENSHOTS = [
   },
   { 
     id: 104, 
-    image: "/homescreen_under90.png", 
+    image: "/dashboard_updated.png", 
     title: "RUSH READY", 
     desc: "Because the best home-cooked food shouldn't make you wait. 90 mins, guaranteed.", 
     accent: "from-emerald-500 to-teal-500",

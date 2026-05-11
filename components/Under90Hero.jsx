@@ -175,7 +175,7 @@ export default function Under90Hero() {
              {[
                { src: "/under90_splashscreen.png", rotate: -10, x: -30 },
                { src: "/under90_homescreen.png", rotate: 0, x: 0 },
-               { src: "/homescreen_under90.png", rotate: 10, x: 30 }
+               { src: "/dashboard_updated.png", rotate: 10, x: 30 }
              ].map((img, i) => (
                <motion.div
                  key={i}

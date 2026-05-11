@@ -62,9 +62,9 @@ export default function Dialogbox({ open, onClose }) {
         initial={{ opacity: 0, scale: 0.9, y: "-45%", x: "-50%" }}
         animate={{ opacity: 1, scale: 1, y: "-50%", x: "-50%" }}
         exit={{ opacity: 0, scale: 0.9, y: "-45%", x: "-50%" }}
-        className="fixed z-[1001] left-1/2 top-1/2 w-11/12 md:w-full max-w-5xl max-h-[80vh] md:max-h-[82vh] overflow-y-auto md:overflow-hidden p-2 md:p-8"
+        className="fixed z-[1001] left-1/2 top-1/2 w-full max-w-5xl overflow-hidden px-4 md:px-8"
       >
-        <Card className={`${theme === 'light' ? 'bg-[#F2F0EA]/90 border-[#814A20]/10' : 'glass-dark border-white/10'} rounded-[2.5rem] overflow-hidden shadow-2xl backdrop-blur-xl`}>
+        <Card className={`${theme === 'light' ? 'bg-[#F2F0EA] border-none' : 'glass-dark border-none'} rounded-[2.5rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] backdrop-blur-xl`}>
           <CardContent className="p-0">
             <div className={`flex flex-col md:flex-row ${theme === 'light' ? 'bg-[#F2F0EA]' : ''}`}>
               {/* Left Side: Image Preview */}
@@ -82,7 +82,7 @@ export default function Dialogbox({ open, onClose }) {
                       alt="Back Preview"
                       width={320}
                       height={640}
-                      className="w-full h-auto object-cover rounded-[2rem] shadow-xl"
+                      className="w-full h-auto object-cover rounded-[2rem]"
                     />
                   </motion.div>
 
@@ -91,11 +91,11 @@ export default function Dialogbox({ open, onClose }) {
                     whileHover={{ scale: 1.05, rotate: 0 }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0, x: 20 }}
-                    className="relative z-10 group cursor-pointer shadow-[20px_40px_80px_rgba(0,0,0,0.4)] rounded-[2.2rem] md:rounded-[2.5rem] overflow-hidden transition-all"
+                    className="relative z-10 group cursor-pointer rounded-[2.2rem] md:rounded-[2.5rem] overflow-hidden transition-all border-none outline-none bg-transparent"
                     onClick={() => openInNewTab("https://play.google.com/store/apps/details?id=com.dayummeals.androidapp")}
                   >
                     <Image
-                      src="/homescreen_under90.png"
+                      src="/dashboard_updated.png"
                       alt="App Preview"
                       width={320}
                       height={640}

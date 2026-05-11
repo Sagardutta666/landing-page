@@ -7,9 +7,8 @@ export default function Navbar() {
 
   return (
     <motion.header 
-      className="fixed top-0 w-full h-[10vh] flex items-center justify-end px-6 md:px-12 z-[10000] pointer-events-none"
+      className="fixed top-8 right-8 md:top-12 md:right-12 z-[10000] pointer-events-none"
     >
-      <div className="absolute inset-0 bg-white/[0.01] backdrop-blur-[4px] border-b border-white/[0.05] pointer-events-none" />
       <div className="flex items-center gap-6 pointer-events-auto">
         {/* Animated Toggle */}
         <motion.div 
