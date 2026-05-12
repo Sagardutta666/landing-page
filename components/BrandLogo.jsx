@@ -7,7 +7,7 @@ export default function BrandLogo({ className = "", showIcon = true, showUnderli
   const { theme } = useTheme();
 
   return (
-    <div className={`inline-flex flex-row items-center font-black italic tracking-tighter cursor-pointer bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full shadow-sm hover:shadow-md transition-all whitespace-nowrap overflow-visible group ${className}`}>
+    <div className={`inline-flex flex-row items-center font-archivo-black tracking-tighter cursor-pointer bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full shadow-sm hover:shadow-md transition-all whitespace-nowrap overflow-visible group ${className}`}>
       {/* Logo Image */}
       {showIcon && (
         <img 

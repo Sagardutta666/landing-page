@@ -6,7 +6,7 @@ import { useTheme } from "@/lib/ThemeContext";
 const DARK_SCREENSHOTS = [
   { 
     id: 1, 
-    image: "/dashboard_updated.png", 
+    image: "/dashboard_updated_new.png", 
     title: "AUTHENTIC FLAVORS", 
     desc: "Experience the real taste of home-cooked meals, crafted with love by local chefs.", 
     accent: "from-purple-600 to-indigo-600"
@@ -37,26 +37,26 @@ const DARK_SCREENSHOTS = [
 const LIGHT_SCREENSHOTS = [
   { 
     id: 101, 
-    image: "/under90_splashscreen.png", 
-    title: "AUTHENTIC HOME", 
-    desc: "Pure home-cooked goodness, delivered fresh from local kitchens to your table.", 
+    image: "/under90_product screen.png", 
+    title: "PRODUCT PAGE", 
+    desc: "Discover the secret recipes of your neighborhood. Handcrafted with love.", 
     accent: "from-purple-500 to-pink-500",
     label: "STEP 01",
     layout: "float"
   },
   { 
     id: 102, 
-    image: "/under90_homescreen.png", 
-    title: "KITCHEN PRIDE", 
-    desc: "Discover the secret recipes of your neighborhood. Handcrafted with love.", 
+    image: "/under90_cartscreen.png", 
+    title: "EASY CART", 
+    desc: "Add your favorites to the cart and get ready for a homemade feast.", 
     accent: "from-purple-500 to-[#aa3fdd]",
     label: "STEP 02",
     layout: "slant"
   },
   { 
     id: 103, 
-    image: "/under90_orderscreen (1).png", 
-    title: "EXPRESS LOVE", 
+    image: "/under90_orderstatus screen.png", 
+    title: "LIVE TRACKING", 
     desc: "Speed meets soul. Tracking your meal from the heart of a home to your hands.", 
     accent: "from-blue-500 to-cyan-500",
     label: "STEP 03",
@@ -64,7 +64,7 @@ const LIGHT_SCREENSHOTS = [
   },
   { 
     id: 104, 
-    image: "/dashboard_updated.png", 
+    image: "/dashboard_updated_new.png", 
     title: "RUSH READY", 
     desc: "Because the best home-cooked food shouldn't make you wait. 90 mins, guaranteed.", 
     accent: "from-emerald-500 to-teal-500",
@@ -181,9 +181,9 @@ export default function Showcase() {
                           filter: "blur(10px)",
                           transition: { duration: 0.4, ease: "circIn" }
                         }}
-                        className={`absolute inset-0 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border-[4px] md:border-[6px] shadow-2xl bg-black border-[#111]`}
+                        className={`absolute inset-0 overflow-hidden border-[4px] md:border-[6px] shadow-2xl bg-black border-[#111]`}
                       >
-                        <img src={screen.image} alt={screen.title} className="w-full h-full object-cover" />
+                        <img src={screen.image} alt={screen.title} className="w-full h-full object-contain" />
                       </motion.div>
                     );
                   })}
@@ -208,13 +208,13 @@ export default function Showcase() {
                     <div className="absolute inset-4 bg-black/5 blur-3xl rounded-[3rem] -z-10" />
                     
                     <motion.div 
-                      className={`w-full h-full rounded-[3rem] overflow-hidden shadow-2xl relative z-10 glass-light`}
+                      className={`w-full h-full shadow-2xl relative z-10 glass-light`}
                       whileHover={{ scale: 1.02 }}
                     >
                       <img 
                         src={currentScreenshot.image} 
                         alt={currentScreenshot.title} 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain"
                       />
                     </motion.div>
 

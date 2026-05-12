@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.dayummeals.in';
+  const baseUrl = 'https://dayummeals.in';
   
   return [
     {

@@ -173,18 +173,18 @@ export default function Under90Hero() {
         >
           <div className="relative w-full aspect-square max-w-[400px] flex items-center justify-center">
              {[
-               { src: "/under90_splashscreen.png", rotate: -10, x: -30 },
-               { src: "/under90_homescreen.png", rotate: 0, x: 0 },
-               { src: "/dashboard_updated.png", rotate: 10, x: 30 }
+               { src: "/under90_product screen.png", rotate: -10, x: -30 },
+               { src: "/under90_orderstatus screen.png", rotate: 0, x: 0 },
+               { src: "/dashboard_updated_new.png", rotate: 10, x: 30 }
              ].map((img, i) => (
                <motion.div
                  key={i}
                  initial={{ opacity: 0, x: 100, rotate: 20 }}
                  animate={{ opacity: 1, x: img.x, rotate: img.rotate }}
                  transition={{ delay: 1 + i * 0.2, type: "spring", stiffness: 60 }}
-                 className="absolute inset-10 rounded-[2rem] overflow-hidden border-4 border-white shadow-2xl bg-white"
+                 className="absolute inset-10 border-4 border-white shadow-2xl bg-white"
                >
-                 <img src={img.src} className="w-full h-full object-cover" alt="app" />
+                 <img src={img.src} className="w-full h-full object-contain" alt="app" />
                </motion.div>
              ))}
 

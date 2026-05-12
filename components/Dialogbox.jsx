@@ -82,7 +82,7 @@ export default function Dialogbox({ open, onClose }) {
                       alt="Back Preview"
                       width={320}
                       height={640}
-                      className="w-full h-auto object-cover rounded-[2rem]"
+                      className="w-full h-auto object-contain"
                     />
                   </motion.div>
 
@@ -91,15 +91,15 @@ export default function Dialogbox({ open, onClose }) {
                     whileHover={{ scale: 1.05, rotate: 0 }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0, x: 20 }}
-                    className="relative z-10 group cursor-pointer rounded-[2.2rem] md:rounded-[2.5rem] overflow-hidden transition-all border-none outline-none bg-transparent"
+                    className="relative z-10 group cursor-pointer transition-all border-none outline-none bg-transparent"
                     onClick={() => openInNewTab("https://play.google.com/store/apps/details?id=com.dayummeals.androidapp")}
                   >
                     <Image
-                      src="/dashboard_updated.png"
+                      src="/dashboard_updated_new.png"
                       alt="App Preview"
                       width={320}
                       height={640}
-                      className="w-full h-auto object-cover"
+                      className="w-full h-auto object-contain"
                       priority
                     />
                     <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors" />

@@ -87,7 +87,7 @@ export default function Under90Experience() {
         {/* 5. FOOTER */}
         <footer className="w-full bg-white py-20 border-t border-purple-100 relative z-[100]">
             <div className="container mx-auto px-6 text-center">
-              <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-12 text-[10px] md:text-sm font-black uppercase tracking-[0.2em] text-gray-400 italic">
+              <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-12 text-[10px] md:text-sm font-black uppercase tracking-[0.2em] text-gray-400">
                  <a href="#" onClick={(e) => handlePolicyOpen(e, "TERMS")} className="hover:text-[#aa3fdd] transition-colors">Terms & Conditions</a>
                  <a href="#" onClick={(e) => handlePolicyOpen(e, "PRIVACY")} className="hover:text-[#aa3fdd] transition-colors">Privacy Policy</a>
                  <a href="#" onClick={(e) => handlePolicyOpen(e, "ABOUT")} className="hover:text-[#aa3fdd] transition-colors">About Us</a>
@@ -136,8 +136,8 @@ const SceneHero = memo(({ isMobile, mouseX, mouseY, openOrderNow }) => {
   const rotateY = useTransform(mouseX, (v) => v * 0.3);
 
   return (
-    <div className="relative w-full min-h-screen flex items-center justify-center px-4 md:px-10 py-16 md:py-0 overflow-x-hidden">
-      <div className={`max-w-6xl w-full grid grid-cols-2 md:grid-cols-12 gap-3 md:gap-5 h-auto md:h-[80vh] ${isMobile ? '' : 'perspective-[2000px]'}`}>
+    <div className="relative w-full min-h-screen flex items-center justify-center px-0 md:px-10 py-16 md:py-0 overflow-x-hidden">
+      <div className={`max-w-6xl w-full grid grid-cols-[1fr_1.15fr] md:grid-cols-12 gap-5 md:gap-5 h-auto md:h-[80vh] px-4 md:px-0 ${isMobile ? '' : 'perspective-[2000px]'}`}>
         
         {/* 1. Main Title Card - Prominent (Left) */}
         <motion.div 
@@ -149,11 +149,11 @@ const SceneHero = memo(({ isMobile, mouseX, mouseY, openOrderNow }) => {
             damping: 18,
             delay: isMobile ? 0.1 : 0.4
           }}
-          className="col-span-2 md:col-span-6 md:row-span-2 bg-white rounded-[2.5rem] md:rounded-[3.5rem] p-6 md:p-10 flex flex-col justify-between relative overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.08)] border border-white/60 group px-8 md:px-14 will-change-transform transform-gpu isolate h-full"
+          className="col-span-2 md:col-span-6 md:row-span-2 bg-white rounded-[2.5rem] md:rounded-[3.5rem] pt-4 pb-6 md:pt-8 md:pb-10 flex flex-col justify-between relative overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.08)] border border-white/60 group px-8 md:px-14 will-change-transform transform-gpu isolate h-full"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-purple-50/50 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
           
-          <div className="flex flex-col items-start gap-4 mb-4 md:mb-6 relative z-10 w-fit pt-6 md:pt-8">
+          <div className="flex flex-col items-start gap-4 mb-4 md:mb-6 relative z-10 w-fit pt-0">
             <div className="flex flex-col items-start gap-1">
               <BrandLogo showIcon={false} showUnderline={false} className="scale-[0.65] md:scale-[0.8] origin-left" />
               <span className="text-[7px] md:text-[8px] font-black uppercase tracking-[0.3em] text-gray-400 ml-1">Authenticity Starts Here!</span>
@@ -165,7 +165,7 @@ const SceneHero = memo(({ isMobile, mouseX, mouseY, openOrderNow }) => {
             <span className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] text-[#aa3fdd]">Freshly Simmering</span>
           </div>
 
-          <h1 className="text-[8vw] md:text-[4.2rem] font-black tracking-tighter leading-[0.9] text-black relative z-10 flex flex-col items-start">
+          <h1 className="text-[8vw] md:text-[4.2rem] font-black tracking-tighter leading-[0.9] text-black relative z-10 flex flex-col items-start mt-6 md:mt-10">
             <div className="overflow-hidden">
               <motion.span 
                 initial={{ y: "100%", opacity: 0 }}
@@ -181,7 +181,7 @@ const SceneHero = memo(({ isMobile, mouseX, mouseY, openOrderNow }) => {
                 initial={{ y: "100%", opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.1, ease: [0.33, 1, 0.68, 1] }}
-                className="text-[#aa3fdd] italic selection:bg-purple-200 block"
+                className="text-[#aa3fdd] selection:bg-purple-200 block"
               >
                 MAGIC
               </motion.span>
@@ -257,7 +257,7 @@ const SceneHero = memo(({ isMobile, mouseX, mouseY, openOrderNow }) => {
             damping: 18,
             delay: isMobile ? 0.2 : 0.6
           }}
-          className="col-span-1 md:col-span-3 bg-white rounded-[2.5rem] p-4 md:p-6 flex flex-col justify-between border border-white/60 shadow-xl shadow-black/[0.03] relative overflow-hidden aspect-square md:aspect-auto h-[160px] md:h-full will-change-transform transform-gpu isolate"
+          className="col-span-1 md:col-span-3 bg-white rounded-[2.5rem] p-4 md:p-6 flex flex-col justify-between border border-white/60 shadow-xl shadow-black/[0.03] relative overflow-hidden aspect-square md:aspect-auto h-[180px] md:h-full will-change-transform transform-gpu isolate"
         >
           <div className="absolute top-0 left-0 w-20 h-20 bg-green-50 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
           <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-green-50 flex items-center justify-center text-green-500 relative z-10 shadow-inner">
@@ -279,7 +279,7 @@ const SceneHero = memo(({ isMobile, mouseX, mouseY, openOrderNow }) => {
             damping: 18,
             delay: isMobile ? 0.25 : 0.7
           }}
-          className="col-span-1 md:col-span-3 bg-[#aa3fdd] rounded-[2.5rem] p-4 md:p-6 flex flex-col justify-between text-white shadow-lg md:shadow-2xl shadow-purple-200/50 relative overflow-hidden aspect-square md:aspect-auto h-[160px] md:h-full will-change-transform transform-gpu isolate"
+          className="col-span-1 md:col-span-3 bg-[#aa3fdd] rounded-[2.5rem] p-4 md:p-6 flex flex-col justify-between text-white shadow-lg md:shadow-2xl shadow-purple-200/50 relative overflow-hidden aspect-square md:aspect-auto h-[180px] md:h-full will-change-transform transform-gpu isolate"
         >
           <div className="absolute top-0 left-0 w-20 h-20 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
           <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-white/20 flex items-center justify-center text-white relative z-10 backdrop-blur-sm">
@@ -287,7 +287,7 @@ const SceneHero = memo(({ isMobile, mouseX, mouseY, openOrderNow }) => {
           </div>
           <div className="relative z-10">
              <p className="text-[8px] md:text-[10px] font-black uppercase text-white/50 tracking-widest mb-1 md:mb-1.5">Speed</p>
-             <p className="text-sm md:text-xl font-bold leading-tight italic">90 Min <br/>Guarantee</p>
+             <p className="text-sm md:text-xl font-bold leading-tight">90 Min <br/>Guarantee</p>
           </div>
         </motion.div>
 
@@ -297,19 +297,38 @@ const SceneHero = memo(({ isMobile, mouseX, mouseY, openOrderNow }) => {
 });
 
 const KITCHEN_SCREENSHOTS = [
-  { src: "/dashboard_updated.png", label: "DASHBOARD" },
-  { src: "/under90_homescreen.png", label: "UNDER90 PRODUCT PAGE" },   
-  { src: "/under90_orderscreen (1).png", label: "UNDER90 ORDER DETAILS" }, 
+  { src: "/dashboard_updated_new.png", label: "DASHBOARD" },
+  { src: "/under90_product screen.png", label: "PRODUCT PAGE" },   
+  { src: "/under90_cartscreen.png", label: "CART PAGE" }, 
+  { src: "/under90_orderstatus screen.png", label: "ORDER STATUS" }, 
 ];
 
 const SceneKitchen = memo(({ isMobile }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [desktopIndex, setDesktopIndex] = useState(1);
   const scrollRef = useRef(null);
+
+
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDesktopIndex(prev => (prev - 1 + KITCHEN_SCREENSHOTS.length) % KITCHEN_SCREENSHOTS.length);
+      // Also sync mobile if we are in mobile view
+      if (isMobile) {
+        setActiveIndex(prev => {
+          const next = (prev - 1 + KITCHEN_SCREENSHOTS.length) % KITCHEN_SCREENSHOTS.length;
+          scrollTo(next);
+          return next;
+        });
+      }
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [isMobile]);
 
   const handleScroll = (e) => {
     const scrollLeft = e.target.scrollLeft;
     const width = e.target.offsetWidth;
-    const itemWidth = width * 0.7 + 24; // Width (70vw) + Gap (24px)
+    const itemWidth = width * 0.7 + 24; 
     const newIndex = Math.round(scrollLeft / itemWidth);
     if (newIndex !== activeIndex) {
       setActiveIndex(newIndex);
@@ -335,12 +354,12 @@ const SceneKitchen = memo(({ isMobile }) => {
             <div className="h-[1px] w-8 bg-purple-400" />
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-purple-600">Purely HomeMade</span>
           </div>
-          <h2 className="text-3xl md:text-6xl font-black tracking-tighter leading-none mb-4 uppercase italic">
+          <h2 className="text-3xl md:text-6xl font-black tracking-tighter leading-none mb-4 uppercase">
             MADE BY <br />
             <span className="text-[#aa3fdd]">MOM&apos;S HAND.</span>
           </h2>
           <p className="text-sm md:text-xl text-gray-600 font-light leading-snug">
-            Authentic meals crafted by neighborhood moms, arriving at your doorstep in <span className="text-[#aa3fdd] font-bold italic">under 90 minutes.</span>
+            Authentic meals crafted by neighborhood moms, arriving at your doorstep in <span className="text-[#aa3fdd] font-bold">under 90 minutes.</span>
           </p>
         </div>
 
@@ -356,103 +375,69 @@ const SceneKitchen = memo(({ isMobile }) => {
       </div>
 
       <div className="w-full lg:w-7/12 relative min-h-[500px] md:min-h-[750px] flex items-center justify-center mt-12 lg:mt-0 px-4 md:px-0">
-         {/* Desktop View: 3D Floating Stack */}
-         <div className="hidden lg:block relative w-full h-full perspective-[2000px]">
+         <div className="relative w-full h-[500px] md:h-full perspective-[2000px]">
             {KITCHEN_SCREENSHOTS.map((item, i) => {
-              // Create a 3D Floating Stack
-              const rotation = (i - 1.5) * 12;
-              const xOffset = (i - 1.5) * 140;
-              const yOffset = Math.abs(i - 1.5) * 30;
-              const zOffset = Math.abs(i - 1.5) * -150;
-              
-              return (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: 0, y: 100, rotateY: 0 }}
-                  whileInView={{ 
-                    opacity: 1, 
-                    x: xOffset,
-                    y: yOffset,
-                    rotateY: rotation,
-                    z: zOffset,
-                  }}
-                  transition={{ 
-                    type: "spring", 
-                    stiffness: 70, 
-                    damping: 20, 
-                    delay: i * 0.1 
-                  }}
-                  whileHover={{ 
-                    y: yOffset - 80,
-                    scale: 1.15,
-                    rotateY: 0,
-                    z: 200,
-                    zIndex: 100,
-                    transition: { 
-                      duration: 0.3, 
-                      type: "spring",
-                      stiffness: 200,
-                      damping: 20
-                    }
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  viewport={{ once: false, margin: "-100px" }}
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] aspect-[9/19] rounded-[2.8rem] overflow-hidden group cursor-pointer transition-all duration-500 border-none outline-none"
-                  style={{ 
-                    zIndex: KITCHEN_SCREENSHOTS.length - i,
-                  }}
-                >
-                  <img 
-                    src={item.src} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                    alt={item.label} 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 group-hover:opacity-80 transition-opacity" />
-                  <div className="absolute bottom-10 left-6 right-6 text-white translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out delay-100">
-                     <p className="text-[12px] font-black uppercase tracking-[0.3em] mb-1">{item.label}</p>
-                     <p className="text-[8px] font-medium opacity-70 uppercase tracking-widest">Click to enlarge</p>
-                  </div>
-                </motion.div>
-              );
-            })}
-         </div>
+               // Calculate cyclic position relative to desktopIndex
+               let displayIndex = i - desktopIndex;
+               if (displayIndex < -1) displayIndex += KITCHEN_SCREENSHOTS.length;
+               if (displayIndex > 1) displayIndex -= KITCHEN_SCREENSHOTS.length;
 
-         {/* Mobile View: Staggered Depth Carousel */}
-         <div className="lg:hidden w-full flex flex-col gap-10">
-            <div 
-              ref={scrollRef}
-              onScroll={handleScroll}
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-              className="w-full overflow-x-auto [&::-webkit-scrollbar]:hidden flex items-center gap-6 px-[15vw] pb-12 snap-x snap-mandatory perspective-[1000px]"
-            >
-              {KITCHEN_SCREENSHOTS.map((item, i) => (
-                <motion.div
-                  key={i}
-                  className="flex-shrink-0 w-[70vw] aspect-[9/19] rounded-[2.5rem] overflow-hidden bg-transparent snap-center relative border-none outline-none"
-                  initial={{ opacity: 0, rotateY: 15, scale: 0.9 }}
-                  whileInView={{ opacity: 1, rotateY: 0, scale: 1 }}
-                  transition={{ type: "spring", stiffness: 50, damping: 15, delay: i * 0.1 }}
-                  viewport={{ once: false, margin: "-10px" }}
-                >
-                  <img 
-                    src={item.src} 
-                    className="w-full h-full object-cover" 
-                    alt={item.label} 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute bottom-6 left-6 text-white pointer-events-none">
-                     <span className="text-[8px] font-black uppercase tracking-widest">{item.label}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-            {/* Functional indicators */}
-            <div className="flex justify-center gap-3 px-10">
+               const rotation = displayIndex * (isMobile ? 15 : 20);
+               const xOffset = displayIndex * (isMobile ? 110 : 250);
+               const yOffset = 0;
+               const zOffset = Math.abs(displayIndex) * (isMobile ? -250 : -400);
+               const zIndex = displayIndex === 0 ? 50 : 20;
+               const isCenter = displayIndex === 0;
+               
+               return (
+                 <motion.div
+                   key={i}
+                   onClick={() => setDesktopIndex(i)}
+                   initial={{ opacity: 0, x: 0, y: 100, rotateY: 0 }}
+                   animate={{ 
+                     opacity: 1, 
+                     x: xOffset,
+                     y: yOffset,
+                     rotateY: rotation,
+                     z: zOffset,
+                     scale: isCenter ? 1.15 : 0.85,
+                   }}
+                   transition={{ 
+                     type: "spring", 
+                     stiffness: 60, 
+                     damping: 20,
+                   }}
+                   whileHover={{ 
+                     scale: isCenter ? 1.18 : 0.9,
+                     z: isCenter ? 100 : -350,
+                     transition: { duration: 0.2 }
+                   }}
+                   whileTap={{ scale: 0.95 }}
+                   className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] md:w-[220px] aspect-[9/19] group cursor-pointer border-none outline-none"
+                   style={{ 
+                     zIndex: zIndex,
+                   }}
+                 >
+                   <img 
+                     src={item.src} 
+                     className="w-full h-full object-contain" 
+                     alt={item.label} 
+                   />
+                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 group-hover:opacity-80 transition-opacity" />
+                   <div className="absolute bottom-6 md:bottom-10 left-4 md:left-6 right-4 md:right-6 text-white translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out delay-100">
+                      <p className="text-[10px] md:text-[12px] font-black uppercase tracking-[0.3em] mb-1">{item.label}</p>
+                      <p className="text-[6px] md:text-[8px] font-medium opacity-70 uppercase tracking-widest">Click to view</p>
+                   </div>
+                 </motion.div>
+               );
+             })}
+            {/* Unified Indicators */}
+            <div className="flex justify-center gap-3 absolute bottom-0 left-0 right-0">
                {KITCHEN_SCREENSHOTS.map((_, i) => (
                  <button 
                    key={i} 
-                   onClick={() => scrollTo(i)}
-                   className={`h-1.5 transition-all duration-500 rounded-full ${activeIndex === i ? 'w-8 bg-[#aa3fdd]' : 'w-2 bg-purple-200'}`}
+                   onClick={() => setDesktopIndex(i)}
+                   className={`h-1.5 transition-all duration-500 rounded-full ${desktopIndex === i ? 'w-8 bg-[#aa3fdd]' : 'w-2 bg-purple-200 hover:bg-purple-300'}`}
                    aria-label={`Go to slide ${i + 1}`}
                  />
                ))}
@@ -467,8 +452,8 @@ const SceneTrack = memo(({ isMobile }) => {
   return (
     <div className="flex flex-col lg:flex-row items-center justify-center gap-12 md:gap-20 max-w-6xl mx-auto w-full px-6">
        <div className="relative w-full max-w-[240px] md:max-w-[300px] aspect-[9/19]">
-          <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden">
-             <img src="/under90_orderscreen (1).png" className="w-full h-full object-cover" alt="Tracking Screen" />
+          <div className="relative w-full h-full">
+             <img src="/under90_orderstatus screen.png" className="w-full h-full object-contain" alt="Tracking Screen" />
              
              {/* Masking the address for privacy/design */}
              <div className="absolute top-[32%] bottom-0 left-0 right-0 bg-white z-10 p-5 flex flex-col items-center">
@@ -486,7 +471,7 @@ const SceneTrack = memo(({ isMobile }) => {
                         className="h-full bg-gradient-to-r from-purple-500 to-[#aa3fdd]"
                       />
                    </div>
-                   <p className="text-[9px] text-gray-500 italic">Simmering with love since 15 mins</p>
+                   <p className="text-[9px] text-gray-500">Simmering with love since 15 mins</p>
                 </div>
                 
                 <div className="mt-8 space-y-4 w-full px-6">
@@ -515,7 +500,7 @@ const SceneTrack = memo(({ isMobile }) => {
        </div>
 
        <div className="text-center lg:text-left space-y-6">
-          <h3 className="text-3xl md:text-7xl font-black italic tracking-tighter uppercase leading-[0.8]">
+          <h3 className="text-3xl md:text-7xl font-black tracking-tighter uppercase leading-[0.8]">
             SPEED WITH <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-[#aa3fdd]">SOUL.</span>
           </h3>
@@ -532,7 +517,7 @@ const SceneCTA = memo(() => {
     <div className="text-center space-y-8 px-6">
         <div className="space-y-4">
           <h4 className="text-[10px] font-black uppercase tracking-[0.5em] text-purple-600">The Final Step</h4>
-          <h2 className="text-5xl md:text-[8vw] font-black tracking-tighter leading-none italic uppercase">
+          <h2 className="text-5xl md:text-[8vw] font-black tracking-tighter leading-none uppercase">
             Order <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">Express.</span>
           </h2>
           <p className="text-sm md:text-xl text-gray-600 font-light max-w-lg mx-auto">
