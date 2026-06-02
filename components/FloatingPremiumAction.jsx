@@ -35,7 +35,7 @@ export default function FloatingPremiumAction({ onClick, isOpen }) {
     }
   };
 
-  const SIZE = isMobile ? 70 : 84;
+  const SIZE = isMobile ? 54 : 84;
 
   return (
     <div 

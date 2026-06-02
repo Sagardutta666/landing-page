@@ -103,7 +103,7 @@ export default function Hero() {
               <span className="text-5xl sm:text-6xl md:text-8xl lg:text-8xl font-black tracking-tighter leading-none text-white italic">
                 EATING
               </span>
-              <div className="relative min-w-[280px] sm:min-w-[300px] md:min-w-[600px] flex items-center justify-center sm:justify-start">
+              <div className="relative w-full flex items-center justify-center sm:justify-start overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={words[index]}

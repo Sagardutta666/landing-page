@@ -62,13 +62,13 @@ export default function Dialogbox({ open, onClose }) {
         initial={{ opacity: 0, scale: 0.9, y: "-45%", x: "-50%" }}
         animate={{ opacity: 1, scale: 1, y: "-50%", x: "-50%" }}
         exit={{ opacity: 0, scale: 0.9, y: "-45%", x: "-50%" }}
-        className="fixed z-[1001] left-1/2 top-1/2 w-full max-w-5xl overflow-hidden px-4 md:px-8"
+        className="fixed z-[1001] left-1/2 top-1/2 w-full max-w-5xl px-3 md:px-8"
       >
-        <Card className={`${theme === 'light' ? 'bg-[#F2F0EA] border-none' : 'glass-dark border-none'} rounded-[2.5rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] backdrop-blur-xl`}>
+        <Card className={`${theme === 'light' ? 'bg-[#F2F0EA] border-none' : 'glass-dark border-none'} rounded-[2.5rem] overflow-x-hidden overflow-y-auto max-h-[88dvh] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] backdrop-blur-xl`}>
           <CardContent className="p-0">
             <div className={`flex flex-col md:flex-row ${theme === 'light' ? 'bg-[#F2F0EA]' : ''}`}>
               {/* Left Side: Image Preview */}
-              <div className={`w-full md:w-5/12 bg-gradient-to-br p-4 md:p-8 flex items-center justify-center relative overflow-hidden ${theme === 'light' ? 'from-[#EAE8E4] to-[#F2F0EA]' : 'from-purple-900/40 to-black'}`}>
+              <div className={`hidden md:flex w-full md:w-5/12 bg-gradient-to-br p-4 md:p-8 items-center justify-center relative overflow-hidden ${theme === 'light' ? 'from-[#EAE8E4] to-[#F2F0EA]' : 'from-purple-900/40 to-black'}`}>
                 <div className="relative w-full max-w-[120px] md:max-w-[190px] aspect-[9/19]">
                   {/* Secondary Image (Behind, Left) */}
                   <motion.div
