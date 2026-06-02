@@ -305,18 +305,18 @@ const KITCHEN_SCREENSHOTS = [
 
 const SceneKitchen = memo(({ isMobile }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [desktopIndex, setDesktopIndex] = useState(1);
+  const [desktopIndex, setDesktopIndex] = useState(0);
   const scrollRef = useRef(null);
 
 
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setDesktopIndex(prev => (prev - 1 + KITCHEN_SCREENSHOTS.length) % KITCHEN_SCREENSHOTS.length);
+      setDesktopIndex(prev => (prev + 1) % KITCHEN_SCREENSHOTS.length);
       // Also sync mobile if we are in mobile view
       if (isMobile) {
         setActiveIndex(prev => {
-          const next = (prev - 1 + KITCHEN_SCREENSHOTS.length) % KITCHEN_SCREENSHOTS.length;
+          const next = (prev + 1) % KITCHEN_SCREENSHOTS.length;
           scrollTo(next);
           return next;
         });
