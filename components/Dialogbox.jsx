@@ -68,8 +68,8 @@ export default function Dialogbox({ open, onClose }) {
           <CardContent className="p-0">
             <div className={`flex flex-col md:flex-row ${theme === 'light' ? 'bg-[#F2F0EA]' : ''}`}>
               {/* Left Side: Image Preview */}
-              <div className={`hidden md:flex w-full md:w-5/12 bg-gradient-to-br p-4 md:p-8 items-center justify-center relative overflow-hidden ${theme === 'light' ? 'from-[#EAE8E4] to-[#F2F0EA]' : 'from-purple-900/40 to-black'}`}>
-                <div className="relative w-full max-w-[120px] md:max-w-[190px] aspect-[9/19]">
+              <div className={`flex w-full md:w-5/12 bg-gradient-to-br p-3 md:p-8 items-center justify-center relative overflow-hidden max-h-[160px] md:max-h-none ${theme === 'light' ? 'from-[#EAE8E4] to-[#F2F0EA]' : 'from-purple-900/40 to-black'}`}>
+                <div className="relative w-full max-w-[75px] md:max-w-[190px] aspect-[9/19]">
                   {/* Secondary Image (Behind, Left) */}
                   <motion.div
                     initial={{ opacity: 0, x: 0, y: 20, rotate: -5 }}

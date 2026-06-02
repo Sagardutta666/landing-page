@@ -103,7 +103,7 @@ export default function Hero() {
               <span className="text-5xl sm:text-6xl md:text-8xl lg:text-8xl font-black tracking-tighter leading-none text-white italic">
                 EATING
               </span>
-              <div className="relative w-full flex items-center justify-center sm:justify-start overflow-hidden">
+              <div className="relative w-full flex items-center justify-center sm:justify-start">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={words[index]}
@@ -111,7 +111,7 @@ export default function Hero() {
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: -20, opacity: 0 }}
                     transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1] }}
-                    className="text-gradient block text-4xl sm:text-6xl md:text-8xl lg:text-8xl font-black italic tracking-tighter text-center sm:text-left leading-none"
+                    className="text-gradient block text-4xl sm:text-6xl md:text-8xl lg:text-8xl font-black italic tracking-tighter text-center sm:text-left leading-none pr-4 sm:pr-0"
                   >
                     {words[index]}
                   </motion.span>
