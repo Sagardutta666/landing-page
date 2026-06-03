@@ -44,7 +44,7 @@ export default function Hero() {
     }
   };
  
-  const words = ["WELL", "RIGHT", "AUTHENTIC", "HOMECOOKED"];
+  const words = ["WELL\u00A0", "RIGHT\u00A0", "AUTHENTIC\u00A0", "HOMECOOKED\u00A0"];
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function Hero() {
   }, []);
  
   return (
-    <div className={`relative w-full h-[100dvh] overflow-hidden flex items-center justify-center transition-colors duration-700 bg-black pt-[12vh] md:pt-[14vh]`}>
+    <div className="relative w-full h-[100dvh] overflow-hidden flex items-center justify-center transition-colors duration-700 bg-black pt-4 md:pt-0">
       {/* Background Video */}
       <video
         className={`absolute top-0 left-0 w-full h-full object-cover brightness-[0.4]`}
@@ -78,32 +78,32 @@ export default function Hero() {
         >
           <motion.div 
             variants={itemVariants}
-            className="flex flex-col items-center lg:items-start gap-4 mb-4 md:mb-10"
+            className="flex flex-col items-center lg:items-start gap-4 mb-3 md:mb-4"
           >
             <div className="flex flex-col items-center lg:items-start gap-2">
               <BrandLogo showIcon={false} showUnderline={false} className="scale-[1.1] md:scale-[1.4] origin-center lg:origin-left bg-white px-5 py-2 mb-2" />
               <span className="text-[9px] md:text-[11px] font-black uppercase tracking-[0.2em] text-white/50">Authenticity Starts Here!</span>
             </div>
           </motion.div>
-
-          <motion.div variants={itemVariants} className="mb-6 md:mb-8">
+ 
+          <motion.div variants={itemVariants} className="mb-4">
             <span className="px-5 py-2 rounded-full text-[9px] md:text-[10px] font-black tracking-[0.15em] uppercase glass text-white border-white/10">
               Tastier • Healthy • Homely
             </span>
           </motion.div>
-
+ 
           <motion.h1 
             variants={itemVariants}
-            className="flex flex-col items-center lg:items-start gap-3 md:gap-2 mb-8 md:mb-12"
+            className="flex flex-col items-center lg:items-start gap-3 md:gap-2 mb-6 md:mb-8"
           >
-            <span className="text-4xl sm:text-5xl md:text-7xl lg:text-7xl font-black tracking-tighter leading-none text-white italic">
+            <span className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black tracking-tighter leading-none text-white italic">
               THE ART OF
             </span>
-            <div className="flex flex-col sm:flex-row items-center sm:items-baseline gap-4 sm:gap-6">
-              <span className="text-5xl sm:text-6xl md:text-8xl lg:text-8xl font-black tracking-tighter leading-none text-white italic">
+            <div className="flex flex-col sm:flex-row items-center sm:items-baseline gap-3 sm:gap-5">
+              <span className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-black tracking-tighter leading-none text-white italic pl-2 pr-4">
                 EATING
               </span>
-              <div className="relative w-full flex items-center justify-center sm:justify-start">
+              <div className="relative w-full sm:w-auto flex items-center justify-center sm:justify-start">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={words[index]}
@@ -111,7 +111,7 @@ export default function Hero() {
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: -20, opacity: 0 }}
                     transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1] }}
-                    className="text-gradient block text-4xl sm:text-6xl md:text-8xl lg:text-8xl font-black italic tracking-tighter text-center sm:text-left leading-none pr-4 sm:pr-0"
+                    className="text-gradient block text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-black italic tracking-tighter text-center sm:text-left leading-none pl-3 pr-6 sm:pl-4 sm:pr-8 pb-1"
                   >
                     {words[index]}
                   </motion.span>
@@ -119,14 +119,14 @@ export default function Hero() {
               </div>
             </div>
           </motion.h1>
-
+ 
           <motion.p 
             variants={itemVariants}
-            className="text-lg md:text-2xl max-w-2xl mx-auto lg:mx-0 mb-12 font-light text-white/50 leading-tight px-4 md:px-0"
+            className="text-lg md:text-2xl max-w-2xl mx-auto lg:mx-0 mb-8 md:mb-10 font-light text-white/50 leading-tight px-4 md:px-0"
           >
             Discover curated home-cooked meals that blend traditional heritage with modern wellness.
           </motion.p>
-
+ 
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
              <a 
                href="https://play.google.com/store/apps/details?id=com.dayummeals.androidapp"
@@ -139,17 +139,6 @@ export default function Hero() {
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Elegant Scroll Indicator */}
-      <motion.div 
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-      >
-        <span className={`text-xs font-medium tracking-widest uppercase mb-2 text-white/50`}>Scroll</span>
-        <div className={`w-[1px] h-12 bg-gradient-to-b from-current to-transparent text-white`} />
-      </motion.div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import { useState, useRef, useEffect, memo } from "react";
 import BrandLogo from "./BrandLogo";
 import { ChefHat, Timer, Heart, Sparkles, Star, Instagram, Twitter, Linkedin, Facebook } from "lucide-react";
@@ -369,68 +369,52 @@ const SceneKitchen = memo(({ isMobile }) => {
           </div>
           <div className="text-left">
              <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">The Promise</p>
-             <p className="text-sm font-bold">Express: Under 90 Min</p>
+          <p className="text-sm font-bold">Express: Under 90 Min</p>
           </div>
         </div>
       </div>
 
       <div className="w-full lg:w-7/12 relative min-h-[500px] md:min-h-[750px] flex items-center justify-center mt-12 lg:mt-0 px-4 md:px-0">
          <div className="relative w-full h-[500px] md:h-full perspective-[2000px]">
-            {KITCHEN_SCREENSHOTS.map((item, i) => {
-               // Calculate cyclic position relative to desktopIndex
-               let displayIndex = i - desktopIndex;
-               if (displayIndex < -1) displayIndex += KITCHEN_SCREENSHOTS.length;
-               if (displayIndex > 1) displayIndex -= KITCHEN_SCREENSHOTS.length;
-
-               const rotation = displayIndex * (isMobile ? 15 : 20);
-               const xOffset = displayIndex * (isMobile ? 110 : 250);
-               const yOffset = 0;
-               const zOffset = Math.abs(displayIndex) * (isMobile ? -250 : -400);
-               const zIndex = displayIndex === 0 ? 50 : 20;
-               const isCenter = displayIndex === 0;
-               
-               return (
-                 <motion.div
-                   key={i}
-                   onClick={() => setDesktopIndex(i)}
-                   initial={{ opacity: 0, x: 0, y: 100, rotateY: 0 }}
-                   animate={{ 
-                     opacity: 1, 
-                     x: xOffset,
-                     y: yOffset,
-                     rotateY: rotation,
-                     z: zOffset,
-                     scale: isCenter ? 1.15 : 0.85,
-                   }}
-                   transition={{ 
-                     type: "spring", 
-                     stiffness: 60, 
-                     damping: 20,
-                   }}
-                   whileHover={{ 
-                     scale: isCenter ? 1.18 : 0.9,
-                     z: isCenter ? 100 : -350,
-                     transition: { duration: 0.2 }
-                   }}
-                   whileTap={{ scale: 0.95 }}
-                   className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] md:w-[220px] aspect-[9/19] group cursor-pointer border-none outline-none"
-                   style={{ 
-                     zIndex: zIndex,
-                   }}
-                 >
-                   <img 
-                     src={item.src} 
-                     className="w-full h-full object-contain" 
-                     alt={item.label} 
-                   />
-                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 group-hover:opacity-80 transition-opacity" />
-                   <div className="absolute bottom-6 md:bottom-10 left-4 md:left-6 right-4 md:right-6 text-white translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out delay-100">
-                      <p className="text-[10px] md:text-[12px] font-black uppercase tracking-[0.3em] mb-1">{item.label}</p>
-                      <p className="text-[6px] md:text-[8px] font-medium opacity-70 uppercase tracking-widest">Click to view</p>
-                   </div>
-                 </motion.div>
-               );
-             })}
+            <AnimatePresence mode="popLayout" initial={false}>
+              {[...Array(3)].map((_, index) => {
+                const slideIndex = (desktopIndex + index) % KITCHEN_SCREENSHOTS.length;
+                const item = KITCHEN_SCREENSHOTS[slideIndex];
+                const depth = index;
+                
+                return (
+                  <motion.div
+                    key={item.src}
+                    layoutId={`kitchen-screen-${item.src}`}
+                    initial={{ scale: 0.8, opacity: 0, x: 50, filter: "blur(0px) drop-shadow(0px 15px 15px rgba(0,0,0,0))" }}
+                    animate={{ 
+                      scale: 1 - depth * 0.08, 
+                      opacity: 1 - depth * 0.35,
+                      y: -depth * 25,
+                      zIndex: 10 - depth,
+                      filter: `blur(${depth * 3}px) drop-shadow(0px 15px 20px rgba(0,0,0,${0.25 - depth * 0.08}))`,
+                      x: 0
+                    }}
+                    exit={{ 
+                      x: 300, 
+                      opacity: 0, 
+                      rotate: 10,
+                      scale: 0.9,
+                      filter: "blur(10px) drop-shadow(0px 15px 15px rgba(0,0,0,0))",
+                      transition: { duration: 0.4, ease: "circIn" }
+                    }}
+                    onClick={() => setDesktopIndex((desktopIndex + 1) % KITCHEN_SCREENSHOTS.length)}
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] md:w-[220px] aspect-[9/19] group cursor-pointer border-none outline-none"
+                  >
+                    <img 
+                      src={item.src} 
+                      className="w-full h-full object-contain" 
+                      alt={item.label} 
+                    />
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
             {/* Unified Indicators */}
             <div className="flex justify-center gap-3 absolute bottom-0 left-0 right-0">
                {KITCHEN_SCREENSHOTS.map((_, i) => (

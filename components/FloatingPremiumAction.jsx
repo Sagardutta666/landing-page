@@ -35,7 +35,7 @@ export default function FloatingPremiumAction({ onClick, isOpen }) {
     }
   };
 
-  const SIZE = isMobile ? 54 : 84;
+  const SIZE = isMobile ? 48 : 64;
 
   return (
     <div 
@@ -73,7 +73,7 @@ export default function FloatingPremiumAction({ onClick, isOpen }) {
                  animate={{ scale: 1, rotate: 0, opacity: 1 }}
                  exit={{ scale: 0, rotate: 45, opacity: 0 }}
                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                 className="text-2xl md:text-3xl"
+                 className="text-xl md:text-2xl"
                >
                  {isOpen ? <span className="text-white">✕</span> : <span className="drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">🍱</span>}
                </motion.div>

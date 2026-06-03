@@ -164,13 +164,13 @@ export default function Showcase() {
                       <motion.div
                         key={screen.id}
                         layoutId={`screen-${screen.id}`}
-                        initial={{ scale: 0.8, opacity: 0, x: 50 }}
+                        initial={{ scale: 0.8, opacity: 0, x: 50, filter: "blur(0px) drop-shadow(0px 20px 25px rgba(0,0,0,0))" }}
                         animate={{ 
                           scale: 1 - depth * 0.08, 
                           opacity: 1 - depth * 0.4,
                           y: -depth * 25,
                           zIndex: 10 - depth,
-                          filter: `blur(${depth * 4}px)`,
+                          filter: `blur(${depth * 4}px) drop-shadow(0px 20px 25px rgba(0,0,0,${0.35 - depth * 0.1}))`,
                           x: 0
                         }}
                         exit={{ 
@@ -178,10 +178,10 @@ export default function Showcase() {
                           opacity: 0, 
                           rotate: 10,
                           scale: 0.9,
-                          filter: "blur(10px)",
+                          filter: "blur(10px) drop-shadow(0px 20px 25px rgba(0,0,0,0))",
                           transition: { duration: 0.4, ease: "circIn" }
                         }}
-                        className={`absolute inset-0 overflow-hidden border-[4px] md:border-[6px] shadow-2xl bg-black border-[#111]`}
+                        className="absolute inset-0 select-none pointer-events-none"
                       >
                         <img src={screen.image} alt={screen.title} className="w-full h-full object-contain" />
                       </motion.div>

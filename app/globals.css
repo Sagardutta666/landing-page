@@ -115,11 +115,15 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    border-color: var(--border);
   }
   body {
     @apply bg-black text-foreground;
+  }
+  img {
+    border: none !important;
+    outline: none !important;
   }
 }
 
