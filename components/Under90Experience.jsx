@@ -32,7 +32,7 @@ function SectionWrapper({ children, className = "" }) {
 
 export default function Under90Experience() {
   const [isMobile, setIsMobile] = useState(false);
-  const { openPolicy, openPartner, openContact, openChef, openOrderNow } = useTheme();
+  const { openPartner, openContact, openChef, openOrderNow } = useTheme();
 
   const mouseX = useSpring(0, { stiffness: 50, damping: 20 });
   const mouseY = useSpring(0, { stiffness: 50, damping: 20 });
@@ -56,10 +56,6 @@ export default function Under90Experience() {
     };
   }, []);
 
-  const handlePolicyOpen = (e, type) => {
-    e.preventDefault();
-    openPolicy(type, "90MIN");
-  };
 
   return (
     <div className="relative bg-[#F2F0EA] overflow-x-hidden">
@@ -88,9 +84,9 @@ export default function Under90Experience() {
         <footer className="w-full bg-white py-20 border-t border-purple-100 relative z-[100]">
             <div className="container mx-auto px-6 text-center">
               <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-12 text-[10px] md:text-sm font-black uppercase tracking-[0.2em] text-gray-400">
-                 <a href="#" onClick={(e) => handlePolicyOpen(e, "TERMS")} className="hover:text-[#aa3fdd] transition-colors">Terms & Conditions</a>
-                 <a href="#" onClick={(e) => handlePolicyOpen(e, "PRIVACY")} className="hover:text-[#aa3fdd] transition-colors">Privacy Policy</a>
-                 <a href="#" onClick={(e) => handlePolicyOpen(e, "ABOUT")} className="hover:text-[#aa3fdd] transition-colors">About Us</a>
+                 <a href="/terms-and-conditions?theme=light" target="_blank" rel="noopener noreferrer" className="hover:text-[#aa3fdd] transition-colors">Terms & Conditions</a>
+                 <a href="/privacy-policy?theme=light" target="_blank" rel="noopener noreferrer" className="hover:text-[#aa3fdd] transition-colors">Privacy Policy</a>
+                 <a href="/about-us?theme=light" target="_blank" rel="noopener noreferrer" className="hover:text-[#aa3fdd] transition-colors">About Us</a>
                  <a href="#" onClick={(e) => { e.preventDefault(); openContact(); }} className="hover:text-[#aa3fdd] transition-colors">Contact Us</a>
                  <a href="#" onClick={(e) => { e.preventDefault(); openPartner(); }} className="hover:text-[#aa3fdd] transition-colors">Partner with us</a>
                  <a href="#" onClick={(e) => { e.preventDefault(); openChef(); }} className="hover:text-[#aa3fdd] transition-colors">Become a Chef</a>

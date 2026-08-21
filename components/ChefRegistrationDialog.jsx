@@ -3,10 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { X, Send, User, Phone, Mail, MessageSquare, CheckCircle2, Loader2 } from "lucide-react";
-import { useTheme } from "@/lib/ThemeContext";
 
 export default function ChefRegistrationDialog({ isOpen, onClose }) {
-  const { openPolicy } = useTheme();
   const [formData, setFormData] = useState({
     name: "",
     mobile: "",
@@ -61,11 +59,6 @@ export default function ChefRegistrationDialog({ isOpen, onClose }) {
       setIsLoading(false);
       alert("Something went wrong. Please try again later.");
     }
-  };
-
-  const handlePolicyOpen = (e, type) => {
-    e.preventDefault();
-    openPolicy(type, "90MIN");
   };
 
   return (
@@ -192,9 +185,9 @@ export default function ChefRegistrationDialog({ isOpen, onClose }) {
                 </button>
 
                 <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 pt-6 text-[8px] md:text-[9px] uppercase tracking-widest text-gray-400 font-bold border-t border-gray-100 italic">
-                  <a href="#" onClick={(e) => handlePolicyOpen(e, "TERMS")} className="hover:text-[#aa3fdd] transition-colors cursor-pointer">Terms & Conditions</a>
-                  <a href="#" onClick={(e) => handlePolicyOpen(e, "PRIVACY")} className="hover:text-[#aa3fdd] transition-colors cursor-pointer">Privacy Policy</a>
-                  <a href="#" onClick={(e) => handlePolicyOpen(e, "ABOUT")} className="hover:text-[#aa3fdd] transition-colors cursor-pointer">About Us</a>
+                  <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer" className="hover:text-[#aa3fdd] transition-colors cursor-pointer">Terms & Conditions</a>
+                  <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="hover:text-[#aa3fdd] transition-colors cursor-pointer">Privacy Policy</a>
+                  <a href="/about-us" target="_blank" rel="noopener noreferrer" className="hover:text-[#aa3fdd] transition-colors cursor-pointer">About Us</a>
                 </div>
               </form>
             )}

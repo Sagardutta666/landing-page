@@ -9,12 +9,11 @@ import { useTheme } from "@/lib/ThemeContext";
 import { Instagram, Twitter, Facebook } from "lucide-react";
 
 export default function Dialogbox({ open, onClose }) {
-  const { 
-    theme, 
-    openPolicy, 
-    openPartner, 
-    openContact, 
-    openChef 
+  const {
+    theme,
+    openPartner,
+    openContact,
+    openChef
   } = useTheme();
   const confettiFiredRef = useRef(false);
 
@@ -154,9 +153,9 @@ export default function Dialogbox({ open, onClose }) {
                   </motion.button>
 
                   <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 text-[8px] md:text-[10px] uppercase font-black tracking-[0.2em] text-gray-400 mt-2 px-2 md:px-8 border-t border-gray-100 pt-6 md:pt-8 w-full italic">
-                    <button onClick={() => openPolicy('TERMS')} className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">Terms & Conditions</button>
-                    <button onClick={() => openPolicy('PRIVACY')} className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">Privacy Policy</button>
-                    <button onClick={() => openPolicy('ABOUT')} className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">About Us</button>
+                    <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer" className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">Terms & Conditions</a>
+                    <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">Privacy Policy</a>
+                    <a href="/about-us" target="_blank" rel="noopener noreferrer" className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">About Us</a>
                     <button onClick={openContact} className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">Contact Us</button>
                     <button onClick={openPartner} className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">Partner with us</button>
                     <button onClick={openChef} className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap font-black">Become a Chef</button>

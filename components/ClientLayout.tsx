@@ -12,8 +12,12 @@ import ContactDialog from "@/components/ContactDialog";
 import ChefRegistrationDialog from "@/components/ChefRegistrationDialog";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { ThemeProvider, useTheme } from "@/lib/ThemeContext";
 import { ReactLenis } from 'lenis/react'
+
+// Standalone legal pages that should hide the theme toggle
+const HIDE_TOGGLE_ROUTES = ["/privacy-policy", "/terms-and-conditions", "/about-us"];
 
 function ThemeWrapper({ children }: { children: React.ReactNode }) {
   const { 
@@ -34,22 +38,27 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
     closeOrderNow
   } = useTheme();
 
+  const pathname = usePathname();
+  // Bare legal/info pages: no theme toggle and no splash screen
+  const isBarePage = HIDE_TOGGLE_ROUTES.includes(pathname);
+  const showSplash = isSplashLoading && !isBarePage;
+
   return (
     <div className={`min-h-screen transition-colors duration-500 ${theme === 'light' ? 'bg-[#F2F0EA] text-[#1A1A1A]' : 'bg-black text-white'}`}>
       <AnimatePresence mode="wait">
-        {isSplashLoading && (
+        {showSplash && (
           <Splash theme={theme} type={splashType} key="splash" />
         )}
       </AnimatePresence>
 
       <GrainOverlay />
-      {!isSplashLoading && <Navbar />}
-      
-      <motion.div 
+      {!showSplash && !isBarePage && <Navbar />}
+
+      <motion.div
         key="main-layout"
         className="flex flex-col min-h-screen relative transform-gpu will-change-transform"
         initial={{ opacity: 0 }}
-        animate={{ opacity: isSplashLoading ? 0 : 1 }}
+        animate={{ opacity: showSplash ? 0 : 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <main className="flex-1">

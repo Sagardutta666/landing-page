@@ -41,18 +41,13 @@ function SectionWrapper({
 import Under90Experience from "@/components/Under90Experience";
 
 export default function Home() {
-  const { theme, openPolicy, openPartner, openContact } = useTheme();
+  const { theme, openPartner, openContact } = useTheme();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.01
   });
-
-  const handlePolicyOpen = (e: React.MouseEvent, type: "TERMS" | "PRIVACY" | "ABOUT") => {
-    e.preventDefault();
-    openPolicy(type, "PRE");
-  };
 
   const handlePartnerOpen = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -109,23 +104,26 @@ export default function Home() {
               </div>
               
               <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-white/40 italic">
-                  <a 
-                    href="#" 
-                    onClick={(e) => handlePolicyOpen(e, "TERMS")}
+                  <a
+                    href="/terms-and-conditions"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:text-[#aa3fdd] transition-colors"
                   >
                     Terms & Conditions
                   </a>
-                  <a 
-                    href="#" 
-                    onClick={(e) => handlePolicyOpen(e, "PRIVACY")}
+                  <a
+                    href="/privacy-policy"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:text-[#aa3fdd] transition-colors"
                   >
                     Privacy Policy
                   </a>
-                  <a 
-                    href="#" 
-                    onClick={(e) => handlePolicyOpen(e, "ABOUT")}
+                  <a
+                    href="/about-us"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:text-[#aa3fdd] transition-colors"
                   >
                     About Us
