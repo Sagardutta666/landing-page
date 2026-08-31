@@ -41,7 +41,7 @@ function SectionWrapper({
 import Under90Experience from "@/components/Under90Experience";
 
 export default function Home() {
-  const { theme, openPartner, openContact } = useTheme();
+  const { theme, openPartner } = useTheme();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -52,11 +52,6 @@ export default function Home() {
   const handlePartnerOpen = (e: React.MouseEvent) => {
     e.preventDefault();
     openPartner();
-  };
-
-  const handleContactOpen = (e: React.MouseEvent) => {
-    e.preventDefault();
-    openContact();
   };
 
   // NAVIGATION FIX: Reset scroll to top on theme/mode change
@@ -128,9 +123,10 @@ export default function Home() {
                   >
                     About Us
                   </a>
-                  <a 
-                    href="#" 
-                    onClick={handleContactOpen}
+                  <a
+                    href="/contact-us"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:text-[#aa3fdd] transition-colors"
                   >
                     Contact Us

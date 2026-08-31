@@ -32,7 +32,7 @@ function SectionWrapper({ children, className = "" }) {
 
 export default function Under90Experience() {
   const [isMobile, setIsMobile] = useState(false);
-  const { openPartner, openContact, openChef, openOrderNow } = useTheme();
+  const { openPartner, openChef, openOrderNow } = useTheme();
 
   const mouseX = useSpring(0, { stiffness: 50, damping: 20 });
   const mouseY = useSpring(0, { stiffness: 50, damping: 20 });
@@ -87,7 +87,7 @@ export default function Under90Experience() {
                  <a href="/terms-and-conditions?theme=light" target="_blank" rel="noopener noreferrer" className="hover:text-[#aa3fdd] transition-colors">Terms & Conditions</a>
                  <a href="/privacy-policy?theme=light" target="_blank" rel="noopener noreferrer" className="hover:text-[#aa3fdd] transition-colors">Privacy Policy</a>
                  <a href="/about-us?theme=light" target="_blank" rel="noopener noreferrer" className="hover:text-[#aa3fdd] transition-colors">About Us</a>
-                 <a href="#" onClick={(e) => { e.preventDefault(); openContact(); }} className="hover:text-[#aa3fdd] transition-colors">Contact Us</a>
+                 <a href="/contact-us?theme=light" target="_blank" rel="noopener noreferrer" className="hover:text-[#aa3fdd] transition-colors">Contact Us</a>
                  <a href="#" onClick={(e) => { e.preventDefault(); openPartner(); }} className="hover:text-[#aa3fdd] transition-colors">Partner with us</a>
                  <a href="#" onClick={(e) => { e.preventDefault(); openChef(); }} className="hover:text-[#aa3fdd] transition-colors">Become a Chef</a>
               </div>

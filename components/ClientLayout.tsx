@@ -17,7 +17,7 @@ import { ThemeProvider, useTheme } from "@/lib/ThemeContext";
 import { ReactLenis } from 'lenis/react'
 
 // Standalone legal pages that should hide the theme toggle
-const HIDE_TOGGLE_ROUTES = ["/privacy-policy", "/terms-and-conditions", "/about-us"];
+const HIDE_TOGGLE_ROUTES = ["/privacy-policy", "/terms-and-conditions", "/about-us", "/contact-us"];
 
 function ThemeWrapper({ children }: { children: React.ReactNode }) {
   const { 

@@ -12,7 +12,6 @@ export default function Dialogbox({ open, onClose }) {
   const {
     theme,
     openPartner,
-    openContact,
     openChef
   } = useTheme();
   const confettiFiredRef = useRef(false);
@@ -156,7 +155,7 @@ export default function Dialogbox({ open, onClose }) {
                     <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer" className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">Terms & Conditions</a>
                     <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">Privacy Policy</a>
                     <a href="/about-us" target="_blank" rel="noopener noreferrer" className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">About Us</a>
-                    <button onClick={openContact} className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">Contact Us</button>
+                    <a href="/contact-us" target="_blank" rel="noopener noreferrer" className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">Contact Us</a>
                     <button onClick={openPartner} className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap">Partner with us</button>
                     <button onClick={openChef} className="hover:text-[#aa3fdd] transition-colors whitespace-nowrap font-black">Become a Chef</button>
                   </div>
